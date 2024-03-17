@@ -1,6 +1,6 @@
 import UIKit
 
-class ViewController: UIViewController {
+class LessonLevelViewController: UIViewController {
 
     let text = "Выберите правильную длительность ноты"
     override func viewDidLoad() {
@@ -14,5 +14,4 @@ class ViewController: UIViewController {
         view.backgroundColor = .white
         self.navigationItem.title = "Ноты и длительности"
     }
-
 }
