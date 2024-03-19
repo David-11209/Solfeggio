@@ -10,7 +10,7 @@ class LessonLevelView: UIView {
     private lazy var hpStackView: UIStackView = UIStackView()
     private lazy var progressView: UIProgressView = UIProgressView(progressViewStyle: .default)
     private lazy var progressLabel: UILabel = UILabel()
-    private var taskView: CustomView?
+    private var taskView: GradientTaskView?
     private lazy var taskLabel: UILabel = UILabel()
     private var customView: UIView = UIView()
     private var buttonsStackView: ButtonsStackView?
@@ -18,7 +18,7 @@ class LessonLevelView: UIView {
     /// init для уровня с текстовым заданием
     init(frame: CGRect, text: String, buttonsNames: [String]) {
         super.init(frame: frame)
-        taskView = CustomView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
+        taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myPinkOp)
         setUpWithText()
     }
@@ -26,7 +26,7 @@ class LessonLevelView: UIView {
     /// init для уровня с текстовым заданием и картинкой
     init(frame: CGRect, text: String, image: UIImage, buttonsNames: [String]) {
         super.init(frame: frame)
-        taskView = CustomView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
+        taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myPinkOp)
         setUpWithTextAndImage()
     }
@@ -35,7 +35,7 @@ class LessonLevelView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setUpWithText() {
+    private func setUpWithText() {
         setUpExitButton()
         setUpHpStackView()
         setUpHpImage()
@@ -45,7 +45,7 @@ class LessonLevelView: UIView {
         setUpButtonsStackView()
     }
 
-    func setUpWithTextAndImage() {
+    private func setUpWithTextAndImage() {
         setUpExitButton()
         setUpHpStackView()
         setUpHpImage()
@@ -56,7 +56,7 @@ class LessonLevelView: UIView {
         setUpButtonsStackView()
     }
 
-    func setUpExitButton() {
+    private func setUpExitButton() {
         addSubview(exitButton)
         exitButton.setImage(.exit, for: .normal)
         exitButton.snp.makeConstraints { make in
@@ -67,7 +67,7 @@ class LessonLevelView: UIView {
         }
     }
 
-    func setUpHpStackView() {
+    private func setUpHpStackView() {
         addSubview(hpStackView)
         hpStackView.addArrangedSubview(hpImage1)
         hpStackView.addArrangedSubview(hpImage2)
@@ -84,13 +84,13 @@ class LessonLevelView: UIView {
         }
     }
 
-    func setUpHpImage() {
+    private func setUpHpImage() {
         hpImage1.image = .hp
         hpImage2.image = .hp
         hpImage3.image = .hp
     }
 
-    func setUpProgressView() {
+    private func setUpProgressView() {
         addSubview(progressView)
         progressView.layer.cornerRadius = 10
         progressView.layer.masksToBounds = true
@@ -105,7 +105,7 @@ class LessonLevelView: UIView {
         progressView.setProgress(0.3, animated: true)
     }
 
-    func setUpProgressLabel() {
+    private func setUpProgressLabel() {
         addSubview(progressLabel)
         progressLabel.text = "Прогресс уровня"
         progressLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
@@ -116,7 +116,7 @@ class LessonLevelView: UIView {
         }
     }
 
-    func setUpTaskView() {
+    private func setUpTaskView() {
         addSubview(taskView ?? UIView())
         taskView?.backgroundColor = .clear
         taskView?.layer.cornerRadius = 10
@@ -129,7 +129,7 @@ class LessonLevelView: UIView {
         }
     }
 
-    func setUpButtonsStackView() {
+    private func setUpButtonsStackView() {
         addSubview(buttonsStackView ?? UIView())
         buttonsStackView?.snp.makeConstraints { make in
             make.top.equalTo(customView.snp_bottomMargin).offset(90)
@@ -139,7 +139,7 @@ class LessonLevelView: UIView {
         }
     }
 
-    func setUpView() {
+    private func setUpView() {
         let builder = CustomViewBuilder()
         customView = builder
             .addImage(.note)
@@ -149,6 +149,8 @@ class LessonLevelView: UIView {
         customView.snp.makeConstraints { make in
             make.top.equalTo(taskView!.snp.bottom).offset(40)
             make.centerX.equalToSuperview()
+            make.height.equalTo(200)
+            make.width.equalTo(200)
         }
     }
 }

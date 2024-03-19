@@ -3,13 +3,13 @@ import UIKit
 
 class ButtonsStackView: UIView {
 
-    lazy var button1 = UIButton()
-    lazy var button2 = UIButton()
-    lazy var button3 = UIButton()
-    lazy var button4 = UIButton()
-    lazy var stackView1 = UIStackView()
-    lazy var stackView2 = UIStackView()
-    lazy var mainStackView = UIStackView()
+    private lazy var button1 = UIButton()
+    private lazy var button2 = UIButton()
+    private lazy var button3 = UIButton()
+    private lazy var button4 = UIButton()
+    private lazy var stackView1 = UIStackView()
+    private lazy var stackView2 = UIStackView()
+    private lazy var mainStackView = UIStackView()
     private var names: [String] = []
 
     override class var layerClass: AnyClass {
@@ -32,7 +32,7 @@ class ButtonsStackView: UIView {
         super.init(coder: coder)
     }
 
-    func setUpMainStackView() {
+    private func setUpMainStackView() {
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(stackView1)
         mainStackView.addArrangedSubview(stackView2)
@@ -48,7 +48,7 @@ class ButtonsStackView: UIView {
         }
     }
 
-    func setUpSubStackView(_ stackView: UIStackView, _ buttonFirst: UIButton, _ buttonSecond: UIButton) {
+    private func setUpSubStackView(_ stackView: UIStackView, _ buttonFirst: UIButton, _ buttonSecond: UIButton) {
         addSubview(stackView)
         stackView.addArrangedSubview(buttonFirst)
         stackView.addArrangedSubview(buttonSecond)
@@ -58,7 +58,7 @@ class ButtonsStackView: UIView {
         stackView.spacing = 36
     }
 
-    func setUpButton(button: UIButton, name: String, color: UIColor) {
+    private func setUpButton(button: UIButton, name: String, color: UIColor) {
         button.setTitle(name, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)

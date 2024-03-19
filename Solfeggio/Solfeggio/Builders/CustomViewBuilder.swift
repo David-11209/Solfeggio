@@ -61,17 +61,14 @@ class CustomViewBuilder {
     }
 
     func build() -> UIView {
-        let frame = CGRect(x: 50, y: 100, width: 200, height: 200)
         if !gradientColors.isEmpty {
-
-            view = GradientView(frame: frame, color1: gradientColors[0], color2: gradientColors[1])
+            view = GradientView(frame: CGRect(), color1: gradientColors[0], color2: gradientColors[1])
         } else {
-            view = GradientView(frame: frame, color: backgroundColor ?? UIColor())
+            view = GradientView(frame: CGRect(), color: backgroundColor ?? UIColor())
         }
         if let button = button {
             view?.addSubview(button)
         }
-        /// to do вариация с кнопкой и с лейблом картинкой и лейблом вместе
         if let label = titleLabel, let imageView = imageView {
             view?.addSubview(imageView)
             setUpImage(30, 20, 80)
@@ -90,12 +87,10 @@ class CustomViewBuilder {
             setUpImage(40, 60, 40)
         }
         setUpShadow()
-
         return view!
     }
 
-    func setUpImage(_ top: Int, _ side: Int, _ bottom: Int) {
-
+    private func setUpImage(_ top: Int, _ side: Int, _ bottom: Int) {
         imageView?.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(top)
             make.leading.equalToSuperview().offset(side)
@@ -104,7 +99,7 @@ class CustomViewBuilder {
         }
     }
 
-    func setUpTitleLabel() {
+    private func setUpTitleLabel() {
         titleLabel?.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().inset(10)
@@ -112,7 +107,7 @@ class CustomViewBuilder {
         }
     }
 
-    func setUpMainLabel() {
+    private func setUpMainLabel() {
         mainLabel?.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.leading.equalToSuperview().offset(20)
@@ -121,7 +116,7 @@ class CustomViewBuilder {
         }
     }
 
-    func setUpImageWithText() {
+    private func setUpImageWithText() {
         imageView?.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(40)
             make.leading.equalToSuperview().offset(80)
@@ -130,7 +125,7 @@ class CustomViewBuilder {
         }
     }
 
-    func setUpButton() {
+    private func setUpButton() {
         button?.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(40)
             make.leading.equalToSuperview().offset(20)
@@ -139,7 +134,7 @@ class CustomViewBuilder {
         }
     }
 
-    func setUpShadow() {
+    private func setUpShadow() {
         view?.layer.cornerRadius = 40
         view?.layer.masksToBounds = false
         view?.layer.shadowColor = UIColor.black.cgColor

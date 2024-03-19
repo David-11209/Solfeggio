@@ -1,9 +1,9 @@
 import SnapKit
 import UIKit
 
-class CustomView: UIView {
+class GradientTaskView: UIView {
 
-    lazy var label = UILabel(frame: bounds)
+    private lazy var label = UILabel(frame: bounds)
 
     override class var layerClass: AnyClass {
         return CAGradientLayer.self
@@ -14,11 +14,12 @@ class CustomView: UIView {
         setUpGradient(color1: color1, color2: color2)
         setUpLabel(text: text)
     }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
 
-    func setUpGradient(color1: UIColor, color2: UIColor) {
+    private func setUpGradient(color1: UIColor, color2: UIColor) {
         guard let gradientLayer = self.layer as? CAGradientLayer else { return }
         gradientLayer.colors = [color1.cgColor, color2.cgColor]
         gradientLayer.locations = [0.0, 1.0]
@@ -26,7 +27,7 @@ class CustomView: UIView {
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
     }
 
-    func setUpLabel(text: String) {
+    private func setUpLabel(text: String) {
         addSubview(label)
         label.text = text
         label.textAlignment = .center
