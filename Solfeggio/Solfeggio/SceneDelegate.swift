@@ -16,7 +16,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = LessonLevelViewController()
+        window?.rootViewController = HearingTestLevelScreenViewController()
         window?.makeKeyAndVisible()
     }
 

@@ -1,13 +1,15 @@
-import UIKit
-import SnapKit
+//
+//  HearingTestLevelScreenView.swift
+//  Solfeggio
+//
+//  Created by Давид Васильев on 28.03.2024.
+//
 
-class LessonLevelView: UIView {
+import UIKit
+
+class HearingTestLevelScreenView: UIView {
 
     private lazy var exitButton: UIButton = UIButton()
-    private lazy var hpImage1: UIImageView = UIImageView()
-    private lazy var hpImage2: UIImageView = UIImageView()
-    private lazy var hpImage3: UIImageView = UIImageView()
-    private lazy var hpStackView: UIStackView = UIStackView()
     private lazy var progressView: UIProgressView = UIProgressView(progressViewStyle: .default)
     private lazy var progressLabel: UILabel = UILabel()
     private var taskView: GradientTaskView?
@@ -15,10 +17,12 @@ class LessonLevelView: UIView {
     private var customView: UIView = UIView()
     private var buttonsStackView: ButtonsStackView?
 
+    var startStopButtonTapped: (() -> Void)?
+
     init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
         super.init(frame: frame)
-        taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
-        buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myPinkOp)
+        taskView = GradientTaskView(frame: frame, text: text, color1: .myLightblue, color2: .myLightGreen)
+        buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myCyan)
         if image != nil {
             setUpWithTextAndImage()
         } else {
@@ -32,8 +36,6 @@ class LessonLevelView: UIView {
 
     private func setUpWithText() {
         setUpExitButton()
-        setUpHpStackView()
-        setUpHpImage()
         setUpProgressView()
         setUpProgressLabel()
         setUpTaskView()
@@ -42,8 +44,6 @@ class LessonLevelView: UIView {
 
     private func setUpWithTextAndImage() {
         setUpExitButton()
-        setUpHpStackView()
-        setUpHpImage()
         setUpProgressView()
         setUpProgressLabel()
         setUpTaskView()
@@ -62,35 +62,12 @@ class LessonLevelView: UIView {
         }
     }
 
-    private func setUpHpStackView() {
-        addSubview(hpStackView)
-        hpStackView.addArrangedSubview(hpImage1)
-        hpStackView.addArrangedSubview(hpImage2)
-        hpStackView.addArrangedSubview(hpImage3)
-        hpStackView.axis = .horizontal
-        hpStackView.alignment = .fill
-        hpStackView.distribution = .fillEqually
-        hpStackView.spacing = 16
-        hpStackView.snp.makeConstraints {make in
-            make.top.equalToSuperview().offset(66)
-            make.trailing.equalToSuperview().offset(-20)
-            make.height.equalTo(30)
-            make.width.equalTo(120)
-        }
-    }
-
-    private func setUpHpImage() {
-        hpImage1.image = .hp
-        hpImage2.image = .hp
-        hpImage3.image = .hp
-    }
-
     private func setUpProgressView() {
         addSubview(progressView)
         progressView.layer.cornerRadius = 10
         progressView.layer.masksToBounds = true
-        progressView.progressTintColor = .magenta
-        progressView.trackTintColor = .myMagentaOp
+        progressView.progressTintColor = .myCyan
+        progressView.trackTintColor = .myCyanOp
         progressView.snp.makeConstraints { make in
             make.top.equalTo(exitButton.snp_bottomMargin).offset(24)
             make.centerX.equalToSuperview()
@@ -137,9 +114,12 @@ class LessonLevelView: UIView {
     private func setUpView() {
         let builder = CustomViewBuilder()
         customView = builder
-            .addImage(.note)
+            .addImage(.start)
             .addBackgroundColor(.white)
             .build()
+
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        customView.addGestureRecognizer(tapGesture)
         addSubview(customView)
         customView.snp.makeConstraints { make in
             make.top.equalTo(taskView!.snp.bottom).offset(40)
@@ -147,5 +127,9 @@ class LessonLevelView: UIView {
             make.height.equalTo(200)
             make.width.equalTo(200)
         }
+    }
+
+    @objc func viewTapped() {
+        startStopButtonTapped?()
     }
 }

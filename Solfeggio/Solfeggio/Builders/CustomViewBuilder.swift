@@ -51,23 +51,11 @@ class CustomViewBuilder {
         return self
     }
 
-    func addButton(_ image: UIImage) -> Self {
-        button = UIButton()
-        button?.setImage(image, for: .normal)
-        button?.imageView?.contentMode = .scaleAspectFit
-        button?.contentMode = .scaleAspectFill
-        button?.imageView?.clipsToBounds = true
-        return self
-    }
-
     func build() -> UIView {
         if !gradientColors.isEmpty {
             view = GradientView(frame: CGRect(), color1: gradientColors[0], color2: gradientColors[1])
         } else {
             view = GradientView(frame: CGRect(), color: backgroundColor ?? UIColor())
-        }
-        if let button = button {
-            view?.addSubview(button)
         }
         if let label = titleLabel, let imageView = imageView {
             view?.addSubview(imageView)
@@ -79,9 +67,6 @@ class CustomViewBuilder {
             setUpMainLabel()
             view?.addSubview(label)
             setUpTitleLabel()
-        } else if let button = button {
-            view?.addSubview(button)
-            setUpButton()
         } else if let imageView = imageView {
             view?.addSubview(imageView)
             setUpImage(40, 60, 40)
@@ -128,9 +113,9 @@ class CustomViewBuilder {
     private func setUpButton() {
         button?.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(40)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(80)
+            make.leading.equalToSuperview().offset(60)
+            make.trailing.equalToSuperview().inset(60)
+            make.bottom.equalToSuperview().inset(40)
         }
     }
 
