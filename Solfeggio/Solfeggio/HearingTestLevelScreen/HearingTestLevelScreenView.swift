@@ -122,7 +122,7 @@ class HearingTestLevelScreenView: UIView {
         customView.addGestureRecognizer(tapGesture)
         addSubview(customView)
         customView.snp.makeConstraints { make in
-            make.top.equalTo(taskView!.snp.bottom).offset(40)
+            make.top.equalTo(taskView?.snp.bottom ?? UIView()).offset(40)
             make.centerX.equalToSuperview()
             make.height.equalTo(200)
             make.width.equalTo(200)

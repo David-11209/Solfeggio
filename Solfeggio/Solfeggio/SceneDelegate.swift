@@ -15,8 +15,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         _ scene: UIScene, willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
+            let viewModel = TopicLevelsScreenViewModel(levelNames: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11"])
         window = UIWindow(windowScene: windowScene)
-        window?.rootViewController = HearingTestLevelScreenViewController()
+        window?.rootViewController = TopicLevelsScreenViewController(viewModel: viewModel)
         window?.makeKeyAndVisible()
     }
 

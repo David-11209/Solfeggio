@@ -3,14 +3,14 @@ import UIKit
 
 class CustomViewBuilder {
 
-    private var view: GradientView?
-    private var title: String?
-    private var backgroundColor: UIColor?
-    private var imageView: UIImageView?
-    private var button: UIButton?
-    private var mainLabel: UILabel?
-    private var titleLabel: UILabel?
-    private var gradientColors: [UIColor] = []
+    var view: GradientView?
+    var title: String?
+    var backgroundColor: UIColor?
+    var imageView: UIImageView?
+    var button: UIButton?
+    var mainLabel: UILabel?
+    var titleLabel: UILabel?
+    var gradientColors: [UIColor] = []
 
     func addTitle(_ title: String) -> Self {
         titleLabel = UILabel()
@@ -30,7 +30,7 @@ class CustomViewBuilder {
         mainLabel?.textColor = .black
         mainLabel?.minimumScaleFactor = 0.5
         mainLabel?.adjustsFontSizeToFitWidth = true
-        mainLabel?.font = UIFont.boldSystemFont(ofSize: 100.0)
+        mainLabel?.font = UIFont.systemFont(ofSize: 130.0, weight: .heavy)
         return self
     }
 
@@ -59,7 +59,7 @@ class CustomViewBuilder {
         }
         if let label = titleLabel, let imageView = imageView {
             view?.addSubview(imageView)
-            setUpImage(30, 20, 80)
+            setUpImage(20, 20, 70)
             view?.addSubview(label)
             setUpTitleLabel()
         } else if let label = titleLabel, let mainLabel = mainLabel {
@@ -72,7 +72,7 @@ class CustomViewBuilder {
             setUpImage(40, 60, 40)
         }
         setUpShadow()
-        return view!
+        return view ?? UIView()
     }
 
     private func setUpImage(_ top: Int, _ side: Int, _ bottom: Int) {
@@ -94,10 +94,10 @@ class CustomViewBuilder {
 
     private func setUpMainLabel() {
         mainLabel?.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(80)
+            make.bottom.equalToSuperview().inset(60)
         }
     }
 
@@ -120,7 +120,7 @@ class CustomViewBuilder {
     }
 
     private func setUpShadow() {
-        view?.layer.cornerRadius = 40
+        view?.layer.cornerRadius = 30
         view?.layer.masksToBounds = false
         view?.layer.shadowColor = UIColor.black.cgColor
         view?.layer.shadowOpacity = 0.5
@@ -129,3 +129,4 @@ class CustomViewBuilder {
         view?.layer.borderColor = UIColor.black.cgColor
     }
 }
+
