@@ -3,14 +3,14 @@ import UIKit
 
 class CustomViewBuilder {
 
-    var view: GradientView?
-    var title: String?
-    var backgroundColor: UIColor?
-    var imageView: UIImageView?
-    var button: UIButton?
-    var mainLabel: UILabel?
-    var titleLabel: UILabel?
-    var gradientColors: [UIColor] = []
+    private var view: GradientView?
+    private var title: String?
+    private var backgroundColor: UIColor?
+    private var imageView: UIImageView?
+    private var button: UIButton?
+    private var mainLabel: UILabel?
+    private var titleLabel: UILabel?
+    private var gradientColors: [UIColor] = []
 
     func addTitle(_ title: String) -> Self {
         titleLabel = UILabel()
