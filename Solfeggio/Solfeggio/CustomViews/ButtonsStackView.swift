@@ -12,6 +12,8 @@ class ButtonsStackView: UIView {
     private lazy var mainStackView = UIStackView()
     private var names: [String] = []
 
+    var actionClosure: (() -> Void)?
+
     override class var layerClass: AnyClass {
         return CAGradientLayer.self
     }
@@ -64,6 +66,10 @@ class ButtonsStackView: UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
         button.backgroundColor = color
         button.layer.cornerRadius = 10
+        let buttonAction: UIAction = UIAction { [weak self] _ in
+            self?.actionClosure?()
+        }
+        button.addAction(buttonAction, for: .touchUpInside)
         button.layer.shadowColor = UIColor.black.cgColor
         button.layer.shadowOpacity = 0.3
         button.layer.shadowOffset = CGSize(width: 2.0, height: 2.0)
