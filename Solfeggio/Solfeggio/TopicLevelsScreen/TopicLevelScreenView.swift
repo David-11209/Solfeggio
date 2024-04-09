@@ -66,7 +66,7 @@ class TopicLevelsScreenView: UIView {
         progressView.layer.cornerRadius = 10
         progressView.layer.masksToBounds = true
         progressView.progressTintColor = .green
-        progressView.trackTintColor = .myCyanOp
+        progressView.trackTintColor = .myCyanop
         progressView.snp.makeConstraints { make in
             make.top.equalTo(70)
             make.leading.equalTo(80)

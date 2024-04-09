@@ -19,7 +19,7 @@ class CustomViewBuilder {
         titleLabel?.textColor = .black
         titleLabel?.minimumScaleFactor = 0.5
         titleLabel?.adjustsFontSizeToFitWidth = true
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 28.0)
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 22.0)
         return self
     }
 

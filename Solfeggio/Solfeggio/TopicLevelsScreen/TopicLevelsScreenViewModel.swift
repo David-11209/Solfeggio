@@ -35,19 +35,6 @@ class TopicLevelsScreenViewModel: NSObject, UICollectionViewDataSource {
     }
 }
 
-/// это все уберу, пока не могу придумать как это красиво сделать
-private enum CellColor {
-    case red
-    case yellow
-    case mySPink
-    case myCyan
-    case green
-    case mySBlueLight
-    case myLightYellow
-    case mySPeach
-    case myBlue
-}
-
 private struct LevelCellColors {
     var colors: [UIColor]
 }
