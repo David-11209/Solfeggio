@@ -67,7 +67,7 @@ class HearingTestLevelScreenView: UIView {
         progressView.layer.cornerRadius = 10
         progressView.layer.masksToBounds = true
         progressView.progressTintColor = .myCyan
-        progressView.trackTintColor = .myCyanOp
+        progressView.trackTintColor = .myCyanop
         progressView.snp.makeConstraints { make in
             make.top.equalTo(exitButton.snp_bottomMargin).offset(24)
             make.centerX.equalToSuperview()

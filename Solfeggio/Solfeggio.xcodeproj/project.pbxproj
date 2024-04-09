@@ -31,6 +31,12 @@
 		2ABFFBEC2BA3B24800DA45E8 /* ButtonsStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFFBEB2BA3B24800DA45E8 /* ButtonsStackView.swift */; };
 		2ABFFBEE2BA5508E00DA45E8 /* CustomViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFFBED2BA5508E00DA45E8 /* CustomViewBuilder.swift */; };
 		2ABFFBF12BA7613500DA45E8 /* LessonLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFFBF02BA7613500DA45E8 /* LessonLevelViewController.swift */; };
+		2AE929902BC43FE4003D32E0 /* MainScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE9298F2BC43FE4003D32E0 /* MainScreenView.swift */; };
+		2AE929922BC43FFB003D32E0 /* MainScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929912BC43FFB003D32E0 /* MainScreenViewController.swift */; };
+		2AE929942BC44011003D32E0 /* MainScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929932BC44011003D32E0 /* MainScreenViewModel.swift */; };
+		2AE929962BC443F7003D32E0 /* MainScreenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929952BC443F7003D32E0 /* MainScreenCollectionViewCell.swift */; };
+		2AE929982BC45422003D32E0 /* MainScreenSubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929972BC45422003D32E0 /* MainScreenSubCollectionViewCell.swift */; };
+		2AE9299A2BC456E7003D32E0 /* MainScreenSubCollectionViewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929992BC456E7003D32E0 /* MainScreenSubCollectionViewDataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +64,12 @@
 		2ABFFBEB2BA3B24800DA45E8 /* ButtonsStackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonsStackView.swift; sourceTree = "<group>"; };
 		2ABFFBED2BA5508E00DA45E8 /* CustomViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomViewBuilder.swift; sourceTree = "<group>"; };
 		2ABFFBF02BA7613500DA45E8 /* LessonLevelViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonLevelViewController.swift; sourceTree = "<group>"; };
+		2AE9298F2BC43FE4003D32E0 /* MainScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenView.swift; sourceTree = "<group>"; };
+		2AE929912BC43FFB003D32E0 /* MainScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewController.swift; sourceTree = "<group>"; };
+		2AE929932BC44011003D32E0 /* MainScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenViewModel.swift; sourceTree = "<group>"; };
+		2AE929952BC443F7003D32E0 /* MainScreenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCollectionViewCell.swift; sourceTree = "<group>"; };
+		2AE929972BC45422003D32E0 /* MainScreenSubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenSubCollectionViewCell.swift; sourceTree = "<group>"; };
+		2AE929992BC456E7003D32E0 /* MainScreenSubCollectionViewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenSubCollectionViewDataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +143,7 @@
 		2ABFFBC12BA1C2CC00DA45E8 /* Solfeggio */ = {
 			isa = PBXGroup;
 			children = (
+				2AE9298E2BC43FCF003D32E0 /* MainScreen */,
 				2A0290982BBAB809008BB3C7 /* Extensions */,
 				2A02908F2BBA980F008BB3C7 /* TopicLevelsScreen */,
 				2A0290882BB5DDCC008BB3C7 /* HearingTestLevelScreen */,
@@ -173,6 +186,19 @@
 				2ABFFBED2BA5508E00DA45E8 /* CustomViewBuilder.swift */,
 			);
 			path = Builders;
+			sourceTree = "<group>";
+		};
+		2AE9298E2BC43FCF003D32E0 /* MainScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2AE9298F2BC43FE4003D32E0 /* MainScreenView.swift */,
+				2AE929912BC43FFB003D32E0 /* MainScreenViewController.swift */,
+				2AE929932BC44011003D32E0 /* MainScreenViewModel.swift */,
+				2AE929952BC443F7003D32E0 /* MainScreenCollectionViewCell.swift */,
+				2AE929972BC45422003D32E0 /* MainScreenSubCollectionViewCell.swift */,
+				2AE929992BC456E7003D32E0 /* MainScreenSubCollectionViewDataManager.swift */,
+			);
+			path = MainScreen;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -278,6 +304,7 @@
 			files = (
 				2ABFFBF12BA7613500DA45E8 /* LessonLevelViewController.swift in Sources */,
 				2A02908C2BB5DE2F008BB3C7 /* HearingTestLevelScreenView.swift in Sources */,
+				2AE929942BC44011003D32E0 /* MainScreenViewModel.swift in Sources */,
 				2ABFFBEC2BA3B24800DA45E8 /* ButtonsStackView.swift in Sources */,
 				2A0290872BB5D58A008BB3C7 /* KnowledgeRepetitionLevelViewModel.swift in Sources */,
 				2A0290952BBAA6F9008BB3C7 /* TopicLevelsScreenViewModel.swift in Sources */,
@@ -292,9 +319,14 @@
 				2A0290852BB5D542008BB3C7 /* KnowledgeRepetitionLevelViewController.swift in Sources */,
 				2A02908A2BB5DE21008BB3C7 /* HearingTestLevelScreenViewController.swift in Sources */,
 				2ABFFBEA2BA38DB300DA45E8 /* GradientView.swift in Sources */,
+				2AE929902BC43FE4003D32E0 /* MainScreenView.swift in Sources */,
 				2A02909A2BBAB826008BB3C7 /* UICollectionViewCellExtension.swift in Sources */,
 				2ABFFBEE2BA5508E00DA45E8 /* CustomViewBuilder.swift in Sources */,
+				2AE929922BC43FFB003D32E0 /* MainScreenViewController.swift in Sources */,
+				2AE929962BC443F7003D32E0 /* MainScreenCollectionViewCell.swift in Sources */,
+				2AE9299A2BC456E7003D32E0 /* MainScreenSubCollectionViewDataManager.swift in Sources */,
 				2ABFFBE22BA1D85800DA45E8 /* LessonLevelView.swift in Sources */,
+				2AE929982BC45422003D32E0 /* MainScreenSubCollectionViewCell.swift in Sources */,
 				2ABFFBC52BA1C2CC00DA45E8 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
