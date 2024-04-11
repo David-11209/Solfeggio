@@ -53,9 +53,11 @@ class CustomViewBuilder {
 
     func build() -> UIView {
         if !gradientColors.isEmpty {
-            view = GradientView(frame: CGRect(), color1: gradientColors[0], color2: gradientColors[1])
+            view = GradientView()
+            view?.setUpGradient(color1: gradientColors[0], color2: gradientColors[1])
         } else {
-            view = GradientView(frame: CGRect(), color: backgroundColor ?? UIColor())
+            view = GradientView()
+            view?.setUpOneColor(color: backgroundColor ?? UIColor())
         }
         if let label = titleLabel, let imageView = imageView {
             view?.addSubview(imageView)
