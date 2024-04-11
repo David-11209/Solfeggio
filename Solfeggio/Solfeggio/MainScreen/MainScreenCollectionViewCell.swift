@@ -9,19 +9,16 @@ import UIKit
 
 class MainScreenCollectionViewCell: UICollectionViewCell {
 
-//    private var customView: GradientView = GradientView()
-
+    /// Инициализация dataManager будет изменена после создания моделей
+    private var dataManager = MainScreenSubCollectionViewDataManager(data: ["123", "123"])
+    private lazy var imageView: UIImageView = UIImageView()
+    private lazy var titleLabel: UILabel = UILabel()
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30
         layout.minimumInteritemSpacing = 10
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        collectionView.backgroundColor = .mySPink
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        collectionView.register(MainScreenSubCollectionViewCell.self, forCellWithReuseIdentifier: MainScreenSubCollectionViewCell.reuseIdentifier)
-
         return collectionView
     }()
 
@@ -34,43 +31,60 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(colors: [UIColor]) {
-//        customView.setUpGradient(color1: colors[0], color2: colors[1])
+    func configure(title: String, image: UIImage) {
+        titleLabel.text = title
+        imageView.image = image
 
     }
 
     private func setUp() {
+        setUpImage()
+        setUpTitleLabel()
         setUpTopicsCollectionView()
+    }
+
+    private func setUpImage() {
+        addSubview(imageView)
+        imageView.image = .musicalnotation
+        imageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(40)
+            make.height.width.equalTo(38)
+            make.top.equalToSuperview()
+        }
+    }
+
+    private func setUpTitleLabel() {
+        addSubview(titleLabel)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 26.0)
+        titleLabel.snp.makeConstraints { make in
+            make.leading.equalTo(80)
+            make.trailing.equalToSuperview()
+            make.height.equalTo(38)
+            make.top.equalToSuperview()
+        }
     }
 
     private func setUpTopicsCollectionView() {
         addSubview(collectionView)
+        collectionView.showsHorizontalScrollIndicator = false
+        collectionView.delegate = self
+        collectionView.dataSource = dataManager
+        collectionView.register(MainScreenSubCollectionViewCell.self, forCellWithReuseIdentifier: MainScreenSubCollectionViewCell.reuseIdentifier)
         collectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.top.equalToSuperview().offset(20)
+            make.top.equalToSuperview().offset(50)
             make.bottom.equalToSuperview()
         }
     }
 }
 
-extension MainScreenCollectionViewCell: UICollectionViewDelegateFlowLayout, UICalendarViewDelegate,UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(
-            withReuseIdentifier: MainScreenSubCollectionViewCell.reuseIdentifier, for: indexPath) as? MainScreenSubCollectionViewCell
-        else {
-            return UICollectionViewCell()
-        }
-        cell.configure(colors: [.myBlue, .myCyan])
-        return cell
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Укажите размер ячейки здесь
-        return CGSize(width: 280, height: 180) // Пример размера ячейки (ширина, высота)
+extension MainScreenCollectionViewCell: UICollectionViewDelegateFlowLayout {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 200)
     }
 }

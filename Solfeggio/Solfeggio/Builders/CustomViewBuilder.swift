@@ -54,7 +54,7 @@ class CustomViewBuilder {
     func build() -> UIView {
         if !gradientColors.isEmpty {
             view = GradientView(frame: CGRect())
-            view?.setUpGradient(color1:  gradientColors[0], color2: gradientColors[1])
+            view?.setUpGradient(color1: gradientColors[0], color2: gradientColors[1])
         } else {
             view = GradientView(frame: CGRect())
             view?.setUpOneColor(color: backgroundColor ?? .white)

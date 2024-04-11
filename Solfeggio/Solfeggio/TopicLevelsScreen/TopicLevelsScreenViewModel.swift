@@ -35,7 +35,6 @@ class TopicLevelsScreenViewModel: NSObject, UICollectionViewDataSource {
     }
 }
 
-/// это все уберу, пока не могу придумать как это красиво сделать
 private enum CellColor {
     case red
     case yellow

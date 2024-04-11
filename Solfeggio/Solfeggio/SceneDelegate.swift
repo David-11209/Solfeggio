@@ -15,7 +15,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         _ scene: UIScene, willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
-            let viewModel = MainScreenViewModel()
+            let viewModel = MainScreenViewModel(topics: ["Нотная грамота", "Тональности и лады", "Интервалы"])
         window = UIWindow(windowScene: windowScene)
         window?.rootViewController = MainScreenViewController(viewModel: viewModel)
         window?.makeKeyAndVisible()

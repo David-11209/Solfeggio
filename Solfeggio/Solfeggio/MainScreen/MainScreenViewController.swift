@@ -36,8 +36,11 @@ class MainScreenViewController: UIViewController {
 
 extension MainScreenViewController: UICollectionViewDelegateFlowLayout {
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        // Укажите размер ячейки здесь
-        return CGSize(width: 280, height: 180) // Пример размера ячейки (ширина, высота)
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 280)
     }
 }

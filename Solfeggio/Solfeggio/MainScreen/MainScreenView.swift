@@ -18,7 +18,7 @@ class MainScreenView: UIView {
         layout.scrollDirection = .vertical
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
         collectionView.showsVerticalScrollIndicator = false
-        collectionView.backgroundColor = .myBlue
+        collectionView.backgroundColor = .clear
         return collectionView
     }()
 
@@ -50,10 +50,9 @@ class MainScreenView: UIView {
 
     private func setUpTopicsCollectionView() {
         addSubview(topicsCollectionView)
-//        topicsCollectionView.backgroundColor = .clear
         topicsCollectionView.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().inset(10)
+            make.leading.equalToSuperview()
+            make.trailing.equalToSuperview()
             make.top.equalTo(titleLabel.snp_bottomMargin).offset(20)
             make.bottom.equalToSuperview()
         }

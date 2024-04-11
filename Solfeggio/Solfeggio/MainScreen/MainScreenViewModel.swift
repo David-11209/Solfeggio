@@ -8,7 +8,12 @@
 import UIKit
 
 class MainScreenViewModel: NSObject, UICollectionViewDataSource {
-    var topics = ["Тема1","Тема2","Тема3","Тема4","Тема5","Тема6","Тема1","Тема2","Тема3","Тема4","Тема5","Тема6"]
+
+    private var topics: [String]
+
+    init(topics: [String]) {
+        self.topics = topics
+    }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(
@@ -16,7 +21,7 @@ class MainScreenViewModel: NSObject, UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        cell.configure(colors: [.myBlue, .myCyan])
+        cell.configure(title: topics[indexPath.row], image: .musicalnotation)
         return cell
     }
 

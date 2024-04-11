@@ -25,7 +25,40 @@ class MainScreenSubCollectionViewDataManager: NSObject, UICollectionViewDataSour
         else {
             return UICollectionViewCell()
         }
-        cell.configure(colors: [.myBlue, .myCyan])
+        print(indexPath.item)
+        /// Это будет заменено,  после того как напишу модели 
+        cell.configure(colors: cellDataArray.randomElement()?.colors ?? [.white, .white], title: "Нотная грамота", progressProcent: "57%")
         return cell
     }
 }
+private enum CellColor {
+    case red
+    case yellow
+    case mySPink
+    case myCyan
+    case green
+    case mySBlueLight
+    case myLightYellow
+    case mySPeach
+    case myBlue
+}
+
+private struct LevelCellColors {
+    var colors: [UIColor]
+}
+
+private var cellDataArray: [LevelCellColors] = [
+    LevelCellColors(colors: [.red, .yellow]),
+    LevelCellColors(colors: [.mySPink, .myCyan]),
+    LevelCellColors(colors: [.yellow, .green]),
+    LevelCellColors(colors: [.mySBlueLight, .myLightYellow]),
+    LevelCellColors(colors: [.mySPink, .mySPeach]),
+    LevelCellColors(colors: [.myBlue, .green]),
+    LevelCellColors(colors: [.red, .yellow]),
+    LevelCellColors(colors: [.mySPink, .myCyan]),
+    LevelCellColors(colors: [.yellow, .green]),
+    LevelCellColors(colors: [.mySBlueLight, .myLightYellow]),
+    LevelCellColors(colors: [.mySPink, .mySPeach]),
+    LevelCellColors(colors: [.myBlue, .green])
+]
+
