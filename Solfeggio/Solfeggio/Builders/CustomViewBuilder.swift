@@ -1,7 +1,16 @@
 import SnapKit
 import UIKit
 
-class CustomViewBuilder {
+protocol CustomViewBuilderProtocol {
+    func  addTitle(_ title: String) -> Self
+    func addMainLabel(_ title: String) -> Self
+    func addBackgroundColor(_ color: UIColor) -> Self
+    func setGradientColors(_ colors: [UIColor]) -> Self
+    func addImage(_ image: UIImage) -> Self
+    func build() -> UIView
+}
+
+class CustomViewBuilder: CustomViewBuilderProtocol {
 
     private var view: GradientView?
     private var title: String?

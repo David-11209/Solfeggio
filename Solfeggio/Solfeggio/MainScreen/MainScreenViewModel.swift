@@ -7,12 +7,17 @@
 
 import UIKit
 
-class MainScreenViewModel: NSObject, UICollectionViewDataSource {
+protocol MainScreenViewModelProtocol: UICollectionViewDataSource {
 
-    private var topics: [String]
+}
 
-    init(topics: [String]) {
-        self.topics = topics
+class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
+
+    var closeClosure: (() -> Void)?
+
+    private var topics: [String] = ["", "Нотная грамота", "Тональности и лады", "Интервалы"]
+
+    override init() {
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -21,7 +26,16 @@ class MainScreenViewModel: NSObject, UICollectionViewDataSource {
         else {
             return UICollectionViewCell()
         }
-        cell.configure(title: topics[indexPath.row], image: .interval)
+        if indexPath.row == 0 {
+            cell.configureFirstCell()
+            return cell
+        } else {
+            cell.configure(title: topics[indexPath.row], image: .interval)
+            cell.didSelectItem = { [weak self] indexPath in
+                /// indexPath будет использован в следущем MR
+                self?.closeClosure?()
+            }
+        }
         return cell
     }
 

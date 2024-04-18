@@ -13,6 +13,9 @@ class TopicLevelsScreenView: UIView {
     private lazy var exitButton: UIButton = UIButton()
     private lazy var progressView: UIProgressView = UIProgressView(progressViewStyle: .default)
     private lazy var progressLabel: UILabel = UILabel()
+
+    var exitClosure: (() -> Void)?
+
     lazy var levelsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30
@@ -52,6 +55,10 @@ class TopicLevelsScreenView: UIView {
 
     private func setUpExitButton() {
         addSubview(exitButton)
+        let action: UIAction = UIAction { [weak self] _ in
+            self?.exitClosure?()
+        }
+        exitButton.addAction(action, for: .touchUpInside)
         exitButton.setImage(.exit, for: .normal)
         exitButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(60)

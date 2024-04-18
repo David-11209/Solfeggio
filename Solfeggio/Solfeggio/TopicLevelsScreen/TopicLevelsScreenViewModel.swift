@@ -7,7 +7,11 @@
 
 import UIKit
 
-class TopicLevelsScreenViewModel: NSObject, UICollectionViewDataSource {
+protocol TopicLevelsScreenViewModelProtocol: UICollectionViewDataSource {
+
+}
+
+class TopicLevelsScreenViewModel: NSObject, TopicLevelsScreenViewModelProtocol {
 
     private var levelNames: [String] = []
 

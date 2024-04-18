@@ -13,6 +13,7 @@ class MainScreenSubCollectionViewCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = UILabel()
     private lazy var progressView: UIProgressView = UIProgressView(progressViewStyle: .default)
     private lazy var progressLabel: UILabel = UILabel()
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()

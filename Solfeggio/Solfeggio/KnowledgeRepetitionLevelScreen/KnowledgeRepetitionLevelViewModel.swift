@@ -6,3 +6,11 @@
 //
 
 import UIKit
+
+protocol KnowledgeRepetitionLevelVMProtocol {
+
+}
+
+class KnowledgeRepetitionLevelViewModel: KnowledgeRepetitionLevelVMProtocol {
+
+}

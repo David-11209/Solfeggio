@@ -12,6 +12,7 @@ class MainScreenViewController: UIViewController {
     private let contentView: MainScreenView = .init()
     private let viewModel: MainScreenViewModel
 
+    var closeClosure: (() -> Void)?
     init(viewModel: MainScreenViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -27,8 +28,12 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         contentView.topicsCollectionView.delegate = self
         contentView.topicsCollectionView.dataSource = viewModel
+        viewModel.closeClosure = { [weak self] in
+            self?.closeClosure?()
+        }
         contentView.topicsCollectionView.register(
             MainScreenCollectionViewCell.self, forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)
     }

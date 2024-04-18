@@ -7,7 +7,11 @@
 
 import UIKit
 
-class MainScreenSubCollectionViewDataManager: NSObject, UICollectionViewDataSource {
+protocol MainScreenSubCVDataManagerProtocol: UICollectionViewDataSource {
+
+}
+
+class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManagerProtocol {
 
     private var data: [String]
 
@@ -24,6 +28,9 @@ class MainScreenSubCollectionViewDataManager: NSObject, UICollectionViewDataSour
             withReuseIdentifier: MainScreenSubCollectionViewCell.reuseIdentifier, for: indexPath) as? MainScreenSubCollectionViewCell
         else {
             return UICollectionViewCell()
+        }
+        if indexPath.row == 0 {
+            cell.configure(colors: [.clear, .clear], title: "", progressProcent: "")
         }
         /// Это будет заменено,  после того как напишу модели
         cell.configure(colors: cellDataArray.randomElement()?.colors ?? [.white, .white], title: "Нотная грамота", progressProcent: "57%")

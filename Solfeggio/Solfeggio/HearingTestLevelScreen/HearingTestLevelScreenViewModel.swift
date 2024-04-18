@@ -6,3 +6,11 @@
 //
 
 import UIKit
+
+protocol HearingTestLevelScreenViewModelProtocol {
+
+}
+
+class HearingTestLevelScreenViewModel: HearingTestLevelScreenViewModelProtocol {
+
+}
