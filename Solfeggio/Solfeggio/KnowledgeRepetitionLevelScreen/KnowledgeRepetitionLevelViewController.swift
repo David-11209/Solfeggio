@@ -10,6 +10,7 @@ import UIKit
 class KnowledgeRepetitionLevelViewController: UIViewController {
 
     let text = "Выберите правильную длительность ноты"
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationItem.title = "Ноты и длительности"

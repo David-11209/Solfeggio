@@ -1,4 +1,3 @@
-import SnapKit
 import UIKit
 
 class GradientView: UIView {

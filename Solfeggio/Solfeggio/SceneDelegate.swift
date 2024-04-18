@@ -5,20 +5,25 @@
 //  Created by Давид Васильев on 13.03.2024.
 //
 
+import Swinject
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    let container = Container()
 
     func scene(
         _ scene: UIScene, willConnectTo session: UISceneSession,
         options connectionOptions: UIScene.ConnectionOptions) {
+            let assembly = ContainerAssembly()
+            assembly.assemble(container: container)
+            let fabric = TabBarFabric(container: container)
+            let tbController = fabric.makeTabBarController()
             guard let windowScene = (scene as? UIWindowScene) else { return }
-            let viewModel = MainScreenViewModel(topics: ["Нотная грамота", "Тональности и лады", "Интервалы"])
-            window = UIWindow(windowScene: windowScene)
-            window?.rootViewController = MainScreenViewController(viewModel: viewModel)
-            window?.makeKeyAndVisible()
+            self.window = UIWindow(windowScene: windowScene)
+            self.window?.rootViewController = tbController
+            self.window?.makeKeyAndVisible()
         }
 
     func sceneDidDisconnect(_ scene: UIScene) {

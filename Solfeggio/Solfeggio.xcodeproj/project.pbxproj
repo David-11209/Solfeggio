@@ -40,6 +40,22 @@
 		2AE929A62BC7EAC9003D32E0 /* MainScreenSubCollectionViewDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929A52BC7EAC9003D32E0 /* MainScreenSubCollectionViewDataManager.swift */; };
 		2AE929A82BC7EAE6003D32E0 /* MainScreenSubCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929A72BC7EAE6003D32E0 /* MainScreenSubCollectionViewCell.swift */; };
 		2AE929B02BCC0AFC003D32E0 /* Swinject in Frameworks */ = {isa = PBXBuildFile; productRef = 2AE929AF2BCC0AFC003D32E0 /* Swinject */; };
+		2AE929B22BCC0D33003D32E0 /* HearingTestScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929B12BCC0D33003D32E0 /* HearingTestScreenViewModel.swift */; };
+		2AE929B62BCC0E3F003D32E0 /* ProfileScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929B52BCC0E3F003D32E0 /* ProfileScreenViewController.swift */; };
+		2AE929B82BCC0E99003D32E0 /* KnowledgeRepetitionScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929B72BCC0E99003D32E0 /* KnowledgeRepetitionScreenViewController.swift */; };
+		2AE929BC2BCC0F44003D32E0 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929BB2BCC0F44003D32E0 /* CoordinatorProtocol.swift */; };
+		2AE929BE2BCC0FB6003D32E0 /* MainScreenFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929BD2BCC0FB6003D32E0 /* MainScreenFlowCoordinator.swift */; };
+		2AE929C12BCC1177003D32E0 /* ContainerAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929C02BCC1177003D32E0 /* ContainerAssembly.swift */; };
+		2AE929C32BCC1A96003D32E0 /* TabBarFabric.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929C22BCC1A96003D32E0 /* TabBarFabric.swift */; };
+		2AE929C52BCC24F3003D32E0 /* HearingTestScreenFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929C42BCC24F3003D32E0 /* HearingTestScreenFlowCoordinator.swift */; };
+		2AE929C72BCC288A003D32E0 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929C62BCC288A003D32E0 /* UIImageExtension.swift */; };
+		2AE929C92BCD109B003D32E0 /* KnowledgeRepetitionScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929C82BCD109B003D32E0 /* KnowledgeRepetitionScreenView.swift */; };
+		2AE929CB2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929CA2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift */; };
+		2AE929CD2BCD1132003D32E0 /* ProfileScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929CC2BCD1132003D32E0 /* ProfileScreenView.swift */; };
+		2AE929CF2BCD113F003D32E0 /* ProfileScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929CE2BCD113F003D32E0 /* ProfileScreenViewModel.swift */; };
+		2AE929D12BCD1322003D32E0 /* LessonLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929D02BCD1322003D32E0 /* LessonLevelViewModel.swift */; };
+		2AE929D32BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929D22BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift */; };
+		2AE929D52BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929D42BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,6 +91,22 @@
 		2AE929A32BC7E8A4003D32E0 /* MainScreenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenCollectionViewCell.swift; sourceTree = "<group>"; };
 		2AE929A52BC7EAC9003D32E0 /* MainScreenSubCollectionViewDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenSubCollectionViewDataManager.swift; sourceTree = "<group>"; };
 		2AE929A72BC7EAE6003D32E0 /* MainScreenSubCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenSubCollectionViewCell.swift; sourceTree = "<group>"; };
+		2AE929B12BCC0D33003D32E0 /* HearingTestScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestScreenViewModel.swift; sourceTree = "<group>"; };
+		2AE929B52BCC0E3F003D32E0 /* ProfileScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewController.swift; sourceTree = "<group>"; };
+		2AE929B72BCC0E99003D32E0 /* KnowledgeRepetitionScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRepetitionScreenViewController.swift; sourceTree = "<group>"; };
+		2AE929BB2BCC0F44003D32E0 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
+		2AE929BD2BCC0FB6003D32E0 /* MainScreenFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainScreenFlowCoordinator.swift; sourceTree = "<group>"; };
+		2AE929C02BCC1177003D32E0 /* ContainerAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerAssembly.swift; sourceTree = "<group>"; };
+		2AE929C22BCC1A96003D32E0 /* TabBarFabric.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarFabric.swift; sourceTree = "<group>"; };
+		2AE929C42BCC24F3003D32E0 /* HearingTestScreenFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestScreenFlowCoordinator.swift; sourceTree = "<group>"; };
+		2AE929C62BCC288A003D32E0 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		2AE929C82BCD109B003D32E0 /* KnowledgeRepetitionScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRepetitionScreenView.swift; sourceTree = "<group>"; };
+		2AE929CA2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRepetitionScreenViewModel.swift; sourceTree = "<group>"; };
+		2AE929CC2BCD1132003D32E0 /* ProfileScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenView.swift; sourceTree = "<group>"; };
+		2AE929CE2BCD113F003D32E0 /* ProfileScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenViewModel.swift; sourceTree = "<group>"; };
+		2AE929D02BCD1322003D32E0 /* LessonLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonLevelViewModel.swift; sourceTree = "<group>"; };
+		2AE929D22BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRepetitionScreenFlowCoordinator.swift; sourceTree = "<group>"; };
+		2AE929D42BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenFlowCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				2A0290992BBAB826008BB3C7 /* UICollectionViewCellExtension.swift */,
+				2AE929C62BCC288A003D32E0 /* UIImageExtension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -135,6 +168,7 @@
 			children = (
 				2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */,
 				2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */,
+				2AE929B12BCC0D33003D32E0 /* HearingTestScreenViewModel.swift */,
 			);
 			path = HearingTestScreen;
 			sourceTree = "<group>";
@@ -158,11 +192,16 @@
 		2ABFFBC12BA1C2CC00DA45E8 /* Solfeggio */ = {
 			isa = PBXGroup;
 			children = (
+				2AE929BF2BCC113E003D32E0 /* Assemblies */,
+				2AE929BA2BCC0F02003D32E0 /* FlowCoordinator */,
+				2AE929B92BCC0EB7003D32E0 /* Fabrics */,
+				2AE929B42BCC0DC9003D32E0 /* KnowledgeRepetitionScreen */,
+				2AE929B32BCC0DC0003D32E0 /* ProfileScreen */,
 				2AE9299B2BC7E463003D32E0 /* MainScreen */,
 				2A5B8E482BBF17F2007D8CDD /* HearingTestScreen */,
+				2A0290882BB5DDCC008BB3C7 /* HearingTestLevelScreen */,
 				2A0290982BBAB809008BB3C7 /* Extensions */,
 				2A02908F2BBA980F008BB3C7 /* TopicLevelsScreen */,
-				2A0290882BB5DDCC008BB3C7 /* HearingTestLevelScreen */,
 				2A0290812BB5D4D5008BB3C7 /* KnowledgeRepetitionLevelScreen */,
 				2ABFFBEF2BA660F100DA45E8 /* Builders */,
 				2ABFFBE82BA3374200DA45E8 /* CustomViews */,
@@ -182,6 +221,7 @@
 			children = (
 				2ABFFBE12BA1D85800DA45E8 /* LessonLevelView.swift */,
 				2ABFFBF02BA7613500DA45E8 /* LessonLevelViewController.swift */,
+				2AE929D02BCD1322003D32E0 /* LessonLevelViewModel.swift */,
 			);
 			path = LessonLevel;
 			sourceTree = "<group>";
@@ -223,6 +263,54 @@
 				2AE929A72BC7EAE6003D32E0 /* MainScreenSubCollectionViewCell.swift */,
 			);
 			path = MainScreenSubCollectionView;
+			sourceTree = "<group>";
+		};
+		2AE929B32BCC0DC0003D32E0 /* ProfileScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2AE929B52BCC0E3F003D32E0 /* ProfileScreenViewController.swift */,
+				2AE929CC2BCD1132003D32E0 /* ProfileScreenView.swift */,
+				2AE929CE2BCD113F003D32E0 /* ProfileScreenViewModel.swift */,
+			);
+			path = ProfileScreen;
+			sourceTree = "<group>";
+		};
+		2AE929B42BCC0DC9003D32E0 /* KnowledgeRepetitionScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2AE929B72BCC0E99003D32E0 /* KnowledgeRepetitionScreenViewController.swift */,
+				2AE929C82BCD109B003D32E0 /* KnowledgeRepetitionScreenView.swift */,
+				2AE929CA2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift */,
+			);
+			path = KnowledgeRepetitionScreen;
+			sourceTree = "<group>";
+		};
+		2AE929B92BCC0EB7003D32E0 /* Fabrics */ = {
+			isa = PBXGroup;
+			children = (
+				2AE929C22BCC1A96003D32E0 /* TabBarFabric.swift */,
+			);
+			path = Fabrics;
+			sourceTree = "<group>";
+		};
+		2AE929BA2BCC0F02003D32E0 /* FlowCoordinator */ = {
+			isa = PBXGroup;
+			children = (
+				2AE929BB2BCC0F44003D32E0 /* CoordinatorProtocol.swift */,
+				2AE929BD2BCC0FB6003D32E0 /* MainScreenFlowCoordinator.swift */,
+				2AE929C42BCC24F3003D32E0 /* HearingTestScreenFlowCoordinator.swift */,
+				2AE929D22BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift */,
+				2AE929D42BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift */,
+			);
+			path = FlowCoordinator;
+			sourceTree = "<group>";
+		};
+		2AE929BF2BCC113E003D32E0 /* Assemblies */ = {
+			isa = PBXGroup;
+			children = (
+				2AE929C02BCC1177003D32E0 /* ContainerAssembly.swift */,
+			);
+			path = Assemblies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -328,31 +416,47 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2AE929CF2BCD113F003D32E0 /* ProfileScreenViewModel.swift in Sources */,
 				2ABFFBF12BA7613500DA45E8 /* LessonLevelViewController.swift in Sources */,
 				2AE929A12BC7E873003D32E0 /* MainScreenViewModel.swift in Sources */,
 				2A02908C2BB5DE2F008BB3C7 /* HearingTestLevelScreenView.swift in Sources */,
 				2ABFFBEC2BA3B24800DA45E8 /* ButtonsStackView.swift in Sources */,
 				2A0290872BB5D58A008BB3C7 /* KnowledgeRepetitionLevelViewModel.swift in Sources */,
 				2A5B8E4A2BBF2139007D8CDD /* HearingTestScreenView.swift in Sources */,
+				2AE929D12BCD1322003D32E0 /* LessonLevelViewModel.swift in Sources */,
 				2AE9299F2BC7E852003D32E0 /* MainScreenViewController.swift in Sources */,
+				2AE929C12BCC1177003D32E0 /* ContainerAssembly.swift in Sources */,
 				2A0290952BBAA6F9008BB3C7 /* TopicLevelsScreenViewModel.swift in Sources */,
+				2AE929B62BCC0E3F003D32E0 /* ProfileScreenViewController.swift in Sources */,
 				2ABFFBCD2BA1C2CC00DA45E8 /* Solfeggio.xcdatamodeld in Sources */,
+				2AE929C52BCC24F3003D32E0 /* HearingTestScreenFlowCoordinator.swift in Sources */,
+				2AE929BE2BCC0FB6003D32E0 /* MainScreenFlowCoordinator.swift in Sources */,
+				2AE929BC2BCC0F44003D32E0 /* CoordinatorProtocol.swift in Sources */,
+				2AE929CD2BCD1132003D32E0 /* ProfileScreenView.swift in Sources */,
 				2ABFFBC32BA1C2CC00DA45E8 /* AppDelegate.swift in Sources */,
 				2A0290972BBAA8DB008BB3C7 /* LevelsCollectionViewCell.swift in Sources */,
+				2AE929B82BCC0E99003D32E0 /* KnowledgeRepetitionScreenViewController.swift in Sources */,
 				2A0290932BBA984D008BB3C7 /* TopicLevelScreenViewController.swift in Sources */,
 				2ABFFBE72BA2E79500DA45E8 /* GradientTaskView.swift in Sources */,
+				2AE929D32BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift in Sources */,
 				2AE9299D2BC7E829003D32E0 /* MainScreenView.swift in Sources */,
 				2A0290912BBA9836008BB3C7 /* TopicLevelScreenView.swift in Sources */,
 				2A02908E2BB5DE47008BB3C7 /* HearingTestLevelScreenViewModel.swift in Sources */,
+				2AE929D52BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift in Sources */,
+				2AE929B22BCC0D33003D32E0 /* HearingTestScreenViewModel.swift in Sources */,
+				2AE929C72BCC288A003D32E0 /* UIImageExtension.swift in Sources */,
 				2A0290832BB5D524008BB3C7 /* KnowledgeRepetitionLevelView.swift in Sources */,
 				2AE929A42BC7E8A4003D32E0 /* MainScreenCollectionViewCell.swift in Sources */,
 				2AE929A62BC7EAC9003D32E0 /* MainScreenSubCollectionViewDataManager.swift in Sources */,
 				2A0290852BB5D542008BB3C7 /* KnowledgeRepetitionLevelViewController.swift in Sources */,
 				2A5B8E4C2BBF28D3007D8CDD /* HearingTestViewController.swift in Sources */,
 				2A02908A2BB5DE21008BB3C7 /* HearingTestLevelScreenViewController.swift in Sources */,
+				2AE929C92BCD109B003D32E0 /* KnowledgeRepetitionScreenView.swift in Sources */,
 				2ABFFBEA2BA38DB300DA45E8 /* GradientView.swift in Sources */,
 				2A02909A2BBAB826008BB3C7 /* UICollectionViewCellExtension.swift in Sources */,
 				2ABFFBEE2BA5508E00DA45E8 /* CustomViewBuilder.swift in Sources */,
+				2AE929CB2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift in Sources */,
+				2AE929C32BCC1A96003D32E0 /* TabBarFabric.swift in Sources */,
 				2ABFFBE22BA1D85800DA45E8 /* LessonLevelView.swift in Sources */,
 				2AE929A82BC7EAE6003D32E0 /* MainScreenSubCollectionViewCell.swift in Sources */,
 				2ABFFBC52BA1C2CC00DA45E8 /* SceneDelegate.swift in Sources */,

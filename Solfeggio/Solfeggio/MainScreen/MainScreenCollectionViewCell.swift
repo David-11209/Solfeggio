@@ -13,7 +13,9 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
     private var dataManager = MainScreenSubCollectionViewDataManager(data: ["123", "123"])
     private lazy var imageView: UIImageView = UIImageView()
     private lazy var titleLabel: UILabel = UILabel()
-    lazy var collectionView: UICollectionView = {
+
+    var didSelectItem: ((_ indexPath: IndexPath) -> Void)?
+    var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30
         layout.minimumInteritemSpacing = 10
@@ -35,6 +37,12 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
         titleLabel.text = title
         imageView.image = image
 
+    }
+
+    func configureFirstCell() {
+        collectionView.isHidden = true
+        titleLabel.isHidden = true
+        imageView.isHidden = true
     }
 
     private func setUp() {
@@ -87,5 +95,9 @@ extension MainScreenCollectionViewCell: UICollectionViewDelegateFlowLayout {
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
         return CGSize(width: UIScreen.main.bounds.width, height: 200)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectItem?(indexPath)
     }
 }

@@ -10,6 +10,15 @@ import UIKit
 class MainScreenView: UIView {
 
     private lazy var titleLabel: UILabel = UILabel()
+    private var blurEffect: UIBlurEffect {
+        let effect = UIBlurEffect(style: .light)
+        return effect
+    }
+
+    private lazy var blurView: UIVisualEffectView = {
+        let view = UIVisualEffectView(effect: blurEffect)
+        return view
+    }()
 
     lazy var topicsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -33,19 +42,32 @@ class MainScreenView: UIView {
     }
 
     private func setUp() {
-        setUpTitleLabel()
+
         setUpTopicsCollectionView()
+        setUpBlurView()
+        setUpTitleLabel()
+    }
+
+    private func setUpBlurView() {
+        addSubview(blurView)
+        blurView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(-10)
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(110)
+        }
     }
 
     private func setUpTitleLabel() {
-        addSubview(titleLabel)
+        blurView.contentView.addSubview(titleLabel)
         titleLabel.text = "Уроки"
         titleLabel.font = UIFont.boldSystemFont(ofSize: 36.0)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(80)
+            make.bottom.equalToSuperview().inset(6)
             make.centerX.equalToSuperview()
             make.height.equalTo(40)
         }
+
     }
 
     private func setUpTopicsCollectionView() {
@@ -53,7 +75,7 @@ class MainScreenView: UIView {
         topicsCollectionView.snp.makeConstraints { make in
             make.leading.equalToSuperview()
             make.trailing.equalToSuperview()
-            make.top.equalTo(titleLabel.snp_bottomMargin).offset(20)
+            make.top.equalToSuperview().offset(-240)
             make.bottom.equalToSuperview()
         }
     }

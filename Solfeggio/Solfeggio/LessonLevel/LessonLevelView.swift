@@ -15,6 +15,8 @@ class LessonLevelView: UIView {
     private var customView: UIView = UIView()
     private var buttonsStackView: ButtonsStackView?
 
+    var exitClosure: (() -> Void)?
+
     init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
         super.init(frame: frame)
         taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
@@ -54,6 +56,10 @@ class LessonLevelView: UIView {
     private func setUpExitButton() {
         addSubview(exitButton)
         exitButton.setImage(.exit, for: .normal)
+        let action: UIAction = UIAction { [weak self] _ in
+            self?.exitClosure?()
+        }
+        exitButton.addAction(action, for: .touchUpInside)
         exitButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(60)
             make.leading.equalToSuperview().offset(22)

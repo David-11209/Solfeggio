@@ -5,6 +5,7 @@
 //  Created by Давид Васильев on 28.03.2024.
 //
 
+import SnapKit
 import UIKit
 
 class HearingTestLevelScreenView: UIView {
@@ -18,6 +19,7 @@ class HearingTestLevelScreenView: UIView {
     var buttonsStackView: ButtonsStackView?
 
     var startStopButtonTapped: (() -> Void)?
+    var exitClosure: (() -> Void)?
 
     init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
         super.init(frame: frame)
@@ -54,6 +56,10 @@ class HearingTestLevelScreenView: UIView {
     private func setUpExitButton() {
         addSubview(exitButton)
         exitButton.setImage(.exit, for: .normal)
+        let action: UIAction = UIAction { [weak self] _ in
+            self?.exitClosure?()
+        }
+        exitButton.addAction(action, for: .touchUpInside)
         exitButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(60)
             make.leading.equalToSuperview().offset(22)

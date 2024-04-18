@@ -12,6 +12,9 @@ class TopicLevelsScreenViewController: UIViewController {
     private let contentView: TopicLevelsScreenView = .init()
     private let viewModel: TopicLevelsScreenViewModel
 
+    var didSelectItem: ((_ indexPath: IndexPath) -> Void)?
+    var exitClosure: (() -> Void)?
+
     init(viewModel: TopicLevelsScreenViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -31,6 +34,9 @@ class TopicLevelsScreenViewController: UIViewController {
         contentView.levelsCollectionView.dataSource = viewModel
         contentView.levelsCollectionView.register(
             LevelsCollectionViewCell.self, forCellWithReuseIdentifier: LevelsCollectionViewCell.reuseIdentifier)
+        contentView.exitClosure = {
+            self.exitClosure?()
+        }
     }
 }
 
@@ -42,5 +48,9 @@ extension TopicLevelsScreenViewController: UICollectionViewDelegateFlowLayout {
             let width = collectionView.frame.width / 2 - 6
             let height = 190.0
             return CGSize(width: width, height: height)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        didSelectItem?(indexPath)
     }
 }
