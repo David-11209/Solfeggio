@@ -17,8 +17,11 @@ class ContainerAssembly: Assembly {
             HearingTestScreenViewModel()
         }
 
-        container.register(TabBarFabricProtocol.self) { _ in
-            TabBarFabric(container: container)
+        container.register(TabBarFabricProtocol.self) { [weak container] _ in
+            guard let container = container else {
+                fatalError("Container is nil")
+            }
+            return TabBarFabric(container: container)
         }
         .inObjectScope(.container)
 

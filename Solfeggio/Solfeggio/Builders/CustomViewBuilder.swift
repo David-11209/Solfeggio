@@ -9,6 +9,7 @@ protocol CustomViewBuilderProtocol {
     func addImage(_ image: UIImage) -> Self
     func build() -> UIView
 }
+
 class CustomViewBuilder: CustomViewBuilderProtocol {
 
     private var view: GradientView?
