@@ -20,7 +20,7 @@ class LessonLevelView: UIView {
     init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
         super.init(frame: frame)
         taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
-        buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myPinkOp)
+        buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pPurple)
         if image != nil {
             setUpWithTextAndImage()
         } else {
@@ -95,8 +95,8 @@ class LessonLevelView: UIView {
         addSubview(progressView)
         progressView.layer.cornerRadius = 10
         progressView.layer.masksToBounds = true
-        progressView.progressTintColor = .magenta
-        progressView.trackTintColor = .myMagentaOp
+        progressView.progressTintColor = .pPurple
+        progressView.trackTintColor = .pPurpleOp
         progressView.snp.makeConstraints { make in
             make.top.equalTo(exitButton.snp_bottomMargin).offset(24)
             make.centerX.equalToSuperview()
