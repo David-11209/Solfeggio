@@ -31,6 +31,7 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         let viewController = KnowledgeRepetitionScreenViewController(
             viewModel: viewModel as? KnowledgeRepetitionScreenViewModel ?? KnowledgeRepetitionScreenViewModel()
         )
+
         let item = UITabBarItem(
             title: nil,
             image: image.resizeImage(
@@ -44,6 +45,28 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         viewController.tabBarItem = item
         navigationController = UINavigationController(
             rootViewController: viewController
+        )
+        viewController.viewTappedClosure = {
+            self.navigationController.tabBarController?.tabBar.isHidden = true
+            self.showTopicsScreen()
+        }
+        navigationController.isNavigationBarHidden = true
+    }
+
+    private func showTopicsScreen() {
+        guard let viewModel = container.resolve(
+            KnowRepChossingTopicsViewModelProtocol.self
+        ) else { return }
+        let viewController = KnowRepChossingTopicsViewController(
+            viewModel: viewModel as? KnowRepetitionChossingTopicsViewModel ?? KnowRepetitionChossingTopicsViewModel(levelNames: [])
+        )
+        viewController.exitClosure = {
+            self.navigationController.tabBarController?.tabBar.isHidden = false
+            self.navigationController.popViewController(animated: true)
+        }
+        navigationController.pushViewController(
+            viewController,
+            animated: true
         )
     }
 }

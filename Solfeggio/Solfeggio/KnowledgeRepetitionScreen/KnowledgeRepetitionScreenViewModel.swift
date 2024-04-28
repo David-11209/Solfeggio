@@ -6,9 +6,9 @@
 //
 
 import UIKit
-
 protocol KnowledgeRepetitionSViewModelProtocol {
 }
 
-class KnowledgeRepetitionScreenViewModel: KnowledgeRepetitionSViewModelProtocol {
+class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewModelProtocol {
+
 }

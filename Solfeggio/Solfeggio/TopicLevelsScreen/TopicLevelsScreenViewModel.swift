@@ -31,9 +31,9 @@ class TopicLevelsScreenViewModel: NSObject, TopicLevelsScreenViewModelProtocol {
             return UICollectionViewCell()
         }
         if indexPath.row == 0 {
-            cell.configure(colors: cellDataArray[indexPath.row].colors, image: .book, title: "Теория")
+            cell.configure(color: cellDataArray[indexPath.row], image: .book, title: "Теория")
         } else {
-            cell.configure(colors: cellDataArray[indexPath.row].colors, mainTitle: String(indexPath.row), title: "Уровень")
+            cell.configure(color: cellDataArray[indexPath.row], mainTitle: String(indexPath.row), title: "Уровень")
         }
         return cell
     }
@@ -43,17 +43,20 @@ private struct LevelCellColors {
     var colors: [UIColor]
 }
 
-private var cellDataArray: [LevelCellColors] = [
-    LevelCellColors(colors: [.red, .yellow]),
-    LevelCellColors(colors: [.mySPink, .myCyan]),
-    LevelCellColors(colors: [.yellow, .green]),
-    LevelCellColors(colors: [.mySBlueLight, .myLightYellow]),
-    LevelCellColors(colors: [.mySPink, .mySPeach]),
-    LevelCellColors(colors: [.myBlue, .green]),
-    LevelCellColors(colors: [.red, .yellow]),
-    LevelCellColors(colors: [.mySPink, .myCyan]),
-    LevelCellColors(colors: [.yellow, .green]),
-    LevelCellColors(colors: [.mySBlueLight, .myLightYellow]),
-    LevelCellColors(colors: [.mySPink, .mySPeach]),
-    LevelCellColors(colors: [.myBlue, .green])
+private var cellDataArray: [UIColor] = [
+    .pDarkBlue,
+    .pPink,
+    .pOrange,
+    .pPurple,
+    .pYellow,
+    .pDarkBlue,
+    .pPink,
+    .pOrange,
+    .pPurple,
+    .pYellow,
+    .pDarkBlue,
+    .pPink,
+    .pOrange,
+    .pPurple,
+    .pYellow
 ]

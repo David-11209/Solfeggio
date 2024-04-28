@@ -15,7 +15,7 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
 
     var closeClosure: (() -> Void)?
 
-    private var topics: [String] = ["", "Нотная грамота", "Тональности и лады", "Интервалы"]
+    private var topics: [String] = ["", "", "Нотная грамота", "Тональности и лады", "Интервалы"]
 
     override init() {
     }
@@ -29,6 +29,8 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
         if indexPath.row == 0 {
             cell.configureFirstCell()
             return cell
+        } else if indexPath.row == 1 {
+            cell.configureSecondCell()
         } else {
             cell.configure(title: topics[indexPath.row], image: .interval)
             cell.didSelectItem = { [weak self] indexPath in

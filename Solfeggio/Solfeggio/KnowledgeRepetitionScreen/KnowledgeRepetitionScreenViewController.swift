@@ -11,6 +11,7 @@ class KnowledgeRepetitionScreenViewController: UIViewController {
 
     private let contentView: KnowledgeRepetitionScreenView = .init()
     private let viewModel: KnowledgeRepetitionScreenViewModel
+    var viewTappedClosure: (() -> Void)?
 
     init(viewModel: KnowledgeRepetitionScreenViewModel) {
         self.viewModel = viewModel
@@ -23,5 +24,12 @@ class KnowledgeRepetitionScreenViewController: UIViewController {
 
     override func loadView() {
         view = contentView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentView.viewTappedClosure = {
+            self.viewTappedClosure?()
+        }
     }
 }

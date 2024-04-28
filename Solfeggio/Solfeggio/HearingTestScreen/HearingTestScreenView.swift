@@ -10,6 +10,7 @@ import UIKit
 class HearingTestScreenView: UIView {
 
     private lazy var titleLabel: UILabel = UILabel()
+    private lazy var imageView: UIImageView = UIImageView()
     private lazy var notesProgressLabel: UILabel = UILabel()
     private lazy var notesProgressView: UIProgressView = UIProgressView(progressViewStyle: .default)
     private lazy var notesView: UIView = UIView()
@@ -37,7 +38,7 @@ class HearingTestScreenView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
-        self.backgroundColor = .white
+        self.backgroundColor = .pBlue
     }
 
     required init?(coder: NSCoder) {
@@ -46,20 +47,7 @@ class HearingTestScreenView: UIView {
 
     private func setUp() {
         setUpTitleLabel()
-        setUpStackView()
-
-        setUpProgressLabel(progressLabel: notesProgressLabel, text: "Ноты")
-        setUpProgressView(progressView: notesProgressView, color: .myRed, trackColor: .myRedOp)
-
-        setUpProgressLabel(progressLabel: intervalsProgressLabel, text: "Интервалы")
-        setUpProgressView(progressView: intervalsProgressView, color: .myGreen, trackColor: .myGreenOp)
-
-        setUpProgressLabel(progressLabel: moodsProgressLabel, text: "Лады")
-        setUpProgressView(progressView: moodsProgressView, color: .myMagenta, trackColor: .myMagentaOp)
-
-        setUpProgressLabel(progressLabel: chordsProgressLabel, text: "Аккорды")
-        setUpProgressView(progressView: chordsProgressView, color: .mySPink, trackColor: .myPinkOp)
-
+        setUpImageView()
         setUpNotesView()
         setUpIntervalsView()
         setUpMoodsView()
@@ -73,10 +61,22 @@ class HearingTestScreenView: UIView {
         titleLabel.textColor = .black
         titleLabel.minimumScaleFactor = 0.5
         titleLabel.adjustsFontSizeToFitWidth = true
-        titleLabel.font = UIFont.boldSystemFont(ofSize: 28.0)
+        titleLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
         titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(70)
+            make.top.equalTo(80)
             make.centerX.equalToSuperview()
+        }
+    }
+
+    private func setUpImageView() {
+        addSubview(imageView)
+        imageView.image = .hearing
+        imageView.contentMode = .scaleAspectFit
+        imageView.snp.makeConstraints { make in
+            make.top.equalTo(120)
+            make.centerX.equalToSuperview()
+            make.width.equalToSuperview().multipliedBy(0.9)
+            make.height.equalTo(200)
         }
     }
 
@@ -115,7 +115,7 @@ class HearingTestScreenView: UIView {
         let builder = CustomViewBuilder()
         notesView = builder
             .addImage(.note)
-            .setGradientColors([.red, .yellow])
+            .addBackgroundColor(.white)
             .addTitle("Ноты")
             .build()
 
@@ -123,10 +123,10 @@ class HearingTestScreenView: UIView {
         notesView.addGestureRecognizer(tapGesture)
         addSubview(notesView)
         notesView.snp.makeConstraints { make in
-            make.top.equalTo(progressStack.snp.bottom).offset(30)
-            make.leading.equalToSuperview().offset(10)
-            make.height.equalTo(180)
-            make.width.equalTo(176)
+            make.top.equalTo(380)
+            make.leading.equalToSuperview().offset(20)
+            make.height.equalTo(160)
+            make.width.equalTo(160)
         }
     }
 
@@ -134,7 +134,7 @@ class HearingTestScreenView: UIView {
         let builder = CustomViewBuilder()
         intervalsView = builder
             .addImage(.interval)
-            .setGradientColors([.yellow, .cyan])
+            .addBackgroundColor(.white)
             .addTitle("Интервалы")
             .build()
 
@@ -142,10 +142,10 @@ class HearingTestScreenView: UIView {
         intervalsView.addGestureRecognizer(tapGesture)
         addSubview(intervalsView)
         intervalsView.snp.makeConstraints { make in
-            make.top.equalTo(progressStack.snp.bottom).offset(40)
-            make.trailing.equalToSuperview().inset(10)
-            make.height.equalTo(180)
-            make.width.equalTo(176)
+            make.top.equalTo(notesView.snp.top)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(160)
+            make.width.equalTo(160)
         }
     }
 
@@ -153,7 +153,7 @@ class HearingTestScreenView: UIView {
         let builder = CustomViewBuilder()
         moodsView = builder
             .addImage(.treble)
-            .setGradientColors([.myMagenta, .myBlue])
+            .addBackgroundColor(.white)
             .addTitle("Лады")
             .build()
 
@@ -162,9 +162,9 @@ class HearingTestScreenView: UIView {
         addSubview(moodsView)
         moodsView.snp.makeConstraints { make in
             make.top.equalTo(notesView.snp.bottom).offset(40)
-            make.leading.equalToSuperview().offset(10)
-            make.height.equalTo(180)
-            make.width.equalTo(176)
+            make.leading.equalToSuperview().offset(20)
+            make.height.equalTo(160)
+            make.width.equalTo(160)
         }
     }
 
@@ -172,7 +172,7 @@ class HearingTestScreenView: UIView {
         let builder = CustomViewBuilder()
         chordsView = builder
             .addImage(.chord)
-            .setGradientColors([.mySPink, .white])
+            .addBackgroundColor(.white)
             .addTitle("Аккорды")
             .build()
 
@@ -181,9 +181,9 @@ class HearingTestScreenView: UIView {
         addSubview(chordsView)
         chordsView.snp.makeConstraints { make in
             make.top.equalTo(notesView.snp.bottom).offset(40)
-            make.trailing.equalToSuperview().inset(10)
-            make.height.equalTo(180)
-            make.width.equalTo(176)
+            make.trailing.equalToSuperview().inset(20)
+            make.height.equalTo(160)
+            make.width.equalTo(160)
         }
     }
 

@@ -28,7 +28,7 @@ class TopicLevelsScreenView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()
-        self.backgroundColor = .white
+        self.backgroundColor = .pBlue
     }
 
     required init?(coder: NSCoder) {
@@ -72,8 +72,8 @@ class TopicLevelsScreenView: UIView {
         addSubview(progressView)
         progressView.layer.cornerRadius = 10
         progressView.layer.masksToBounds = true
-        progressView.progressTintColor = .green
-        progressView.trackTintColor = .myCyanop
+        progressView.progressTintColor = .pIndigo
+        progressView.trackTintColor = .pIndigoOp
         progressView.snp.makeConstraints { make in
             make.top.equalTo(70)
             make.leading.equalTo(80)

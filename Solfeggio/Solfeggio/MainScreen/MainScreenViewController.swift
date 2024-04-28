@@ -28,7 +28,6 @@ class MainScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         contentView.topicsCollectionView.delegate = self
         contentView.topicsCollectionView.dataSource = viewModel
         viewModel.closeClosure = { [weak self] in
@@ -46,6 +45,10 @@ extension MainScreenViewController: UICollectionViewDelegateFlowLayout {
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        return CGSize(width: UIScreen.main.bounds.width, height: 280)
+        if indexPath.row == 1 {
+            return CGSize(width: UIScreen.main.bounds.width, height: 200)
+        } else {
+            return CGSize(width: UIScreen.main.bounds.width, height: 280)
+        }
     }
 }
