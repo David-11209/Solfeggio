@@ -23,10 +23,10 @@ class MainScreenSubCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(colors: [UIColor], title: String, progressProcent: String) {
+    func configure(color: UIColor, title: String, progressProcent: String) {
         titleLabel.text = title
         progressLabel.text = "Прогресс " + progressProcent
-        customView.setUpGradient(color1: colors[0], color2: colors[1])
+        customView.setUpOneColor(color: color)
     }
 
     private func setUp() {

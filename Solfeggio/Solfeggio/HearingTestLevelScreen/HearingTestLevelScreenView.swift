@@ -23,8 +23,8 @@ class HearingTestLevelScreenView: UIView {
 
     init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
         super.init(frame: frame)
-        taskView = GradientTaskView(frame: frame, text: text, color1: .myLightblue, color2: .myLightGreen)
-        buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myCyan)
+        taskView = GradientTaskView(frame: frame, text: text, color1: .pOrange, color2: .pRed)
+        buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pOrange)
         if image != nil {
             setUpWithTextAndImage()
         } else {
@@ -72,8 +72,8 @@ class HearingTestLevelScreenView: UIView {
         addSubview(progressView)
         progressView.layer.cornerRadius = 10
         progressView.layer.masksToBounds = true
-        progressView.progressTintColor = .myCyan
-        progressView.trackTintColor = .myCyanop
+        progressView.progressTintColor = .pOrange
+        progressView.trackTintColor = .pOrangeOp
         progressView.snp.makeConstraints { make in
             make.top.equalTo(exitButton.snp_bottomMargin).offset(24)
             make.centerX.equalToSuperview()

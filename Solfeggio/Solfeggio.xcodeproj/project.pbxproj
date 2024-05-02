@@ -56,6 +56,10 @@
 		2AE929D12BCD1322003D32E0 /* LessonLevelViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929D02BCD1322003D32E0 /* LessonLevelViewModel.swift */; };
 		2AE929D32BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929D22BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift */; };
 		2AE929D52BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE929D42BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift */; };
+		2AE92A5B2BDBF55D003D32E0 /* KnowledgeRepetitionChossingTopicsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A5A2BDBF55D003D32E0 /* KnowledgeRepetitionChossingTopicsUIView.swift */; };
+		2AE92A5D2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A5C2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift */; };
+		2AE92A5F2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A5E2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift */; };
+		2AE92A612BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A602BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -107,6 +111,10 @@
 		2AE929D02BCD1322003D32E0 /* LessonLevelViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LessonLevelViewModel.swift; sourceTree = "<group>"; };
 		2AE929D22BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRepetitionScreenFlowCoordinator.swift; sourceTree = "<group>"; };
 		2AE929D42BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileScreenFlowCoordinator.swift; sourceTree = "<group>"; };
+		2AE92A5A2BDBF55D003D32E0 /* KnowledgeRepetitionChossingTopicsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeRepetitionChossingTopicsUIView.swift; sourceTree = "<group>"; };
+		2AE92A5C2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowRepChossingTopicsViewController.swift; sourceTree = "<group>"; };
+		2AE92A5E2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowRepetitionChossingTopicsViewModel.swift; sourceTree = "<group>"; };
+		2AE92A602BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowRepChossingTopicsCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +200,7 @@
 		2ABFFBC12BA1C2CC00DA45E8 /* Solfeggio */ = {
 			isa = PBXGroup;
 			children = (
+				2AE92A592BDBF4F7003D32E0 /*  KnowledgeRepetitionChossingTopics */,
 				2AE929BF2BCC113E003D32E0 /* Assemblies */,
 				2AE929BA2BCC0F02003D32E0 /* FlowCoordinator */,
 				2AE929B92BCC0EB7003D32E0 /* Fabrics */,
@@ -313,6 +322,17 @@
 			path = Assemblies;
 			sourceTree = "<group>";
 		};
+		2AE92A592BDBF4F7003D32E0 /*  KnowledgeRepetitionChossingTopics */ = {
+			isa = PBXGroup;
+			children = (
+				2AE92A5A2BDBF55D003D32E0 /* KnowledgeRepetitionChossingTopicsUIView.swift */,
+				2AE92A5C2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift */,
+				2AE92A5E2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift */,
+				2AE92A602BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift */,
+			);
+			path = " KnowledgeRepetitionChossingTopics";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -431,6 +451,7 @@
 				2ABFFBCD2BA1C2CC00DA45E8 /* Solfeggio.xcdatamodeld in Sources */,
 				2AE929C52BCC24F3003D32E0 /* HearingTestScreenFlowCoordinator.swift in Sources */,
 				2AE929BE2BCC0FB6003D32E0 /* MainScreenFlowCoordinator.swift in Sources */,
+				2AE92A5D2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift in Sources */,
 				2AE929BC2BCC0F44003D32E0 /* CoordinatorProtocol.swift in Sources */,
 				2AE929CD2BCD1132003D32E0 /* ProfileScreenView.swift in Sources */,
 				2ABFFBC32BA1C2CC00DA45E8 /* AppDelegate.swift in Sources */,
@@ -440,6 +461,7 @@
 				2ABFFBE72BA2E79500DA45E8 /* GradientTaskView.swift in Sources */,
 				2AE929D32BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift in Sources */,
 				2AE9299D2BC7E829003D32E0 /* MainScreenView.swift in Sources */,
+				2AE92A5F2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift in Sources */,
 				2A0290912BBA9836008BB3C7 /* TopicLevelScreenView.swift in Sources */,
 				2A02908E2BB5DE47008BB3C7 /* HearingTestLevelScreenViewModel.swift in Sources */,
 				2AE929D52BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift in Sources */,
@@ -457,7 +479,9 @@
 				2ABFFBEE2BA5508E00DA45E8 /* CustomViewBuilder.swift in Sources */,
 				2AE929CB2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift in Sources */,
 				2AE929C32BCC1A96003D32E0 /* TabBarFabric.swift in Sources */,
+				2AE92A5B2BDBF55D003D32E0 /* KnowledgeRepetitionChossingTopicsUIView.swift in Sources */,
 				2ABFFBE22BA1D85800DA45E8 /* LessonLevelView.swift in Sources */,
+				2AE92A612BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift in Sources */,
 				2AE929A82BC7EAE6003D32E0 /* MainScreenSubCollectionViewCell.swift in Sources */,
 				2ABFFBC52BA1C2CC00DA45E8 /* SceneDelegate.swift in Sources */,
 			);

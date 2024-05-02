@@ -60,15 +60,10 @@ class TabBarFabric: TabBarFabricProtocol {
             item.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
             item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 10)
         }
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = tabBar.tabBar.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        tabBar.tabBar.insertSubview(blurEffectView, at: 0)
         tabBar.tabBar.isTranslucent = true
         tabBar.tabBar.unselectedItemTintColor = .systemGray2
         tabBar.tabBar.tintColor = .black
-        tabBar.tabBar.backgroundColor = UIColor.clear
+        tabBar.tabBar.backgroundColor = .white
         return tabBar
     }
 }

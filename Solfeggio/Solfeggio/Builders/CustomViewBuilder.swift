@@ -20,6 +20,8 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
     private var mainLabel: UILabel?
     private var titleLabel: UILabel?
     private var gradientColors: [UIColor] = []
+    private var switchButton: UISwitch = UISwitch()
+    private var switchFlag = false
 
     func addTitle(_ title: String) -> Self {
         titleLabel = UILabel()
@@ -28,7 +30,7 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
         titleLabel?.textColor = .black
         titleLabel?.minimumScaleFactor = 0.5
         titleLabel?.adjustsFontSizeToFitWidth = true
-        titleLabel?.font = UIFont.boldSystemFont(ofSize: 22.0)
+        titleLabel?.font = UIFont.boldSystemFont(ofSize: 24.0)
         return self
     }
 
@@ -60,6 +62,11 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
         return self
     }
 
+    func addSwitchButton() -> Self {
+        switchFlag = true
+        return self
+    }
+
     func build() -> UIView {
         if !gradientColors.isEmpty {
             view = GradientView()
@@ -68,56 +75,64 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
             view = GradientView()
             view?.setUpOneColor(color: backgroundColor ?? UIColor())
         }
-        if let label = titleLabel, let imageView = imageView {
+        if let label = titleLabel, let mainLabel = mainLabel, let imageView = imageView {
+            print("зашел")
             view?.addSubview(imageView)
-            setUpImage(20, 20, 70)
+            setUpImage(20, 10, 80, 40)
+            view?.addSubview(mainLabel)
+            setUpMainLabel(36, 90, 10, 60)
             view?.addSubview(label)
-            setUpTitleLabel()
+            setUpTitleLabel(10, 10, 26)
+
+        } else if let label = titleLabel, let imageView = imageView {
+            view?.addSubview(imageView)
+            setUpImage(20, 20, 20, 70)
+            view?.addSubview(label)
+            setUpTitleLabel(10, 10, 26)
         } else if let label = titleLabel, let mainLabel = mainLabel {
             view?.addSubview(mainLabel)
-            setUpMainLabel()
+            setUpMainLabel(10, 20, 20, 60)
             view?.addSubview(label)
-            setUpTitleLabel()
+            setUpTitleLabel(10, 10, 26)
         } else if let imageView = imageView {
             view?.addSubview(imageView)
-            setUpImage(40, 60, 40)
+            setUpImage(40, 60, 60, 40)
         }
-        setUpShadow()
+        if switchFlag, let label = titleLabel {
+            view?.addSubview(label)
+            setUpTitleLabel(10, 60, 26)
+            view?.addSubview(switchButton)
+            setUpSwitchButton()
+            setUpShadow(14)
+        } else {
+            setUpShadow(30)
+        }
         return view ?? UIView()
     }
 
-    private func setUpImage(_ top: Int, _ side: Int, _ bottom: Int) {
+    private func setUpImage(_ top: Int, _ sideL: Int, _ sideR: Int, _ bottom: Int) {
         imageView?.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(top)
-            make.leading.equalToSuperview().offset(side)
-            make.trailing.equalToSuperview().inset(side)
+            make.leading.equalToSuperview().offset(sideL)
+            make.trailing.equalToSuperview().inset(sideR)
             make.bottom.equalToSuperview().inset(bottom)
         }
     }
 
-    private func setUpTitleLabel() {
+    private func setUpTitleLabel(_ sideL: Int, _ sideR: Int, _ bottom: Int) {
         titleLabel?.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.trailing.equalToSuperview().inset(10)
-            make.bottom.equalToSuperview().inset(26)
+            make.leading.equalToSuperview().offset(sideL)
+            make.trailing.equalToSuperview().inset(sideR)
+            make.bottom.equalToSuperview().inset(bottom)
         }
     }
 
-    private func setUpMainLabel() {
+    private func setUpMainLabel(_ top: Int, _ sideL: Int, _ sideR: Int, _ bottom: Int) {
         mainLabel?.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(10)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().inset(20)
-            make.bottom.equalToSuperview().inset(60)
-        }
-    }
-
-    private func setUpImageWithText() {
-        imageView?.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(40)
-            make.leading.equalToSuperview().offset(80)
-            make.trailing.equalToSuperview().inset(80)
-            make.bottom.equalToSuperview().inset(80)
+            make.top.equalToSuperview().offset(top)
+            make.leading.equalToSuperview().offset(sideL)
+            make.trailing.equalToSuperview().inset(sideR)
+            make.bottom.equalToSuperview().inset(bottom)
         }
     }
 
@@ -130,8 +145,16 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
         }
     }
 
-    private func setUpShadow() {
-        view?.layer.cornerRadius = 30
+    private func setUpSwitchButton() {
+        switchButton.onTintColor = .myWhiteop
+        switchButton.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.trailing.equalToSuperview().inset(20)
+        }
+    }
+
+    private func setUpShadow(_ radius: CGFloat) {
+        view?.layer.cornerRadius = radius
         view?.layer.masksToBounds = false
         view?.layer.shadowColor = UIColor.black.cgColor
         view?.layer.shadowOpacity = 0.5

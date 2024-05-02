@@ -24,18 +24,18 @@ class LevelsCollectionViewCell: UICollectionViewCell {
         customView.removeFromSuperview()
     }
 
-    func configure(colors: [UIColor], image: UIImage, title: String) {
+    func configure(color: UIColor, image: UIImage, title: String) {
         customView = CustomViewBuilder()
-            .setGradientColors(colors)
+            .addBackgroundColor(color)
             .addImage(image)
             .addTitle(title)
             .build()
         setUp()
     }
 
-    func configure(colors: [UIColor], mainTitle: String, title: String) {
+    func configure(color: UIColor, mainTitle: String, title: String) {
         customView = CustomViewBuilder()
-            .setGradientColors(colors)
+            .addBackgroundColor(color)
             .addMainLabel(mainTitle)
             .addTitle(title)
             .build()

@@ -41,5 +41,17 @@ class ContainerAssembly: Assembly {
         container.register( TopicLevelsScreenViewModelProtocol.self) { _ in
             TopicLevelsScreenViewModel(levelNames: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"])
         }
+
+        container.register(KnowRepChossingTopicsViewModelProtocol.self) { _ in
+            KnowRepetitionChossingTopicsViewModel(levelNames: [
+                "Нотная грамота",
+                "Все о тональностях",
+                "Все о ладах",
+                "Все об интервалах",
+                "Основные аккорды",
+                "Секстаккорды",
+                "Квартсекстаккорды"
+            ])
+        }
     }
 }

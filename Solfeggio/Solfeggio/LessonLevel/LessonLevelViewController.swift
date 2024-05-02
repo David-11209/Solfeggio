@@ -25,7 +25,7 @@ class LessonLevelViewController: UIViewController {
 
     override func loadView() {
         view = contentView
-        view.backgroundColor = .white
+        view.backgroundColor = .pBlue
         self.navigationItem.title = "Ноты и длительности"
     }
 

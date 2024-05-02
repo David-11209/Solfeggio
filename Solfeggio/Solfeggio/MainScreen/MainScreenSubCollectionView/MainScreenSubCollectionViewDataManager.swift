@@ -30,10 +30,10 @@ class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManag
             return UICollectionViewCell()
         }
         if indexPath.row == 0 {
-            cell.configure(colors: [.clear, .clear], title: "", progressProcent: "")
+            cell.configure(color: cellDataArray.randomElement() ?? .white, title: "", progressProcent: "")
         }
         /// Это будет заменено,  после того как напишу модели
-        cell.configure(colors: cellDataArray.randomElement()?.colors ?? [.white, .white], title: "Нотная грамота", progressProcent: "57%")
+        cell.configure(color: cellDataArray.randomElement() ?? .white, title: "Нотная грамота", progressProcent: "57%")
         return cell
     }
 }
@@ -54,18 +54,10 @@ private struct LevelCellColors {
     var colors: [UIColor]
 }
 
-private var cellDataArray: [LevelCellColors] = [
-    LevelCellColors(colors: [.red, .yellow]),
-    LevelCellColors(colors: [.mySPink, .myCyan]),
-    LevelCellColors(colors: [.yellow, .green]),
-    LevelCellColors(colors: [.mySBlueLight, .myLightYellow]),
-    LevelCellColors(colors: [.mySPink, .mySPeach]),
-    LevelCellColors(colors: [.myBlue, .green]),
-    LevelCellColors(colors: [.red, .yellow]),
-    LevelCellColors(colors: [.mySPink, .myCyan]),
-    LevelCellColors(colors: [.yellow, .green]),
-    LevelCellColors(colors: [.mySBlueLight, .myLightYellow]),
-    LevelCellColors(colors: [.mySPink, .mySPeach]),
-    LevelCellColors(colors: [.myBlue, .green])
+private var cellDataArray: [UIColor] = [
+    .pDarkBlue,
+    .pPink,
+    .pOrange,
+    .pPurple
 ]
 

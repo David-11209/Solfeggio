@@ -36,7 +36,7 @@ class HearingTestLevelScreenViewController: UIViewController {
         )
 
         view = contentView
-        view.backgroundColor = .white
+        view.backgroundColor = .pBlue
     }
 
     override func viewDidLoad() {

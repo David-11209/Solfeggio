@@ -13,7 +13,8 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
     private var dataManager = MainScreenSubCollectionViewDataManager(data: ["123", "123"])
     private lazy var imageView: UIImageView = UIImageView()
     private lazy var titleLabel: UILabel = UILabel()
-
+    private lazy var mainImageView: UIImageView = UIImageView()
+    private lazy var mainTitle: UILabel = UILabel()
     var didSelectItem: ((_ indexPath: IndexPath) -> Void)?
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -45,10 +46,41 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
         imageView.isHidden = true
     }
 
+    func configureSecondCell() {
+        collectionView.isHidden = true
+        titleLabel.isHidden = true
+        imageView.isHidden = true
+        setUpMainTitle()
+        setUpMainImage()
+    }
+
     private func setUp() {
         setUpImage()
         setUpTitleLabel()
         setUpTopicsCollectionView()
+    }
+
+    private func setUpMainTitle() {
+        addSubview(mainTitle)
+        mainTitle.text = "Уроки"
+        mainTitle.font = UIFont.boldSystemFont(ofSize: 36.0)
+        mainTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview()
+            make.centerX.equalToSuperview()
+            make.height.equalTo(38)
+        }
+    }
+
+    private func setUpMainImage() {
+        addSubview(mainImageView)
+        mainImageView.image = .sax
+        mainImageView.contentMode = .scaleAspectFit
+        mainImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(60)
+            make.bottom.equalToSuperview()
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalToSuperview().inset(20)
+        }
     }
 
     private func setUpImage() {
@@ -75,6 +107,7 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
 
     private func setUpTopicsCollectionView() {
         addSubview(collectionView)
+        collectionView.backgroundColor = .clear
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.delegate = self
         collectionView.dataSource = dataManager

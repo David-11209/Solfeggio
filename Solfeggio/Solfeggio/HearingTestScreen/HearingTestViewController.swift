@@ -12,6 +12,7 @@ class HearingTestViewController: UIViewController {
     private let contentView: HearingTestScreenView = .init()
     private let viewModel: HearingTestScreenViewModel
     var closeClosure: (() -> Void)?
+
     init(viewModel: HearingTestScreenViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
