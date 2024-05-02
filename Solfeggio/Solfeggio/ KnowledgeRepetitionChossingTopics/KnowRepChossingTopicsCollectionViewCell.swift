@@ -42,10 +42,6 @@ class KnowRepChossingTopicsCollectionViewCell: UICollectionViewCell {
         setUp()
     }
 
-    func configure() {
-
-    }
-
     private func setUp() {
         contentView.addSubview(customView)
         customView.snp.makeConstraints { make in
