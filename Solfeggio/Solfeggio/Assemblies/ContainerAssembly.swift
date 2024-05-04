@@ -53,5 +53,20 @@ class ContainerAssembly: Assembly {
                 "Квартсекстаккорды"
             ])
         }
+
+        container.register( NetworkServiceProtocol.self) { _ in
+            NetworkService()
+        }
+        .inObjectScope(.container)
+
+        container.register( ConvertServiceProtocol.self) { _ in
+            ConvertService()
+        }
+        .inObjectScope(.container)
+
+        container.register( CoreDataManagerProtocol.self) { _ in
+            CoreDataManager()
+        }
+        .inObjectScope(.container)
     }
 }
