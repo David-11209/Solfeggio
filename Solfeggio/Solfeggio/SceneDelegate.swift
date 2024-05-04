@@ -18,6 +18,35 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions) {
             let assembly = ContainerAssembly()
             assembly.assemble(container: container)
+
+            guard let coreDataManager = container.resolve(
+                CoreDataManagerProtocol.self
+            ) else {
+                return
+            }
+            let result = coreDataManager.obtainAllData()
+            if result.isEmpty {
+                guard let networkService = container.resolve(
+                    NetworkServiceProtocol.self
+                ) else {
+                    return
+                }
+                guard let convertService = container.resolve(
+                    ConvertServiceProtocol.self
+                ) else {
+                    return
+                }
+
+                let jsonData = networkService.getData(completion: { result in
+                    switch result {
+                    case .success(let data):
+                        convertService.convertDataToCoreData(jsonData: data)
+                        print("Successfully retrieved JSON data: \(data)")
+                    case .failure(let error):
+                        print("Error retrieving data: \(error.localizedDescription)")
+                    }
+                })
+            }
             let fabric = TabBarFabric(container: container)
             let tbController = fabric.makeTabBarController()
             guard let windowScene = (scene as? UIWindowScene) else { return }
@@ -55,7 +84,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+//        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
 }

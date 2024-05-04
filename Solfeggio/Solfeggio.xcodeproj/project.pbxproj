@@ -60,6 +60,20 @@
 		2AE92A5D2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A5C2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift */; };
 		2AE92A5F2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A5E2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift */; };
 		2AE92A612BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A602BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift */; };
+		2AE92A7C2BE418D6003D32E0 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A7B2BE418D6003D32E0 /* NetworkService.swift */; };
+		2AE92A882BE555F1003D32E0 /* Task+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A7E2BE555F1003D32E0 /* Task+CoreDataClass.swift */; };
+		2AE92A892BE555F1003D32E0 /* Task+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A7F2BE555F1003D32E0 /* Task+CoreDataProperties.swift */; };
+		2AE92A8A2BE555F1003D32E0 /* Answer+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A802BE555F1003D32E0 /* Answer+CoreDataClass.swift */; };
+		2AE92A8B2BE555F1003D32E0 /* Answer+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A812BE555F1003D32E0 /* Answer+CoreDataProperties.swift */; };
+		2AE92A8C2BE555F1003D32E0 /* Level+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A822BE555F1003D32E0 /* Level+CoreDataClass.swift */; };
+		2AE92A8D2BE555F1003D32E0 /* Level+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A832BE555F1003D32E0 /* Level+CoreDataProperties.swift */; };
+		2AE92A8E2BE555F1003D32E0 /* Block+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A842BE555F1003D32E0 /* Block+CoreDataClass.swift */; };
+		2AE92A8F2BE555F1003D32E0 /* Block+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A852BE555F1003D32E0 /* Block+CoreDataProperties.swift */; };
+		2AE92A902BE555F1003D32E0 /* Theme+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A862BE555F1003D32E0 /* Theme+CoreDataClass.swift */; };
+		2AE92A912BE555F1003D32E0 /* Theme+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A872BE555F1003D32E0 /* Theme+CoreDataProperties.swift */; };
+		2AE92A942BE55CF0003D32E0 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A932BE55CF0003D32E0 /* CoreDataManager.swift */; };
+		2AE92A962BE5A6E3003D32E0 /* APIModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A952BE5A6E3003D32E0 /* APIModels.swift */; };
+		2AE92A982BE5AF01003D32E0 /* ConvertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AE92A972BE5AF01003D32E0 /* ConvertService.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +129,20 @@
 		2AE92A5C2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowRepChossingTopicsViewController.swift; sourceTree = "<group>"; };
 		2AE92A5E2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowRepetitionChossingTopicsViewModel.swift; sourceTree = "<group>"; };
 		2AE92A602BDBF786003D32E0 /* KnowRepChossingTopicsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowRepChossingTopicsCollectionViewCell.swift; sourceTree = "<group>"; };
+		2AE92A7B2BE418D6003D32E0 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		2AE92A7E2BE555F1003D32E0 /* Task+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A7F2BE555F1003D32E0 /* Task+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Task+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A802BE555F1003D32E0 /* Answer+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Answer+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A812BE555F1003D32E0 /* Answer+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Answer+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A822BE555F1003D32E0 /* Level+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Level+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A832BE555F1003D32E0 /* Level+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Level+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A842BE555F1003D32E0 /* Block+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Block+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A852BE555F1003D32E0 /* Block+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Block+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A862BE555F1003D32E0 /* Theme+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A872BE555F1003D32E0 /* Theme+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		2AE92A932BE55CF0003D32E0 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		2AE92A952BE5A6E3003D32E0 /* APIModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIModels.swift; sourceTree = "<group>"; };
+		2AE92A972BE5AF01003D32E0 /* ConvertService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConvertService.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -200,6 +228,8 @@
 		2ABFFBC12BA1C2CC00DA45E8 /* Solfeggio */ = {
 			isa = PBXGroup;
 			children = (
+				2AE92A922BE55CD3003D32E0 /* CoreData */,
+				2AE92A7A2BE418B8003D32E0 /* Network */,
 				2AE92A592BDBF4F7003D32E0 /*  KnowledgeRepetitionChossingTopics */,
 				2AE929BF2BCC113E003D32E0 /* Assemblies */,
 				2AE929BA2BCC0F02003D32E0 /* FlowCoordinator */,
@@ -333,6 +363,42 @@
 			path = " KnowledgeRepetitionChossingTopics";
 			sourceTree = "<group>";
 		};
+		2AE92A7A2BE418B8003D32E0 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				2AE92A7B2BE418D6003D32E0 /* NetworkService.swift */,
+				2AE92A952BE5A6E3003D32E0 /* APIModels.swift */,
+				2AE92A972BE5AF01003D32E0 /* ConvertService.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		2AE92A7D2BE418DF003D32E0 /* CoreDataModels */ = {
+			isa = PBXGroup;
+			children = (
+				2AE92A7E2BE555F1003D32E0 /* Task+CoreDataClass.swift */,
+				2AE92A7F2BE555F1003D32E0 /* Task+CoreDataProperties.swift */,
+				2AE92A802BE555F1003D32E0 /* Answer+CoreDataClass.swift */,
+				2AE92A812BE555F1003D32E0 /* Answer+CoreDataProperties.swift */,
+				2AE92A822BE555F1003D32E0 /* Level+CoreDataClass.swift */,
+				2AE92A832BE555F1003D32E0 /* Level+CoreDataProperties.swift */,
+				2AE92A842BE555F1003D32E0 /* Block+CoreDataClass.swift */,
+				2AE92A852BE555F1003D32E0 /* Block+CoreDataProperties.swift */,
+				2AE92A862BE555F1003D32E0 /* Theme+CoreDataClass.swift */,
+				2AE92A872BE555F1003D32E0 /* Theme+CoreDataProperties.swift */,
+			);
+			path = CoreDataModels;
+			sourceTree = "<group>";
+		};
+		2AE92A922BE55CD3003D32E0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				2AE92A7D2BE418DF003D32E0 /* CoreDataModels */,
+				2AE92A932BE55CF0003D32E0 /* CoreDataManager.swift */,
+			);
+			path = CoreData;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -446,31 +512,45 @@
 				2AE929D12BCD1322003D32E0 /* LessonLevelViewModel.swift in Sources */,
 				2AE9299F2BC7E852003D32E0 /* MainScreenViewController.swift in Sources */,
 				2AE929C12BCC1177003D32E0 /* ContainerAssembly.swift in Sources */,
+				2AE92A892BE555F1003D32E0 /* Task+CoreDataProperties.swift in Sources */,
+				2AE92A912BE555F1003D32E0 /* Theme+CoreDataProperties.swift in Sources */,
+				2AE92A8F2BE555F1003D32E0 /* Block+CoreDataProperties.swift in Sources */,
 				2A0290952BBAA6F9008BB3C7 /* TopicLevelsScreenViewModel.swift in Sources */,
 				2AE929B62BCC0E3F003D32E0 /* ProfileScreenViewController.swift in Sources */,
 				2ABFFBCD2BA1C2CC00DA45E8 /* Solfeggio.xcdatamodeld in Sources */,
+				2AE92A962BE5A6E3003D32E0 /* APIModels.swift in Sources */,
 				2AE929C52BCC24F3003D32E0 /* HearingTestScreenFlowCoordinator.swift in Sources */,
 				2AE929BE2BCC0FB6003D32E0 /* MainScreenFlowCoordinator.swift in Sources */,
+				2AE92A942BE55CF0003D32E0 /* CoreDataManager.swift in Sources */,
 				2AE92A5D2BDBF70B003D32E0 /* KnowRepChossingTopicsViewController.swift in Sources */,
+				2AE92A882BE555F1003D32E0 /* Task+CoreDataClass.swift in Sources */,
+				2AE92A8D2BE555F1003D32E0 /* Level+CoreDataProperties.swift in Sources */,
 				2AE929BC2BCC0F44003D32E0 /* CoordinatorProtocol.swift in Sources */,
+				2AE92A7C2BE418D6003D32E0 /* NetworkService.swift in Sources */,
 				2AE929CD2BCD1132003D32E0 /* ProfileScreenView.swift in Sources */,
 				2ABFFBC32BA1C2CC00DA45E8 /* AppDelegate.swift in Sources */,
+				2AE92A982BE5AF01003D32E0 /* ConvertService.swift in Sources */,
 				2A0290972BBAA8DB008BB3C7 /* LevelsCollectionViewCell.swift in Sources */,
 				2AE929B82BCC0E99003D32E0 /* KnowledgeRepetitionScreenViewController.swift in Sources */,
 				2A0290932BBA984D008BB3C7 /* TopicLevelScreenViewController.swift in Sources */,
 				2ABFFBE72BA2E79500DA45E8 /* GradientTaskView.swift in Sources */,
 				2AE929D32BCD3889003D32E0 /* KnowledgeRepetitionScreenFlowCoordinator.swift in Sources */,
+				2AE92A902BE555F1003D32E0 /* Theme+CoreDataClass.swift in Sources */,
 				2AE9299D2BC7E829003D32E0 /* MainScreenView.swift in Sources */,
 				2AE92A5F2BDBF767003D32E0 /* KnowRepetitionChossingTopicsViewModel.swift in Sources */,
+				2AE92A8B2BE555F1003D32E0 /* Answer+CoreDataProperties.swift in Sources */,
+				2AE92A8A2BE555F1003D32E0 /* Answer+CoreDataClass.swift in Sources */,
 				2A0290912BBA9836008BB3C7 /* TopicLevelScreenView.swift in Sources */,
 				2A02908E2BB5DE47008BB3C7 /* HearingTestLevelScreenViewModel.swift in Sources */,
 				2AE929D52BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift in Sources */,
+				2AE92A8E2BE555F1003D32E0 /* Block+CoreDataClass.swift in Sources */,
 				2AE929B22BCC0D33003D32E0 /* HearingTestScreenViewModel.swift in Sources */,
 				2AE929C72BCC288A003D32E0 /* UIImageExtension.swift in Sources */,
 				2A0290832BB5D524008BB3C7 /* KnowledgeRepetitionLevelView.swift in Sources */,
 				2AE929A42BC7E8A4003D32E0 /* MainScreenCollectionViewCell.swift in Sources */,
 				2AE929A62BC7EAC9003D32E0 /* MainScreenSubCollectionViewDataManager.swift in Sources */,
 				2A0290852BB5D542008BB3C7 /* KnowledgeRepetitionLevelViewController.swift in Sources */,
+				2AE92A8C2BE555F1003D32E0 /* Level+CoreDataClass.swift in Sources */,
 				2A5B8E4C2BBF28D3007D8CDD /* HearingTestViewController.swift in Sources */,
 				2A02908A2BB5DE21008BB3C7 /* HearingTestLevelScreenViewController.swift in Sources */,
 				2AE929C92BCD109B003D32E0 /* KnowledgeRepetitionScreenView.swift in Sources */,
