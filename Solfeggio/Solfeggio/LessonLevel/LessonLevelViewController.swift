@@ -5,7 +5,7 @@ class LessonLevelViewController: UIViewController {
     let text = "Выберите правильную длительность ноты"
     private var contentView: LessonLevelView?
     private var viewModel: LessonLevelViewModelProtocol
-
+    private var animate: Bool = true
     var exitClosure: (() -> Void)?
 
     init(viewModel: LessonLevelViewModelProtocol) {
@@ -31,7 +31,8 @@ class LessonLevelViewController: UIViewController {
             frame: CGRect(),
             text: tuple.0.task,
             image: taskImage ?? .exit,
-            buttonsNames: [answers[0].name, answers[1].name, answers[2].name, answers[3].name]
+            buttonsNames: [answers[0].name, answers[1].name, answers[2].name, answers[3].name],
+            progressAnimate: animate
         )
 
         contentView?.didSelectAnswer = { answer in
@@ -42,7 +43,7 @@ class LessonLevelViewController: UIViewController {
         contentView?.exitClosure = {
             self.exitClosure?()
         }
-
+        animate = false
         view = contentView
         view.backgroundColor = .pBlue
         self.navigationItem.title = "Ноты и длительности"
@@ -61,6 +62,10 @@ class LessonLevelViewController: UIViewController {
 
         self.viewModel.moveToNext = {
             self.setUpTaskView()
+        }
+
+        self.viewModel.exitClosure = {
+            self.exitClosure?()
         }
     }
 }

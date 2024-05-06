@@ -21,6 +21,8 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
         self.container = container
     }
 
+    var exitLevelClosure: (() -> Void)?
+
     func start() {
         guard let viewModel = container.resolve(
             MainScreenViewModelProtocol.self
@@ -90,6 +92,9 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             viewController,
             animated: true
         )
+        exitLevelClosure = {
+            self.navigationController.popViewController(animated: false)
+        }
     }
 
     private func showLessonLevelScreen(level: Level, imageDict: [String: UIImage]) {
@@ -102,6 +107,7 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             viewModel: viewModel
         )
         viewController.exitClosure = {
+            self.exitLevelClosure?()
             self.navigationController.popViewController(animated: true)
         }
         navigationController.pushViewController(

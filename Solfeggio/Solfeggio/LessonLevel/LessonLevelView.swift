@@ -17,7 +17,7 @@ class LessonLevelView: UIView {
     var didSelectAnswer: ((_ answer: String) -> Void)?
     var exitClosure: (() -> Void)?
 
-    init(frame: CGRect, text: String, image: UIImage, buttonsNames: [String]) {
+    init(frame: CGRect, text: String, image: UIImage, buttonsNames: [String], progressAnimate: Bool) {
         super.init(frame: frame)
         let builder = CustomViewBuilder()
         taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
@@ -26,6 +26,7 @@ class LessonLevelView: UIView {
             .addBackgroundColor(.white)
             .build()
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pPurple)
+        progressView.setProgress(0.3, animated: progressAnimate)
         if image != nil {
             setUpWithTextAndImage()
         } else {
@@ -108,7 +109,6 @@ class LessonLevelView: UIView {
             make.height.equalTo(20)
             make.width.equalToSuperview().multipliedBy(0.9)
         }
-        progressView.setProgress(0.3, animated: true)
     }
 
     private func setUpProgressLabel() {

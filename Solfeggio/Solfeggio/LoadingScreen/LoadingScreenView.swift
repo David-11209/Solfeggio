@@ -20,6 +20,6 @@ class LoadingScreenView: UIView {
     }
 
     private func setUp() {
-        
+        ///здесь будет setUp анимация загрузки
     }
 }

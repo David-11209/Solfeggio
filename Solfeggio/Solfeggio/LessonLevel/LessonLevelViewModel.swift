@@ -13,15 +13,17 @@ protocol LessonLevelViewModelProtocol {
     func getCurrentTaskWithImage() -> (Task, UIImage?)
     func getCurrentAnswers() -> [Answer]
     func checkCorrectAnswer(answerName: String)
+    var exitClosure: (() -> Void)? { get set }
 }
 
 class LessonLevelViewModel: LessonLevelViewModelProtocol {
 
     private var tasks: [Task]
     private var index = 0
-    private var hp = 3
+    private var countHP = 3
     private var imageDict: [String: UIImage]
     var moveToNext: (() -> Void)?
+    var exitClosure: (() -> Void)?
 
     init() {
         tasks = []
@@ -48,15 +50,19 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
         if rightAnswer {
             nextTask()
         } else {
-            hp -= 1
-            if hp == 0 {
-                ///завершения уровня
+            countHP -= 1
+            if countHP == 0 {
+                exitClosure?()
             }
         }
     }
 
     func nextTask() {
-        index += 1
-        moveToNext?()
+        if index == tasks.count - 1 {
+            exitClosure?()
+        } else {
+            index += 1
+            moveToNext?()
+        }
     }
 }
