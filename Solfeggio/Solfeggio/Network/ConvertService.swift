@@ -34,7 +34,7 @@ class ConvertService: ConvertServiceProtocol {
                     level.id = levelData.id
 
                     for taskData in levelData.tasks {
-                        let task = Task(context:viewContext)
+                        let task = Task(context: viewContext)
                         task.task = taskData.task
                         task.image = taskData.image
 

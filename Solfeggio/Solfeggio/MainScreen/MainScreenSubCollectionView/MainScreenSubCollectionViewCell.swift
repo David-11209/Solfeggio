@@ -25,7 +25,6 @@ class MainScreenSubCollectionViewCell: UICollectionViewCell {
 
     func configure(color: UIColor, theme: Theme, progressProcent: String) {
         titleLabel.text = theme.name
-        print(theme.name)
         progressLabel.text = "Прогресс " + progressProcent
         customView.setUpOneColor(color: color)
     }
@@ -73,7 +72,6 @@ class MainScreenSubCollectionViewCell: UICollectionViewCell {
 
     private func setUpProgressLabel() {
         customView.addSubview(progressLabel)
-        progressLabel.text = "Прогресс 57%"
         progressLabel.textColor = .white
         progressLabel.font = UIFont.boldSystemFont(ofSize: 16.0)
         progressLabel.snp.makeConstraints { make in
@@ -95,6 +93,6 @@ class MainScreenSubCollectionViewCell: UICollectionViewCell {
             make.height.equalTo(16)
             make.width.equalToSuperview().multipliedBy(0.9)
         }
-        progressView.setProgress(0.3, animated: true)
+        progressView.setProgress(0.0, animated: true)
     }
 }

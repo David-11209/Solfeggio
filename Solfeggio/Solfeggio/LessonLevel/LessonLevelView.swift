@@ -26,7 +26,7 @@ class LessonLevelView: UIView {
             .addBackgroundColor(.white)
             .build()
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pPurple)
-        progressView.setProgress(0.3, animated: progressAnimate)
+        progressView.setProgress(0.01, animated: progressAnimate)
         if image != nil {
             setUpWithTextAndImage()
         } else {

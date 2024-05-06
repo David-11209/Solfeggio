@@ -10,7 +10,6 @@ import UIKit
 protocol MainScreenViewModelProtocol: UICollectionViewDataSource {
     var closeClosure: ((_ theme: Theme) -> Void)? { get set }
     var successfulDataAcquisition: (() -> Void)? { get set }
-//    func requestData(completion: @escaping ([Block]) -> Void)
 }
 
 class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
@@ -51,7 +50,6 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
         } else {
             cell.configure(block: dataSource[indexPath.row - 2])
             cell.didSelectItem = { [weak self] theme in
-                /// indexPath будет использован в следущем MR
                 self?.closeClosure?(theme)
             }
         }
@@ -67,7 +65,7 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
         backgroundQueue.async {
             var coreData = self.coreDataManager.obtainAllData()
             if coreData.isEmpty {
-                let jsonData: () = self.networkService.getData(completion: { result in
+                self.networkService.getData(completion: { result in
                     switch result {
                     case .success(let data):
                         self.convertService.convertDataToCoreData(jsonData: data)

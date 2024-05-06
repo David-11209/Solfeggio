@@ -9,7 +9,6 @@ import UIKit
 
 class MainScreenCollectionViewCell: UICollectionViewCell {
 
-    /// Инициализация dataManager будет изменена после создания моделей
     private var dataManager: MainScreenSubCollectionViewDataManager = MainScreenSubCollectionViewDataManager()
     private lazy var imageView: UIImageView = UIImageView()
     private lazy var titleLabel: UILabel = UILabel()
@@ -131,7 +130,6 @@ extension MainScreenCollectionViewCell: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
         didSelectItem?(dataManager.getData(index: indexPath.row))
     }
 }

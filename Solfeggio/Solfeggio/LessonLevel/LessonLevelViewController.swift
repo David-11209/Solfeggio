@@ -25,7 +25,6 @@ class LessonLevelViewController: UIViewController {
         let tuple = viewModel.getCurrentTaskWithImage()
         let answers = viewModel.getCurrentAnswers()
         var taskImage = tuple.1
-        print(answers[0].name)
         let url = tuple.0.image
         self.contentView = LessonLevelView(
             frame: CGRect(),
@@ -36,7 +35,6 @@ class LessonLevelViewController: UIViewController {
         )
 
         contentView?.didSelectAnswer = { answer in
-            print("didSelectAnswer")
             self.viewModel.checkCorrectAnswer(answerName: answer)
         }
 
@@ -51,12 +49,12 @@ class LessonLevelViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         contentView?.exitClosure = {
             self.exitClosure?()
         }
 
         contentView?.didSelectAnswer = { answer in
-            print("didSelectAnswer")
             self.viewModel.checkCorrectAnswer(answerName: answer)
         }
 

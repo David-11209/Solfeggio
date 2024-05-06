@@ -52,13 +52,13 @@ class LoadingScreenViewModel: LoadingScreenViewModelProtocol {
         }
     }
 
-    func getAllTasksImages() {
+    private func getAllTasksImages() {
         for task in tasks {
             imageDict[task.image] = UIImage()
         }
     }
 
-    func addUIImagesToDict(completion: @escaping () -> Void) {
+    private func addUIImagesToDict(completion: @escaping () -> Void) {
         var downloadedImagesCount = 0
         let totalImagesCount = imageDict.count
 

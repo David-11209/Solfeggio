@@ -8,7 +8,7 @@
 import UIKit
 
 protocol MainScreenSubCVDataManagerProtocol: UICollectionViewDataSource {
-    func setData(data: Set<Theme>) 
+    func setData(data: Set<Theme>)
     func getData(index: Int) -> Theme
 }
 
@@ -26,8 +26,7 @@ class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManag
         else {
             return UICollectionViewCell()
         }
-        cell.configure(color: cellDataArray.randomElement() ?? .white, theme: data[indexPath.row], progressProcent: "57%")
-        /// Это будет заменено,  после того как напишу модели
+        cell.configure(color: cellDataArray.randomElement() ?? .white, theme: data[indexPath.row], progressProcent: "0%")
         return cell
     }
 
@@ -35,7 +34,7 @@ class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManag
         self.data = Array(data)
     }
 
-    func getData(index: Int) -> Theme{
+    func getData(index: Int) -> Theme {
         return data[index]
     }
 }
