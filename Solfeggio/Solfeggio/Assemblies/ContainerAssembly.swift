@@ -75,7 +75,9 @@ class ContainerAssembly: Assembly {
             MainScreenViewModel(coreDataManager: coreDataManager, networkService: networkService, convertService: convertService)
         }
 
-
+        container.register(LoadingScreenViewModelProtocol.self) { _ in
+            LoadingScreenViewModel()
+        }
 
     }
 }

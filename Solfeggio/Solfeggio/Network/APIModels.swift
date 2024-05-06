@@ -8,6 +8,7 @@
 import Foundation
 
 struct AnswerOptionModel: Decodable {
+    let id: String
     let name: String
     let rightAnswer: Bool
 }

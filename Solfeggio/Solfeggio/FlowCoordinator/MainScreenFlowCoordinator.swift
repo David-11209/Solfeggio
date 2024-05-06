@@ -70,18 +70,36 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             self.navigationController.popViewController(animated: true)
         }
         viewController.didSelectItem = { level in
-            self.showLessonLevelScreen(level: level)
+            self.showLoadingLevelScreen(level: level)
         }
     }
 
-    private func showLessonLevelScreen(level: Level) {
+    private func showLoadingLevelScreen(level: Level) {
+        navigationController.tabBarController?.tabBar.isHidden = true
+        guard let viewModel = container.resolve(
+            LoadingScreenViewModelProtocol.self
+        ) else { return }
+        viewModel.setData(tasks: level.tasks)
+        let viewController = LoadingScreenViewController(
+            viewModel: viewModel
+        )
+        viewController.allDataDownload = { dict in
+            self.showLessonLevelScreen(level: level, imageDict: dict)
+        }
+        navigationController.pushViewController(
+            viewController,
+            animated: true
+        )
+    }
+
+    private func showLessonLevelScreen(level: Level, imageDict: [String: UIImage]) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             LessonLevelViewModelProtocol.self
         ) else { return }
-
+        viewModel.setData(tasks: level.tasks, dict: imageDict)
         let viewController = LessonLevelViewController(
-            viewModel: viewModel as? LessonLevelViewModel ?? LessonLevelViewModel()
+            viewModel: viewModel
         )
         viewController.exitClosure = {
             self.navigationController.popViewController(animated: true)

@@ -14,12 +14,17 @@ class LessonLevelView: UIView {
     private lazy var taskLabel: UILabel = UILabel()
     private var customView: UIView = UIView()
     private var buttonsStackView: ButtonsStackView?
-
+    var didSelectAnswer: ((_ answer: String) -> Void)?
     var exitClosure: (() -> Void)?
 
-    init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
+    init(frame: CGRect, text: String, image: UIImage, buttonsNames: [String]) {
         super.init(frame: frame)
+        let builder = CustomViewBuilder()
         taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
+        customView = builder
+            .addImage(image)
+            .addBackgroundColor(.white)
+            .build()
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pPurple)
         if image != nil {
             setUpWithTextAndImage()
@@ -132,6 +137,9 @@ class LessonLevelView: UIView {
 
     private func setUpButtonsStackView() {
         addSubview(buttonsStackView ?? UIView())
+        buttonsStackView?.actionClosure = { answer in
+            self.didSelectAnswer?(answer)
+        }
         buttonsStackView?.snp.makeConstraints { make in
             make.top.equalTo(customView.snp_bottomMargin).offset(90)
             make.height.equalTo(160)
@@ -141,11 +149,6 @@ class LessonLevelView: UIView {
     }
 
     private func setUpView() {
-        let builder = CustomViewBuilder()
-        customView = builder
-            .addImage(.note)
-            .addBackgroundColor(.white)
-            .build()
         addSubview(customView)
         customView.snp.makeConstraints { make in
             make.top.equalTo(taskView?.snp.bottom ?? UIView()).offset(40)

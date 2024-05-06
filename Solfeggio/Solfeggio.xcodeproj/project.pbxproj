@@ -18,6 +18,9 @@
 		2A0290952BBAA6F9008BB3C7 /* TopicLevelsScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0290942BBAA6F9008BB3C7 /* TopicLevelsScreenViewModel.swift */; };
 		2A0290972BBAA8DB008BB3C7 /* LevelsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0290962BBAA8DB008BB3C7 /* LevelsCollectionViewCell.swift */; };
 		2A02909A2BBAB826008BB3C7 /* UICollectionViewCellExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A0290992BBAB826008BB3C7 /* UICollectionViewCellExtension.swift */; };
+		2A4048A32BE935F20030260E /* LoadingScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4048A22BE935F20030260E /* LoadingScreenView.swift */; };
+		2A4048A52BE936130030260E /* LoadingScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4048A42BE936130030260E /* LoadingScreenViewController.swift */; };
+		2A4048A72BE9362D0030260E /* LoadingScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4048A62BE9362D0030260E /* LoadingScreenViewModel.swift */; };
 		2A5B8E4A2BBF2139007D8CDD /* HearingTestScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */; };
 		2A5B8E4C2BBF28D3007D8CDD /* HearingTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */; };
 		2ABFFBC32BA1C2CC00DA45E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFFBC22BA1C2CC00DA45E8 /* AppDelegate.swift */; };
@@ -88,6 +91,9 @@
 		2A0290942BBAA6F9008BB3C7 /* TopicLevelsScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicLevelsScreenViewModel.swift; sourceTree = "<group>"; };
 		2A0290962BBAA8DB008BB3C7 /* LevelsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelsCollectionViewCell.swift; sourceTree = "<group>"; };
 		2A0290992BBAB826008BB3C7 /* UICollectionViewCellExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UICollectionViewCellExtension.swift; sourceTree = "<group>"; };
+		2A4048A22BE935F20030260E /* LoadingScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenView.swift; sourceTree = "<group>"; };
+		2A4048A42BE936130030260E /* LoadingScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewController.swift; sourceTree = "<group>"; };
+		2A4048A62BE9362D0030260E /* LoadingScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingScreenViewModel.swift; sourceTree = "<group>"; };
 		2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestScreenView.swift; sourceTree = "<group>"; };
 		2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestViewController.swift; sourceTree = "<group>"; };
 		2ABFFBBF2BA1C2CC00DA45E8 /* Solfeggio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solfeggio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -199,6 +205,16 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		2A4048A12BE935D20030260E /* LoadingScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2A4048A22BE935F20030260E /* LoadingScreenView.swift */,
+				2A4048A42BE936130030260E /* LoadingScreenViewController.swift */,
+				2A4048A62BE9362D0030260E /* LoadingScreenViewModel.swift */,
+			);
+			path = LoadingScreen;
+			sourceTree = "<group>";
+		};
 		2A5B8E482BBF17F2007D8CDD /* HearingTestScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -228,6 +244,7 @@
 		2ABFFBC12BA1C2CC00DA45E8 /* Solfeggio */ = {
 			isa = PBXGroup;
 			children = (
+				2A4048A12BE935D20030260E /* LoadingScreen */,
 				2AE92A922BE55CD3003D32E0 /* CoreData */,
 				2AE92A7A2BE418B8003D32E0 /* Network */,
 				2AE92A592BDBF4F7003D32E0 /*  KnowledgeRepetitionChossingTopics */,
@@ -507,11 +524,13 @@
 				2AE929A12BC7E873003D32E0 /* MainScreenViewModel.swift in Sources */,
 				2A02908C2BB5DE2F008BB3C7 /* HearingTestLevelScreenView.swift in Sources */,
 				2ABFFBEC2BA3B24800DA45E8 /* ButtonsStackView.swift in Sources */,
+				2A4048A32BE935F20030260E /* LoadingScreenView.swift in Sources */,
 				2A0290872BB5D58A008BB3C7 /* KnowledgeRepetitionLevelViewModel.swift in Sources */,
 				2A5B8E4A2BBF2139007D8CDD /* HearingTestScreenView.swift in Sources */,
 				2AE929D12BCD1322003D32E0 /* LessonLevelViewModel.swift in Sources */,
 				2AE9299F2BC7E852003D32E0 /* MainScreenViewController.swift in Sources */,
 				2AE929C12BCC1177003D32E0 /* ContainerAssembly.swift in Sources */,
+				2A4048A52BE936130030260E /* LoadingScreenViewController.swift in Sources */,
 				2AE92A892BE555F1003D32E0 /* Task+CoreDataProperties.swift in Sources */,
 				2AE92A912BE555F1003D32E0 /* Theme+CoreDataProperties.swift in Sources */,
 				2AE92A8F2BE555F1003D32E0 /* Block+CoreDataProperties.swift in Sources */,
@@ -558,6 +577,7 @@
 				2A02909A2BBAB826008BB3C7 /* UICollectionViewCellExtension.swift in Sources */,
 				2ABFFBEE2BA5508E00DA45E8 /* CustomViewBuilder.swift in Sources */,
 				2AE929CB2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift in Sources */,
+				2A4048A72BE9362D0030260E /* LoadingScreenViewModel.swift in Sources */,
 				2AE929C32BCC1A96003D32E0 /* TabBarFabric.swift in Sources */,
 				2AE92A5B2BDBF55D003D32E0 /* KnowledgeRepetitionChossingTopicsUIView.swift in Sources */,
 				2ABFFBE22BA1D85800DA45E8 /* LessonLevelView.swift in Sources */,

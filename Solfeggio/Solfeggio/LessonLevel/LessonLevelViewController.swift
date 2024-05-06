@@ -3,19 +3,13 @@ import UIKit
 class LessonLevelViewController: UIViewController {
 
     let text = "Выберите правильную длительность ноты"
-    private var contentView: LessonLevelView
-    private let viewModel: LessonLevelViewModel
+    private var contentView: LessonLevelView?
+    private var viewModel: LessonLevelViewModelProtocol
 
     var exitClosure: (() -> Void)?
 
-    init(viewModel: LessonLevelViewModel) {
+    init(viewModel: LessonLevelViewModelProtocol) {
         self.viewModel = viewModel
-        self.contentView = LessonLevelView(
-            frame: CGRect(),
-            text: text,
-            image: .note,
-            buttonsNames: ["Четверть", "Шеснадцатая", "Половинная", "Восьмая"]
-        )
         super.init(nibName: nil, bundle: nil)
     }
 
@@ -24,6 +18,31 @@ class LessonLevelViewController: UIViewController {
     }
 
     override func loadView() {
+        setUpTaskView()
+    }
+
+    func setUpTaskView() {
+        let tuple = viewModel.getCurrentTaskWithImage()
+        let answers = viewModel.getCurrentAnswers()
+        var taskImage = tuple.1
+        print(answers[0].name)
+        let url = tuple.0.image
+        self.contentView = LessonLevelView(
+            frame: CGRect(),
+            text: tuple.0.task,
+            image: taskImage ?? .exit,
+            buttonsNames: [answers[0].name, answers[1].name, answers[2].name, answers[3].name]
+        )
+
+        contentView?.didSelectAnswer = { answer in
+            print("didSelectAnswer")
+            self.viewModel.checkCorrectAnswer(answerName: answer)
+        }
+
+        contentView?.exitClosure = {
+            self.exitClosure?()
+        }
+
         view = contentView
         view.backgroundColor = .pBlue
         self.navigationItem.title = "Ноты и длительности"
@@ -31,8 +50,17 @@ class LessonLevelViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.exitClosure = {
+        contentView?.exitClosure = {
             self.exitClosure?()
+        }
+
+        contentView?.didSelectAnswer = { answer in
+            print("didSelectAnswer")
+            self.viewModel.checkCorrectAnswer(answerName: answer)
+        }
+
+        self.viewModel.moveToNext = {
+            self.setUpTaskView()
         }
     }
 }
