@@ -8,16 +8,13 @@
 import UIKit
 
 protocol MainScreenSubCVDataManagerProtocol: UICollectionViewDataSource {
-
+    func setData(data: Set<Theme>) 
+    func getData(index: Int) -> Theme
 }
 
 class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManagerProtocol {
 
-    private var data: [String]
-
-    init(data: [String]) {
-        self.data = data
-    }
+    private var data: [Theme] = []
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return data.count
@@ -29,12 +26,17 @@ class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManag
         else {
             return UICollectionViewCell()
         }
-        if indexPath.row == 0 {
-            cell.configure(color: cellDataArray.randomElement() ?? .white, title: "", progressProcent: "")
-        }
+        cell.configure(color: cellDataArray.randomElement() ?? .white, theme: data[indexPath.row], progressProcent: "57%")
         /// Это будет заменено,  после того как напишу модели
-        cell.configure(color: cellDataArray.randomElement() ?? .white, title: "Нотная грамота", progressProcent: "57%")
         return cell
+    }
+
+    func setData(data: Set<Theme>) {
+        self.data = Array(data)
+    }
+
+    func getData(index: Int) -> Theme{
+        return data[index]
     }
 }
 

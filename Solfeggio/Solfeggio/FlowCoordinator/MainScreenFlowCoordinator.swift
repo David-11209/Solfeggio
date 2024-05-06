@@ -29,7 +29,7 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
         }
         let image: UIImage = .home
         let viewController = MainScreenViewController(
-            viewModel: viewModel as? MainScreenViewModel ?? MainScreenViewModel()
+            viewModel: viewModel
         )
         let item = UITabBarItem(
             title: nil,
@@ -47,21 +47,19 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             rootViewController: viewController
         )
         navigationController.isNavigationBarHidden = true
-        viewController.closeClosure = {
-            self.showTopicsScreen()
+        viewController.closeClosure = { theme in
+            self.showTopicsScreen(theme: theme)
         }
     }
 
-    private func showTopicsScreen() {
+    private func showTopicsScreen(theme: Theme) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             TopicLevelsScreenViewModelProtocol.self
         ) else { return }
-
+        viewModel.setData(levels: theme.levels)
         let viewController = TopicLevelsScreenViewController(
-            viewModel: viewModel as? TopicLevelsScreenViewModel ?? TopicLevelsScreenViewModel(
-                levelNames: []
-            )
+            viewModel: viewModel
         )
         navigationController.pushViewController(
             viewController,
@@ -71,12 +69,12 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             self.navigationController.tabBarController?.tabBar.isHidden = false
             self.navigationController.popViewController(animated: true)
         }
-        viewController.didSelectItem = { indexPath in
-            self.showLessonLevelScreen(indexPath: indexPath)
+        viewController.didSelectItem = { level in
+            self.showLessonLevelScreen(level: level)
         }
     }
 
-    private func showLessonLevelScreen(indexPath: IndexPath) {
+    private func showLessonLevelScreen(level: Level) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             LessonLevelViewModelProtocol.self

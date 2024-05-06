@@ -11,6 +11,7 @@ import CoreData
 protocol CoreDataManagerProtocol {
     func saveContext()
     func obtainAllData() -> [Block]
+    func getViewContext() -> NSManagedObjectContext
 }
 
 class CoreDataManager: CoreDataManagerProtocol {
@@ -19,6 +20,9 @@ class CoreDataManager: CoreDataManagerProtocol {
         return persistentContainer.viewContext
     }
 
+    func getViewContext() -> NSManagedObjectContext {
+        return viewContext
+    }
     // MARK: - Core Data stack
 
     private lazy var persistentContainer: NSPersistentContainer = {

@@ -10,12 +10,12 @@ import UIKit
 class MainScreenCollectionViewCell: UICollectionViewCell {
 
     /// Инициализация dataManager будет изменена после создания моделей
-    private var dataManager = MainScreenSubCollectionViewDataManager(data: ["123", "123"])
+    private var dataManager: MainScreenSubCollectionViewDataManager = MainScreenSubCollectionViewDataManager()
     private lazy var imageView: UIImageView = UIImageView()
     private lazy var titleLabel: UILabel = UILabel()
     private lazy var mainImageView: UIImageView = UIImageView()
     private lazy var mainTitle: UILabel = UILabel()
-    var didSelectItem: ((_ indexPath: IndexPath) -> Void)?
+    var didSelectItem: ((_ theme: Theme) -> Void)?
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30
@@ -34,10 +34,10 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(title: String, image: UIImage) {
-        titleLabel.text = title
-        imageView.image = image
-
+    func configure(block: Block) {
+        titleLabel.text = block.name
+        imageView.image = .interval
+        dataManager.setData(data: block.themes)
     }
 
     func configureFirstCell() {
@@ -131,6 +131,7 @@ extension MainScreenCollectionViewCell: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectItem?(indexPath)
+        print(indexPath.row)
+        didSelectItem?(dataManager.getData(index: indexPath.row))
     }
 }

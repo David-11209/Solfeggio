@@ -23,9 +23,14 @@ class MainScreenSubCollectionViewCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func configure(color: UIColor, title: String, progressProcent: String) {
-        titleLabel.text = title
+    func configure(color: UIColor, theme: Theme, progressProcent: String) {
+        titleLabel.text = theme.name
+        print(theme.name)
         progressLabel.text = "Прогресс " + progressProcent
+        customView.setUpOneColor(color: color)
+    }
+
+    func configure(color: UIColor) {
         customView.setUpOneColor(color: color)
     }
 
@@ -55,7 +60,6 @@ class MainScreenSubCollectionViewCell: UICollectionViewCell {
 
     private func setUpTitleLabel() {
         customView.addSubview(titleLabel)
-        titleLabel.text = "Ноты и длительности"
         titleLabel.textColor = .white
         titleLabel.font = UIFont.boldSystemFont(ofSize: 20.0)
         titleLabel.textAlignment = .center

@@ -8,16 +8,33 @@
 import UIKit
 
 protocol MainScreenViewModelProtocol: UICollectionViewDataSource {
-
+    var closeClosure: ((_ theme: Theme) -> Void)? { get set }
+    var successfulDataAcquisition: (() -> Void)? { get set }
+//    func requestData(completion: @escaping ([Block]) -> Void)
 }
 
 class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
 
-    var closeClosure: (() -> Void)?
+    var closeClosure: ((_ theme: Theme) -> Void)?
+    var successfulDataAcquisition: (() -> Void)?
+    var coreDataManager: CoreDataManagerProtocol
+    var networkService: NetworkServiceProtocol
+    var convertService: ConvertServiceProtocol
+    var dataSource: [Block] = []
 
-    private var topics: [String] = ["", "", "Нотная грамота", "Тональности и лады", "Интервалы"]
-
-    override init() {
+    init(
+        coreDataManager: CoreDataManagerProtocol,
+        networkService: NetworkServiceProtocol,
+        convertService: ConvertServiceProtocol
+    ) {
+        self.coreDataManager = coreDataManager
+        self.networkService = networkService
+        self.convertService = convertService
+        super.init()
+        requestData { data in
+            self.dataSource = data
+            self.successfulDataAcquisition?()
+        }
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -32,16 +49,38 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
         } else if indexPath.row == 1 {
             cell.configureSecondCell()
         } else {
-            cell.configure(title: topics[indexPath.row], image: .interval)
-            cell.didSelectItem = { [weak self] indexPath in
+            cell.configure(block: dataSource[indexPath.row - 2])
+            cell.didSelectItem = { [weak self] theme in
                 /// indexPath будет использован в следущем MR
-                self?.closeClosure?()
+                self?.closeClosure?(theme)
             }
         }
         return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return topics.count
+        return dataSource.count + 2
+    }
+
+    private func requestData(completion: @escaping ([Block]) -> Void) {
+        let backgroundQueue = DispatchQueue.global(qos: .background)
+        backgroundQueue.async {
+            var coreData = self.coreDataManager.obtainAllData()
+            if coreData.isEmpty {
+                let jsonData: () = self.networkService.getData(completion: { result in
+                    switch result {
+                    case .success(let data):
+                        self.convertService.convertDataToCoreData(jsonData: data)
+                        coreData = self.coreDataManager.obtainAllData()
+                        completion(coreData)
+                        break
+                    case .failure(let error):
+                        print("Error retrieving data: \(error.localizedDescription)")
+                        break
+                    }
+                })
+            }
+            completion(coreData)
+        }
     }
 }

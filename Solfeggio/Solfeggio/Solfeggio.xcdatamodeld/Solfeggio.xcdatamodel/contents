@@ -7,7 +7,7 @@
     </entity>
     <entity name="Block" representedClassName="Block" syncable="YES">
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="themes" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Theme" inverseName="block" inverseEntity="Theme"/>
+        <relationship name="themes" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Theme" inverseName="block" inverseEntity="Theme"/>
     </entity>
     <entity name="Level" representedClassName="Level" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String"/>
@@ -21,6 +21,7 @@
         <relationship name="level" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Level" inverseName="tasks" inverseEntity="Level"/>
     </entity>
     <entity name="Theme" representedClassName="Theme" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="themes" inverseEntity="Block"/>
         <relationship name="levels" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Level" inverseName="theme" inverseEntity="Level"/>

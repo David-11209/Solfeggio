@@ -33,11 +33,11 @@ class LevelsCollectionViewCell: UICollectionViewCell {
         setUp()
     }
 
-    func configure(color: UIColor, mainTitle: String, title: String) {
+    func configure(color: UIColor, mainTitle: String) {
         customView = CustomViewBuilder()
             .addBackgroundColor(color)
             .addMainLabel(mainTitle)
-            .addTitle(title)
+            .addTitle("Уровень")
             .build()
         setUp()
     }

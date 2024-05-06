@@ -10,10 +10,10 @@ import UIKit
 class MainScreenViewController: UIViewController {
 
     private let contentView: MainScreenView = .init()
-    private let viewModel: MainScreenViewModel
+    private let viewModel: MainScreenViewModelProtocol
 
-    var closeClosure: (() -> Void)?
-    init(viewModel: MainScreenViewModel) {
+    var closeClosure: ((_ theme: Theme) -> Void)?
+    init(viewModel: MainScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -30,8 +30,11 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         contentView.topicsCollectionView.delegate = self
         contentView.topicsCollectionView.dataSource = viewModel
-        viewModel.closeClosure = { [weak self] in
-            self?.closeClosure?()
+        viewModel.closeClosure = { theme in
+            self.closeClosure?(theme)
+        }
+        viewModel.successfulDataAcquisition = { [weak self] in
+            self?.contentView.topicsCollectionView.reloadData()
         }
         contentView.topicsCollectionView.register(
             MainScreenCollectionViewCell.self, forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)

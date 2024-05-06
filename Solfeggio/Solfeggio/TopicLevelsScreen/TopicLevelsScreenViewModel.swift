@@ -8,19 +8,16 @@
 import UIKit
 
 protocol TopicLevelsScreenViewModelProtocol: UICollectionViewDataSource {
-
+    func setData(levels: Set<Level>)
+    func getLevel(index: Int) -> Level 
 }
 
 class TopicLevelsScreenViewModel: NSObject, TopicLevelsScreenViewModelProtocol {
 
-    private var levelNames: [String] = []
-
-    init(levelNames: [String]) {
-        self.levelNames = levelNames
-    }
+    private var levels: [Level] = []
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return levelNames.count
+        return levels.count + 1
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath
@@ -33,9 +30,18 @@ class TopicLevelsScreenViewModel: NSObject, TopicLevelsScreenViewModelProtocol {
         if indexPath.row == 0 {
             cell.configure(color: cellDataArray[indexPath.row], image: .book, title: "Теория")
         } else {
-            cell.configure(color: cellDataArray[indexPath.row], mainTitle: String(indexPath.row), title: "Уровень")
+            cell.configure(color: cellDataArray[indexPath.row], mainTitle: String(indexPath.row))
         }
         return cell
+    }
+
+    func setData(levels: Set<Level>) {
+        self.levels = Array(levels)
+        print(levels.count)
+    }
+
+    func getLevel(index: Int) -> Level {
+        return levels[index]
     }
 }
 

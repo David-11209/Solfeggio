@@ -9,9 +9,6 @@ import Swinject
 
 class ContainerAssembly: Assembly {
     func assemble(container: Swinject.Container) {
-        container.register(MainScreenViewModelProtocol.self) { _ in
-            MainScreenViewModel()
-        }
 
         container.register(HearingTestScreenViewModelProtocol.self) { _ in
             HearingTestScreenViewModel()
@@ -39,7 +36,7 @@ class ContainerAssembly: Assembly {
         }
 
         container.register( TopicLevelsScreenViewModelProtocol.self) { _ in
-            TopicLevelsScreenViewModel(levelNames: ["1", "1", "1", "1", "1", "1", "1", "1", "1", "1"])
+            TopicLevelsScreenViewModel()
         }
 
         container.register(KnowRepChossingTopicsViewModelProtocol.self) { _ in
@@ -54,19 +51,31 @@ class ContainerAssembly: Assembly {
             ])
         }
 
+        container.register( CoreDataManagerProtocol.self) { _ in
+            CoreDataManager()
+        }
+        .inObjectScope(.container)
+
         container.register( NetworkServiceProtocol.self) { _ in
             NetworkService()
         }
         .inObjectScope(.container)
 
-        container.register( ConvertServiceProtocol.self) { _ in
-            ConvertService()
-        }
-        .inObjectScope(.container)
+        guard let coreDataManager = container.resolve(CoreDataManagerProtocol.self)  else { return }
 
-        container.register( CoreDataManagerProtocol.self) { _ in
-            CoreDataManager()
+        container.register( ConvertServiceProtocol.self) { _ in
+            ConvertService(coreDataManager: coreDataManager)
         }
+
         .inObjectScope(.container)
+        guard let networkService = container.resolve(NetworkServiceProtocol.self),
+            let convertService = container.resolve(ConvertServiceProtocol.self) else { return }
+
+        container.register(MainScreenViewModelProtocol.self) { _ in
+            MainScreenViewModel(coreDataManager: coreDataManager, networkService: networkService, convertService: convertService)
+        }
+
+
+
     }
 }

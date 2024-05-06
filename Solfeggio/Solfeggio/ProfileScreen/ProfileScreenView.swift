@@ -185,8 +185,9 @@ class ProfileScreenView: UIView {
     private func setUpStackView() {
         whiteView.addSubview(progressStack)
         progressStack.axis = .vertical
+        progressStack.distribution = .equalSpacing
         progressStack.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(80)
+            make.top.equalToSuperview().offset(75)
             make.leading.equalToSuperview().offset(10)
             make.trailing.equalToSuperview().inset(10)
             make.bottom.equalToSuperview().inset(10)
