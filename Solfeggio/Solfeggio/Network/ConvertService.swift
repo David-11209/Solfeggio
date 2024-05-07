@@ -13,28 +13,33 @@ protocol ConvertServiceProtocol {
 
 class ConvertService: ConvertServiceProtocol {
 
-    private let coreDataManager = CoreDataManager()
+    private var coreDataManager: CoreDataManagerProtocol
+    private var viewContext: NSManagedObjectContext
+    init(coreDataManager: CoreDataManagerProtocol) {
+        self.coreDataManager = coreDataManager
+        self.viewContext = coreDataManager.getViewContext()
+    }
 
     func convertDataToCoreData(jsonData: JSONData) {
         for blockData in jsonData.blocks {
-            let block = Block(context: coreDataManager.viewContext)
+            let block = Block(context: viewContext)
             block.name = blockData.name
 
             for themeData in blockData.themes {
-                let theme = Theme(context: coreDataManager.viewContext)
+                let theme = Theme(context: viewContext)
                 theme.name = themeData.name
 
                 for levelData in themeData.levels {
-                    let level = Level(context: coreDataManager.viewContext)
+                    let level = Level(context: viewContext)
                     level.id = levelData.id
 
                     for taskData in levelData.tasks {
-                        let task = Task(context: coreDataManager.viewContext)
+                        let task = Task(context: viewContext)
                         task.task = taskData.task
                         task.image = taskData.image
 
                         for answerOptionData in taskData.answerOptions {
-                            let answer = Answer(context: coreDataManager.viewContext)
+                            let answer = Answer(context: viewContext)
                             answer.name = answerOptionData.name
                             answer.rightAnswer = answerOptionData.rightAnswer
 

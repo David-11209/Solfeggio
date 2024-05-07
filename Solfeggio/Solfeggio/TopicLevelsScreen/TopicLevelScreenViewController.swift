@@ -10,12 +10,12 @@ import UIKit
 class TopicLevelsScreenViewController: UIViewController {
 
     private let contentView: TopicLevelsScreenView = .init()
-    private let viewModel: TopicLevelsScreenViewModel
+    private let viewModel: TopicLevelsScreenViewModelProtocol
 
-    var didSelectItem: ((_ indexPath: IndexPath) -> Void)?
+    var didSelectItem: ((_ level: Level) -> Void)?
     var exitClosure: (() -> Void)?
 
-    init(viewModel: TopicLevelsScreenViewModel) {
+    init(viewModel: TopicLevelsScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -51,6 +51,6 @@ extension TopicLevelsScreenViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectItem?(indexPath)
+        didSelectItem?(viewModel.getLevel(index: indexPath.row - 1))
     }
 }

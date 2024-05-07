@@ -15,9 +15,10 @@ extension Answer {
         return NSFetchRequest<Answer>(entityName: "Answer")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var id: String?
+    @NSManaged public var name: String
     @NSManaged public var rightAnswer: Bool
-    @NSManaged public var task: Task?
+    @NSManaged public var task: Task
 
 }
 

@@ -39,6 +39,7 @@ class KnowRepChossingTopicsViewController: UIViewController {
         }
     }
 }
+
 extension KnowRepChossingTopicsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,

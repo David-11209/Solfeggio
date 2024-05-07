@@ -10,9 +10,9 @@ import UIKit
 class ProfileScreenViewController: UIViewController {
 
     private let contentView: ProfileScreenView = .init()
-    private let viewModel: ProfileScreenViewModel
+    private let viewModel: ProfileScreenViewModelProtocol
 
-    init(viewModel: ProfileScreenViewModel) {
+    init(viewModel: ProfileScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
