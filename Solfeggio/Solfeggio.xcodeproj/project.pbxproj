@@ -24,6 +24,7 @@
 		2A4048AA2BE9720C0030260E /* EndLevelScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4048A92BE9720C0030260E /* EndLevelScreenViewController.swift */; };
 		2A4048AC2BE9721F0030260E /* EndLevelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4048AB2BE9721F0030260E /* EndLevelScreenView.swift */; };
 		2A4048AE2BE972320030260E /* EndLevelScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4048AD2BE972320030260E /* EndLevelScreenViewModel.swift */; };
+		2A4048B12BEAB2140030260E /* JGProgressHUD in Frameworks */ = {isa = PBXBuildFile; productRef = 2A4048B02BEAB2140030260E /* JGProgressHUD */; };
 		2A5B8E4A2BBF2139007D8CDD /* HearingTestScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */; };
 		2A5B8E4C2BBF28D3007D8CDD /* HearingTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */; };
 		2ABFFBC32BA1C2CC00DA45E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFFBC22BA1C2CC00DA45E8 /* AppDelegate.swift */; };
@@ -162,6 +163,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2A4048B12BEAB2140030260E /* JGProgressHUD in Frameworks */,
 				2ABFFBDC2BA1CA3900DA45E8 /* Alamofire in Frameworks */,
 				2ABFFBDF2BA1CA6900DA45E8 /* SnapKit in Frameworks */,
 				2AE929B02BCC0AFC003D32E0 /* Swinject in Frameworks */,
@@ -454,6 +456,7 @@
 				2ABFFBDB2BA1CA3900DA45E8 /* Alamofire */,
 				2ABFFBDE2BA1CA6900DA45E8 /* SnapKit */,
 				2AE929AF2BCC0AFC003D32E0 /* Swinject */,
+				2A4048B02BEAB2140030260E /* JGProgressHUD */,
 			);
 			productName = Solfeggio;
 			productReference = 2ABFFBBF2BA1C2CC00DA45E8 /* Solfeggio.app */;
@@ -487,6 +490,7 @@
 				2ABFFBDA2BA1CA3900DA45E8 /* XCRemoteSwiftPackageReference "Alamofire" */,
 				2ABFFBDD2BA1CA6900DA45E8 /* XCRemoteSwiftPackageReference "SnapKit" */,
 				2AE929AE2BCC0AFC003D32E0 /* XCRemoteSwiftPackageReference "Swinject" */,
+				2A4048AF2BEAB2140030260E /* XCRemoteSwiftPackageReference "JGProgressHUD" */,
 			);
 			productRefGroup = 2ABFFBC02BA1C2CC00DA45E8 /* Products */;
 			projectDirPath = "";
@@ -820,6 +824,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		2A4048AF2BEAB2140030260E /* XCRemoteSwiftPackageReference "JGProgressHUD" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/JonasGessner/JGProgressHUD";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
 		2ABFFBDA2BA1CA3900DA45E8 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/Alamofire/Alamofire";
@@ -847,6 +859,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		2A4048B02BEAB2140030260E /* JGProgressHUD */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 2A4048AF2BEAB2140030260E /* XCRemoteSwiftPackageReference "JGProgressHUD" */;
+			productName = JGProgressHUD;
+		};
 		2ABFFBDB2BA1CA3900DA45E8 /* Alamofire */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 2ABFFBDA2BA1CA3900DA45E8 /* XCRemoteSwiftPackageReference "Alamofire" */;
