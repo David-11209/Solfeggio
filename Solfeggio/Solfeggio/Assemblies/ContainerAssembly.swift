@@ -79,5 +79,8 @@ class ContainerAssembly: Assembly {
             LoadingScreenViewModel()
         }
 
+        container.register(EndLevelScreenViewModelProtocol.self) { _ in
+            EndLevelScreenViewModel()
+        }
     }
 }
