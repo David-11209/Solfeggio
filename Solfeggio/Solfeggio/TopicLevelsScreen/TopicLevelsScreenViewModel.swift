@@ -9,7 +9,7 @@ import UIKit
 
 protocol TopicLevelsScreenViewModelProtocol: UICollectionViewDataSource {
     func setData(levels: Set<Level>)
-    func getLevel(index: Int) -> Level 
+    func getLevel(index: Int) -> Level
 }
 
 class TopicLevelsScreenViewModel: NSObject, TopicLevelsScreenViewModelProtocol {

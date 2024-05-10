@@ -14,10 +14,13 @@ class LessonLevelView: UIView {
     private lazy var taskLabel: UILabel = UILabel()
     private var customView: UIView = UIView()
     private var buttonsStackView: ButtonsStackView?
+    private var resultView: UIView = UIView()
+    private var resultTitle: UILabel = UILabel()
+    private var resultImageView: UIImageView = UIImageView()
     var didSelectAnswer: ((_ answer: String) -> Void)?
     var exitClosure: (() -> Void)?
 
-    init(frame: CGRect, text: String, image: UIImage, buttonsNames: [String], progressAnimate: Bool) {
+    init(frame: CGRect, text: String, image: UIImage, buttonsNames: [String], progressAnimate: Bool, progressProcent: Float, hpCount: Int) {
         super.init(frame: frame)
         let builder = CustomViewBuilder()
         taskView = GradientTaskView(frame: frame, text: text, color1: .myMagentaOp, color2: .myPurpleOp)
@@ -26,32 +29,29 @@ class LessonLevelView: UIView {
             .addBackgroundColor(.white)
             .build()
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pPurple)
-        progressView.setProgress(0.01, animated: progressAnimate)
-        if image != nil {
-            setUpWithTextAndImage()
-        } else {
-            setUpWithText()
-        }
+        progressView.setProgress(progressProcent, animated: progressAnimate)
+        setUpWithTextAndImage(hpCount: hpCount)
+        //        setUpWithText()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setUpWithText() {
+    private func setUpWithText(hpCount: Int) {
         setUpExitButton()
         setUpHpStackView()
-        setUpHpImage()
+        setUpHpImage(hpCount: hpCount)
         setUpProgressView()
         setUpProgressLabel()
         setUpTaskView()
         setUpButtonsStackView()
     }
 
-    private func setUpWithTextAndImage() {
+    private func setUpWithTextAndImage(hpCount: Int) {
         setUpExitButton()
         setUpHpStackView()
-        setUpHpImage()
+        setUpHpImage(hpCount: hpCount)
         setUpProgressView()
         setUpProgressLabel()
         setUpTaskView()
@@ -91,10 +91,17 @@ class LessonLevelView: UIView {
         }
     }
 
-    private func setUpHpImage() {
-        hpImage1.image = .hp
-        hpImage2.image = .hp
-        hpImage3.image = .hp
+    private func setUpHpImage(hpCount: Int) {
+        if hpCount == 1 {
+            hpImage3.image = .hp
+        } else if hpCount == 2 {
+            hpImage3.image = .hp
+            hpImage2.image = .hp
+        } else {
+            hpImage3.image = .hp
+            hpImage2.image = .hp
+            hpImage1.image = .hp
+        }
     }
 
     private func setUpProgressView() {
@@ -156,5 +163,53 @@ class LessonLevelView: UIView {
             make.height.equalTo(200)
             make.width.equalTo(200)
         }
+    }
+
+    func setupMyView(color: UIColor) {
+        addSubview(resultView)
+        resultView.backgroundColor = color
+        resultView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(300)
+            make.height.equalTo(300)
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+    }
+
+    func setUpResultImage(image: UIImage) {
+        resultView.addSubview(resultImageView)
+        resultImageView.contentMode = .scaleAspectFill
+        resultImageView.image = image
+        resultImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.height.width.equalTo(46)
+            make.leading.equalToSuperview().offset(20)
+        }
+    }
+
+    func setUpResultTitle(title: String) {
+        resultView.addSubview(resultTitle)
+        resultTitle.text = title
+        resultTitle.font = .boldSystemFont(ofSize: 34)
+        resultTitle.textColor = .white
+        resultTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().offset(80)
+        }
+    }
+
+    func showView(result: Bool) {
+        if result {
+            setupMyView(color: .myGreen)
+            setUpResultImage(image: .ok)
+            setUpResultTitle(title: "Правильно")
+        } else {
+            setupMyView(color: .pRed)
+            setUpResultImage(image: .cross)
+            setUpResultTitle(title: "Неправильно")
+        }
+        UIView.animate(withDuration: 0.9, delay: 0, options: .curveEaseInOut, animations: {
+                   self.resultView.transform = CGAffineTransform(translationX: 0, y: -280)
+    })
     }
 }

@@ -33,7 +33,7 @@ class ButtonsStackView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-
+    
     private func setUpMainStackView() {
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(stackView1)
@@ -66,8 +66,19 @@ class ButtonsStackView: UIView {
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 18.0)
         button.backgroundColor = color
         button.layer.cornerRadius = 10
-        let buttonAction: UIAction = UIAction { [weak self] _ in
-            self?.actionClosure?(name)
+        let buttonAction: UIAction = UIAction { _ in
+            UIView.animate(withDuration: 0.3, animations: {
+                button.alpha = 0.5
+            }, completion: { _ in
+                UIView.animate(withDuration: 0.3, animations: {
+                    button.alpha = 1.0
+                })
+            })
+            DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(500)) {
+                DispatchQueue.main.async {
+                    self.actionClosure?(name)
+                }
+            }
         }
         button.addAction(buttonAction, for: .touchUpInside)
         button.layer.shadowColor = UIColor.black.cgColor

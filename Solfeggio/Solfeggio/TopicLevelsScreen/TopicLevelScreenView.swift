@@ -80,7 +80,7 @@ class TopicLevelsScreenView: UIView {
             make.height.equalTo(20)
             make.width.equalToSuperview().multipliedBy(0.7)
         }
-        progressView.setProgress(0.3, animated: true)
+        progressView.setProgress(0.0, animated: true)
     }
 
     private func setUpProgressLabel() {

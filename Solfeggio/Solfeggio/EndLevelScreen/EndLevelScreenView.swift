@@ -16,6 +16,7 @@ class EndLevelScreenView: UIView {
     private lazy var exitButton: UIButton = UIButton()
 
     var exitClosure: ((String) -> Void)?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setUp()

@@ -11,6 +11,7 @@ class EndLevelScreenViewController: UIViewController {
 
     private let contentView: EndLevelScreenView = .init()
     private let viewModel: EndLevelScreenViewModelProtocol
+    var exitClosure: ((String) -> Void)?
 
     init(viewModel: EndLevelScreenViewModelProtocol) {
         self.viewModel = viewModel
@@ -23,5 +24,12 @@ class EndLevelScreenViewController: UIViewController {
 
     override func loadView() {
         view = contentView
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        contentView.exitClosure = { result in
+            self.exitClosure?(result)
+        }
     }
 }
