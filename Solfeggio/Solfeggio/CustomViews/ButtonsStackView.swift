@@ -33,7 +33,7 @@ class ButtonsStackView: UIView {
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }
-    
+
     private func setUpMainStackView() {
         addSubview(mainStackView)
         mainStackView.addArrangedSubview(stackView1)
