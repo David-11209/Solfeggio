@@ -31,7 +31,6 @@ class LessonLevelView: UIView {
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pPurple)
         progressView.setProgress(progressProcent, animated: progressAnimate)
         setUpWithTextAndImage(hpCount: hpCount)
-        //        setUpWithText()
     }
 
     required init?(coder: NSCoder) {
@@ -208,8 +207,8 @@ class LessonLevelView: UIView {
             setUpResultImage(image: .cross)
             setUpResultTitle(title: "Неправильно")
         }
-        UIView.animate(withDuration: 0.9, delay: 0, options: .curveEaseInOut, animations: {
-                   self.resultView.transform = CGAffineTransform(translationX: 0, y: -280)
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: {
+            self.resultView.transform = CGAffineTransform(translationX: 0, y: -280)
     })
     }
 }

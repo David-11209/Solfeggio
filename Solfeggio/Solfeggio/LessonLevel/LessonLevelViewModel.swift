@@ -52,7 +52,6 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
         guard let rightAnswer = tuple.0.answers.first(where: { $0.name == answerName})?.rightAnswer else { return }
         if rightAnswer {
             answerReaction?(true)
-//            nextTask()
         } else {
             answerReaction?(false)
             countHP -= 1
@@ -64,8 +63,7 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
             exitClosure?(true)
         } else if countHP == 0 {
             exitClosure?(false)
-        }
-        else {
+        } else {
             index += 1
             moveToNext?(Float(index) / Float(tasks.count), countHP)
         }

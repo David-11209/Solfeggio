@@ -35,7 +35,6 @@ class LoadingScreenView: UIView {
         hud.textLabel.text = "Загрузка"
         hud.detailTextLabel.text = "0%"
         hud.show(in: self)
-
         var progress: Float = 0.0
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
             progress += 0.1

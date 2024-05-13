@@ -23,5 +23,4 @@ class EndLevelScreenViewModel: EndLevelScreenViewModelProtocol {
     func setResult(result: Bool) {
         self.result = result
     }
-
 }
