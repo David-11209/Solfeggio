@@ -17,9 +17,14 @@ class EndLevelScreenView: UIView {
 
     var exitClosure: ((String) -> Void)?
 
-    override init(frame: CGRect) {
+    init(frame: CGRect, result: Bool) {
         super.init(frame: frame)
-        setUp()
+        if result {
+            setUp(image: .sucsesfulLevel, titleText: "Вы прошли уровень!")
+        } else {
+            setUp(image: .fail, titleText: "Вы не прошли уровень")
+        }
+
         self.backgroundColor = .pBlue
     }
 
@@ -27,16 +32,16 @@ class EndLevelScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setUp() {
-        setUpImageView()
-        setUpTitleLabel()
+    private func setUp(image: UIImage, titleText: String) {
+        setUpImageView(image: image)
+        setUpTitleLabel(titleText: titleText)
         setUpRetryButton()
         setUpExitButton()
     }
 
-    private func setUpImageView() {
+    private func setUpImageView(image: UIImage) {
         addSubview(imageView)
-        imageView.image = .sucsesfulLevel
+        imageView.image = image
         imageView.contentMode = .scaleAspectFill
         imageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(160)
@@ -46,9 +51,9 @@ class EndLevelScreenView: UIView {
         }
     }
 
-    private func setUpTitleLabel() {
+    private func setUpTitleLabel(titleText: String) {
         addSubview(titleLabel)
-        titleLabel.text = "Вы прошли уровень!"
+        titleLabel.text = titleText
         titleLabel.font = .boldSystemFont(ofSize: 32)
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp_bottomMargin).offset(20)

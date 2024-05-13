@@ -6,7 +6,7 @@ class LessonLevelViewController: UIViewController {
     private var contentView: LessonLevelView?
     private var viewModel: LessonLevelViewModelProtocol
     private var animate: Bool = true
-    var exitClosure: (() -> Void)?
+    var exitClosure: ((Bool) -> Void)?
 
     init(viewModel: LessonLevelViewModelProtocol) {
         self.viewModel = viewModel
@@ -58,7 +58,7 @@ class LessonLevelViewController: UIViewController {
             }
         }
         contentView?.exitClosure = {
-            self.exitClosure?()
+            self.exitClosure?(false)
         }
         animate = false
         view = contentView
@@ -70,7 +70,7 @@ class LessonLevelViewController: UIViewController {
         super.viewDidLoad()
 
         contentView?.exitClosure = {
-            self.exitClosure?()
+            self.exitClosure?(false)
         }
 
         contentView?.didSelectAnswer = { answer in
@@ -81,8 +81,8 @@ class LessonLevelViewController: UIViewController {
             self.setUpTaskView(progress: progress, hpCount: hpCount)
         }
 
-        self.viewModel.exitClosure = {
-            self.exitClosure?()
+        self.viewModel.exitClosure = { result in
+            self.exitClosure?(result)
         }
     }
 }

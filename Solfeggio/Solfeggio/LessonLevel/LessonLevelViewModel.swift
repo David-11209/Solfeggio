@@ -13,7 +13,7 @@ protocol LessonLevelViewModelProtocol {
     func getCurrentTaskWithImage() -> (Task, UIImage?)
     func getCurrentAnswers() -> [Answer]
     func checkCorrectAnswer(answerName: String)
-    var exitClosure: (() -> Void)? { get set }
+    var exitClosure: ((Bool) -> Void)? { get set }
     var answerReaction: ((Bool) -> Void)? { get set }
     func nextTask()
 }
@@ -25,7 +25,7 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
     private var countHP = 3
     private var imageDict: [String: UIImage]
     var moveToNext: ((Float, Int) -> Void)?
-    var exitClosure: (() -> Void)?
+    var exitClosure: ((Bool) -> Void)?
     var answerReaction: ((Bool) -> Void)?
 
     init() {
@@ -60,9 +60,12 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
     }
 
     func nextTask() {
-        if index == tasks.count - 1 || countHP == 0 {
-            exitClosure?()
-        } else {
+        if index == tasks.count - 1 {
+            exitClosure?(true)
+        } else if countHP == 0 {
+            exitClosure?(false)
+        }
+        else {
             index += 1
             moveToNext?(Float(index) / Float(tasks.count), countHP)
         }
