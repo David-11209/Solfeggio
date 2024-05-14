@@ -6,7 +6,7 @@ class LessonLevelViewController: UIViewController {
     private var contentView: LessonLevelView?
     private var viewModel: LessonLevelViewModelProtocol
     private var animate: Bool = true
-    var exitClosure: (() -> Void)?
+    var exitClosure: ((Bool) -> Void)?
 
     init(viewModel: LessonLevelViewModelProtocol) {
         self.viewModel = viewModel
@@ -18,28 +18,47 @@ class LessonLevelViewController: UIViewController {
     }
 
     override func loadView() {
-        setUpTaskView()
+        setUpTaskView(progress: 0.0, hpCount: 3)
     }
 
-    func setUpTaskView() {
+    func setUpTaskView(progress: Float, hpCount: Int) {
         let tuple = viewModel.getCurrentTaskWithImage()
         let answers = viewModel.getCurrentAnswers()
-        var taskImage = tuple.1
-        let url = tuple.0.image
+        let taskImage = tuple.1
         self.contentView = LessonLevelView(
             frame: CGRect(),
             text: tuple.0.task,
             image: taskImage ?? .exit,
             buttonsNames: [answers[0].name, answers[1].name, answers[2].name, answers[3].name],
-            progressAnimate: animate
+            progressAnimate: animate,
+            progressProcent: progress,
+            hpCount: hpCount
         )
 
         contentView?.didSelectAnswer = { answer in
             self.viewModel.checkCorrectAnswer(answerName: answer)
         }
 
+        self.viewModel.answerReaction = { result in
+            if result {
+                self.contentView?.showView(result: true)
+                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1000)) {
+                    DispatchQueue.main.async {
+                        self.viewModel.nextTask()
+                    }
+                }
+
+            } else {
+                self.contentView?.showView(result: false)
+                DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1000)) {
+                    DispatchQueue.main.async {
+                        self.viewModel.nextTask()
+                    }
+                }
+            }
+        }
         contentView?.exitClosure = {
-            self.exitClosure?()
+            self.exitClosure?(false)
         }
         animate = false
         view = contentView
@@ -51,19 +70,19 @@ class LessonLevelViewController: UIViewController {
         super.viewDidLoad()
 
         contentView?.exitClosure = {
-            self.exitClosure?()
+            self.exitClosure?(false)
         }
 
         contentView?.didSelectAnswer = { answer in
             self.viewModel.checkCorrectAnswer(answerName: answer)
         }
 
-        self.viewModel.moveToNext = {
-            self.setUpTaskView()
+        self.viewModel.moveToNext = { progress, hpCount in
+            self.setUpTaskView(progress: progress, hpCount: hpCount)
         }
 
-        self.viewModel.exitClosure = {
-            self.exitClosure?()
+        self.viewModel.exitClosure = { result in
+            self.exitClosure?(result)
         }
     }
 }

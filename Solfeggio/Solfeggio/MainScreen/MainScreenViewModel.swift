@@ -71,10 +71,8 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
                         self.convertService.convertDataToCoreData(jsonData: data)
                         coreData = self.coreDataManager.obtainAllData()
                         completion(coreData)
-                        break
                     case .failure(let error):
                         print("Error retrieving data: \(error.localizedDescription)")
-                        break
                     }
                 })
             }

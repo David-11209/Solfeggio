@@ -12,11 +12,15 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
 
     var navigationController: UINavigationController
     let container: Container
+    private var level: Level
+    private var imageDict: [String: UIImage]
 
     init(
         navigationController: UINavigationController,
         container: Container
     ) {
+        self.level = Level()
+        self.imageDict = [:]
         self.navigationController = navigationController
         self.container = container
     }
@@ -86,6 +90,8 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             viewModel: viewModel
         )
         viewController.allDataDownload = { dict in
+            self.level = level
+            self.imageDict = dict
             self.showLessonLevelScreen(level: level, imageDict: dict)
         }
         navigationController.pushViewController(
@@ -98,6 +104,7 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
     }
 
     private func showLessonLevelScreen(level: Level, imageDict: [String: UIImage]) {
+        print(navigationController.viewControllers.count)
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             LessonLevelViewModelProtocol.self
@@ -106,9 +113,31 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
         let viewController = LessonLevelViewController(
             viewModel: viewModel
         )
-        viewController.exitClosure = {
-            self.exitLevelClosure?()
-            self.navigationController.popViewController(animated: true)
+        viewController.exitClosure = { result in
+            self.showEndLevelScreen(result: result)
+        }
+        navigationController.pushViewController(
+            viewController,
+            animated: true
+        )
+    }
+
+    private func showEndLevelScreen(result: Bool) {
+        navigationController.tabBarController?.tabBar.isHidden = true
+        guard let viewModel = container.resolve(
+            EndLevelScreenViewModelProtocol.self
+        ) else { return }
+        viewModel.setResult(result: result)
+        let viewController = EndLevelScreenViewController(
+            viewModel: viewModel
+        )
+        viewController.exitClosure = { result in
+            if result == "exit" {
+                self.navigationController.popToViewController(self.navigationController.viewControllers[1], animated: true)
+            } else {
+                self.navigationController.popToViewController(self.navigationController.viewControllers[2], animated: false)
+                self.showLoadingLevelScreen(level: self.level)
+            }
         }
         navigationController.pushViewController(
             viewController,

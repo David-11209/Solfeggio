@@ -8,12 +8,14 @@
 import UIKit
 
 protocol LessonLevelViewModelProtocol {
-    var moveToNext: (() -> Void)? { get set }
+    var moveToNext: ((Float, Int) -> Void)? { get set }
     func setData(tasks: Set<Task>, dict: [String: UIImage])
     func getCurrentTaskWithImage() -> (Task, UIImage?)
     func getCurrentAnswers() -> [Answer]
     func checkCorrectAnswer(answerName: String)
-    var exitClosure: (() -> Void)? { get set }
+    var exitClosure: ((Bool) -> Void)? { get set }
+    var answerReaction: ((Bool) -> Void)? { get set }
+    func nextTask()
 }
 
 class LessonLevelViewModel: LessonLevelViewModelProtocol {
@@ -22,8 +24,9 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
     private var index = 0
     private var countHP = 3
     private var imageDict: [String: UIImage]
-    var moveToNext: (() -> Void)?
-    var exitClosure: (() -> Void)?
+    var moveToNext: ((Float, Int) -> Void)?
+    var exitClosure: ((Bool) -> Void)?
+    var answerReaction: ((Bool) -> Void)?
 
     init() {
         tasks = []
@@ -48,21 +51,21 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
         let tuple = getCurrentTaskWithImage()
         guard let rightAnswer = tuple.0.answers.first(where: { $0.name == answerName})?.rightAnswer else { return }
         if rightAnswer {
-            nextTask()
+            answerReaction?(true)
         } else {
+            answerReaction?(false)
             countHP -= 1
-            if countHP == 0 {
-                exitClosure?()
-            }
         }
     }
 
     func nextTask() {
         if index == tasks.count - 1 {
-            exitClosure?()
+            exitClosure?(true)
+        } else if countHP == 0 {
+            exitClosure?(false)
         } else {
             index += 1
-            moveToNext?()
+            moveToNext?(Float(index) / Float(tasks.count), countHP)
         }
     }
 }

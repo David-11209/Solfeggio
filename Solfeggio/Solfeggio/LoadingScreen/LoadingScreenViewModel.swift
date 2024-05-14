@@ -27,8 +27,10 @@ class LoadingScreenViewModel: LoadingScreenViewModelProtocol {
     func setData(tasks: Set<Task>) {
         self.tasks = Array(tasks)
         getAllTasksImages()
-        addUIImagesToDict {
-            self.allDataDownload?(self.imageDict)
+        DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(1)) {
+            self.addUIImagesToDict {
+                self.allDataDownload?(self.imageDict)
+            }
         }
     }
 
@@ -61,14 +63,12 @@ class LoadingScreenViewModel: LoadingScreenViewModelProtocol {
     private func addUIImagesToDict(completion: @escaping () -> Void) {
         var downloadedImagesCount = 0
         let totalImagesCount = imageDict.count
-
         for imageKey in imageDict.keys {
             downloadImage(from: imageKey) { image in
                 if let image = image {
                     self.imageDict[imageKey] = image
                     downloadedImagesCount += 1
                 }
-
                 if downloadedImagesCount == totalImagesCount {
                     completion()
                 }

@@ -18,8 +18,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions) {
             let assembly = ContainerAssembly()
             assembly.assemble(container: container)
-
-           
             let fabric = TabBarFabric(container: container)
             let tbController = fabric.makeTabBarController()
             guard let windowScene = (scene as? UIWindowScene) else { return }
