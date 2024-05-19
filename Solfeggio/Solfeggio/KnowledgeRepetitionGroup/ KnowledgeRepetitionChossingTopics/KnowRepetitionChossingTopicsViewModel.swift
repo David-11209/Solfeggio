@@ -16,15 +16,20 @@ class KnowRepetitionChossingTopicsViewModel: NSObject, KnowRepChossingTopicsView
 
     private var blockNames: [String] = []
     var blocksDict: [String: Bool] = [:]
+    var userDefaultsBlocks: [String: Bool] = UserDefaults.standard.object(forKey: "chooseBlocks") as? [String: Bool] ?? [:]
+
     func setData(names: [String]) {
         blockNames = names
-        for name in blockNames {
-            blocksDict[name] = false
+        if userDefaultsBlocks.isEmpty {
+            for name in blockNames {
+                blocksDict[name] = false
+            }
+        } else {
+            blocksDict = userDefaultsBlocks
         }
     }
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(blockNames.count)
         return blockNames.count
     }
 
@@ -40,8 +45,8 @@ class KnowRepetitionChossingTopicsViewModel: NSObject, KnowRepChossingTopicsView
         cell.switchClosure = {
             self.blocksDict[self.blockNames[indexPath.row]]?.toggle()
         }
-
-        cell.configure(color: cellDataArray[indexPath.row], title: blockNames[indexPath.row])
+        var enabled = userDefaultsBlocks[blockNames[indexPath.row]] ?? false
+        cell.configure(color: cellDataArray[indexPath.row], title: blockNames[indexPath.row], enabled: enabled)
 
         return cell
     }
@@ -53,6 +58,7 @@ class KnowRepetitionChossingTopicsViewModel: NSObject, KnowRepChossingTopicsView
                 resultArray.append(block.key)
             }
         }
+        UserDefaults.standard.set(blocksDict, forKey: "chooseBlocks")
         return resultArray
     }
 }

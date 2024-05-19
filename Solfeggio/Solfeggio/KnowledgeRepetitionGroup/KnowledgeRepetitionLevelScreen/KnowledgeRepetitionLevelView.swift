@@ -21,7 +21,7 @@ class KnowledgeRepetitionLevelView: UIView {
     private var resultImageView: UIImageView = UIImageView()
     var didSelectAnswer: ((_ answer: String) -> Void)?
     var exitClosure: (() -> Void)?
-    init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
+    init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String], progressProcent: Float, progressAnimate: Bool) {
         super.init(frame: frame)
         self.backgroundColor = .pBlue
         taskView = GradientTaskView(frame: frame, text: text, color1: .pOrange, color2: .pRed)
@@ -32,6 +32,7 @@ class KnowledgeRepetitionLevelView: UIView {
             .addBackgroundColor(.white)
             .build()
         setUpWithTextAndImage()
+        progressView.setProgress(progressProcent, animated: progressAnimate)
 //        if image != nil {
 //            setUpWithTextAndImage()
 //        } else {
@@ -87,7 +88,6 @@ class KnowledgeRepetitionLevelView: UIView {
             make.height.equalTo(20)
             make.width.equalToSuperview().multipliedBy(0.9)
         }
-        progressView.setProgress(0.3, animated: true)
     }
 
     private func setUpProgressLabel() {

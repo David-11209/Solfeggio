@@ -20,7 +20,7 @@ class KnowledgeRepetitionScreenView: UIView {
     private lazy var chooseTopicsImage: UIImageView = UIImageView()
     private lazy var segmentControl: UISegmentedControl = UISegmentedControl()
     var chooseViewTappedClosure: (() -> Void)?
-    var startTappedClosure: (() -> Void)?
+    var startTappedClosure: ((Int) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -91,8 +91,7 @@ class KnowledgeRepetitionScreenView: UIView {
     }
 
     @objc func startTapped(sender: UITapGestureRecognizer) {
-        print("view")
-        startTappedClosure?()
+        startTappedClosure?(segmentControl.selectedSegmentIndex)
     }
 
     private func setUpStartLabel() {

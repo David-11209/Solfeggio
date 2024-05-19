@@ -39,15 +39,16 @@ class KnowRepChossingTopicsCollectionViewCell: UICollectionViewCell {
 //        customView.removeFromSuperview()
 //    }
 
-    func configure(title: String, image: UIImage) {
-        titleLabel.text = title
-        imageView.image = image
-        setUpSecondCell()
-    }
+//    func configure(title: String, image: UIImage) {
+//        titleLabel.text = title
+//        imageView.image = image
+//        setUpSecondCell()
+//    }
 
-    func configure(color: UIColor, title: String) {
+    func configure(color: UIColor, title: String, enabled: Bool) {
         backgroundColor = color
         titleLabel.text = title
+        switchButton.isOn = enabled
     }
 
     private func setUp() {

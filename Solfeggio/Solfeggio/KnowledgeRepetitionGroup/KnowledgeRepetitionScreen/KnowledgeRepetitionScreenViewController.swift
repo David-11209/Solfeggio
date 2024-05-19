@@ -32,8 +32,8 @@ class KnowledgeRepetitionScreenViewController: UIViewController {
         contentView.chooseViewTappedClosure = {
             self.chooseViewTappedClosure?(self.viewModel.getNames())
         }
-        contentView.startTappedClosure = {
-            print("controller")
+        contentView.startTappedClosure = { segment in
+            self.viewModel.setSelectedNumberTasks(number: segment)
             self.startTappedClosure?()
         }
     }

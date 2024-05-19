@@ -46,12 +46,19 @@ class KnowledgeRepetitionLevelViewController: UIViewController {
         let tuple = viewModel.getCurrentTaskWithImage()
         let answers = viewModel.getCurrentAnswers()
 
-        self.contentView = KnowledgeRepetitionLevelView(frame: CGRect(), text: tuple.0.task, image: tuple.1, buttonsNames: [
-            answers[0].name,
-            answers[1].name,
-            answers[2].name,
-            answers[3].name
-        ])
+        self.contentView = KnowledgeRepetitionLevelView(
+            frame: CGRect(),
+            text: tuple.0.task,
+            image: tuple.1,
+            buttonsNames: [
+                answers[0].name,
+                answers[1].name,
+                answers[2].name,
+                answers[3].name
+            ],
+            progressProcent: progress,
+            progressAnimate: animate
+        )
 
         contentView?.didSelectAnswer = { answer in
             self.viewModel.checkCorrectAnswer(answerName: answer)

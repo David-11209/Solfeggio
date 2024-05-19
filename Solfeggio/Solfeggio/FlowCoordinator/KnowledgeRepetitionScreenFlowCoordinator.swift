@@ -51,14 +51,13 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         )
         dataTransmissonClosure = { chooseNames in
             viewModel.setChooseNames(names: chooseNames)
-            self.tasks = viewModel.getTasks()
         }
         viewController.chooseViewTappedClosure = { names in
             self.navigationController.tabBarController?.tabBar.isHidden = true
-            ///user defaults для уже выбранных тем
             self.showTopicsScreen(names: names)
         }
         viewController.startTappedClosure = {
+            self.tasks = viewModel.getTasks()
             self.navigationController.tabBarController?.tabBar.isHidden = true
             self.showLoadingLevelScreen()
         }
@@ -88,7 +87,6 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
             LoadingScreenViewModelProtocol.self
         ) else { return }
         ///???
-
         viewModel.setData(tasks: Set(tasks))
         let viewController = LoadingScreenViewController(
             viewModel: viewModel

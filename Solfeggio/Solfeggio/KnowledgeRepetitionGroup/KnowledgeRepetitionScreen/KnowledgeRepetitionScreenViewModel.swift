@@ -11,6 +11,7 @@ protocol KnowledgeRepetitionSViewModelProtocol {
     func getNames() -> [String]
     func setChooseNames(names: [String])
     func getTasks() -> [Task]
+    func setSelectedNumberTasks(number: Int)
 }
 
 class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewModelProtocol {
@@ -19,6 +20,7 @@ class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewMode
     var dataSource: [Block] = []
     var namesBlocks: [String] = []
     var chooseNames: Set<String> = .init()
+    var selectedNumberTasks = 10
 
     init(
         coreDataManager: CoreDataManagerProtocol
@@ -38,6 +40,19 @@ class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewMode
         backgroundQueue.async {
             let coreData = self.coreDataManager.obtainAllData()
             completion(coreData)
+        }
+    }
+
+    func setSelectedNumberTasks(number: Int) {
+        switch number {
+        case 0:
+            selectedNumberTasks = 10
+        case 1:
+            selectedNumberTasks = 20
+        case 2:
+            selectedNumberTasks = 30
+        default:
+            break
         }
     }
 
@@ -62,6 +77,8 @@ class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewMode
                 }
             }
         }
-        return tasks
+        tasks.shuffle()
+        print("selectedNumberTasks\(selectedNumberTasks)")
+        return Array(tasks.prefix(selectedNumberTasks))
     }
 }
