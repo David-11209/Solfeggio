@@ -20,8 +20,6 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
     private var mainLabel: UILabel?
     private var titleLabel: UILabel?
     private var gradientColors: [UIColor] = []
-    private var switchButton: UISwitch = UISwitch()
-    private var switchFlag = false
 
     func addTitle(_ title: String) -> Self {
         titleLabel = UILabel()
@@ -62,11 +60,6 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
         return self
     }
 
-    func addSwitchButton() -> Self {
-        switchFlag = true
-        return self
-    }
-
     func build() -> UIView {
         if !gradientColors.isEmpty {
             view = GradientView()
@@ -98,15 +91,10 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
             view?.addSubview(imageView)
             setUpImage(40, 60, 60, 40)
         }
-        if switchFlag, let label = titleLabel {
-            view?.addSubview(label)
-            setUpTitleLabel(10, 60, 26)
-            view?.addSubview(switchButton)
-            setUpSwitchButton()
-            setUpShadow(14)
-        } else {
-            setUpShadow(30)
-        }
+//        else {
+//
+//        }
+        setUpShadow(30)
         return view ?? UIView()
     }
 
@@ -142,14 +130,6 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
             make.leading.equalToSuperview().offset(60)
             make.trailing.equalToSuperview().inset(60)
             make.bottom.equalToSuperview().inset(40)
-        }
-    }
-
-    private func setUpSwitchButton() {
-        switchButton.onTintColor = .myWhiteop
-        switchButton.snp.makeConstraints { make in
-            make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(20)
         }
     }
 

@@ -16,16 +16,27 @@ class KnowledgeRepetitionLevelView: UIView {
     private lazy var taskLabel: UILabel = UILabel()
     private var customView: UIView = UIView()
     private var buttonsStackView: ButtonsStackView?
-
+    private var resultView: UIView = UIView()
+    private var resultTitle: UILabel = UILabel()
+    private var resultImageView: UIImageView = UIImageView()
+    var didSelectAnswer: ((_ answer: String) -> Void)?
+    var exitClosure: (() -> Void)?
     init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
         super.init(frame: frame)
-        taskView = GradientTaskView(frame: frame, text: text, color1: .myPeach, color2: .myLightYellow)
+        self.backgroundColor = .pBlue
+        taskView = GradientTaskView(frame: frame, text: text, color1: .pOrange, color2: .pRed)
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myOrange)
-        if image != nil {
-            setUpWithTextAndImage()
-        } else {
-            setUpWithText()
-        }
+        var builder = CustomViewBuilder()
+        customView = builder
+            .addImage(image ?? UIImage())
+            .addBackgroundColor(.white)
+            .build()
+        setUpWithTextAndImage()
+//        if image != nil {
+//            setUpWithTextAndImage()
+//        } else {
+//            setUpWithText()
+//        }
     }
 
     required init?(coder: NSCoder) {
@@ -51,6 +62,10 @@ class KnowledgeRepetitionLevelView: UIView {
 
     private func setUpExitButton() {
         addSubview(exitButton)
+        let action: UIAction = UIAction { [weak self] _ in
+            self?.exitClosure?()
+        }
+        exitButton.addAction(action, for: .touchUpInside)
         exitButton.setImage(.exit, for: .normal)
         exitButton.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(60)
@@ -101,6 +116,9 @@ class KnowledgeRepetitionLevelView: UIView {
 
     private func setUpButtonsStackView() {
         addSubview(buttonsStackView ?? UIView())
+        buttonsStackView?.actionClosure = { answer in
+            self.didSelectAnswer?(answer)
+        }
         buttonsStackView?.snp.makeConstraints { make in
             make.top.equalTo(customView.snp_bottomMargin).offset(90)
             make.height.equalTo(160)
@@ -110,11 +128,6 @@ class KnowledgeRepetitionLevelView: UIView {
     }
 
     private func setUpView() {
-        let builder = CustomViewBuilder()
-        customView = builder
-            .addImage(.note)
-            .addBackgroundColor(.white)
-            .build()
         addSubview(customView)
         customView.snp.makeConstraints { make in
             make.top.equalTo(taskView?.snp.bottom ?? 40).offset(40)
@@ -122,5 +135,53 @@ class KnowledgeRepetitionLevelView: UIView {
             make.height.equalTo(200)
             make.width.equalTo(200)
         }
+    }
+
+    func setupResultView(color: UIColor) {
+        addSubview(resultView)
+        resultView.backgroundColor = color
+        resultView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(300)
+            make.height.equalTo(300)
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+    }
+
+    func setUpResultImage(image: UIImage) {
+        resultView.addSubview(resultImageView)
+        resultImageView.contentMode = .scaleAspectFill
+        resultImageView.image = image
+        resultImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.height.width.equalTo(46)
+            make.leading.equalToSuperview().offset(20)
+        }
+    }
+
+    func setUpResultTitle(title: String) {
+        resultView.addSubview(resultTitle)
+        resultTitle.text = title
+        resultTitle.font = .boldSystemFont(ofSize: 34)
+        resultTitle.textColor = .white
+        resultTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().offset(80)
+        }
+    }
+
+    func showView(result: Bool) {
+        if result {
+            setupResultView(color: .myGreen)
+            setUpResultImage(image: .ok)
+            setUpResultTitle(title: "Правильно")
+        } else {
+            setupResultView(color: .pRed)
+            setUpResultImage(image: .cross)
+            setUpResultTitle(title: "Неправильно")
+        }
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: {
+            self.resultView.transform = CGAffineTransform(translationX: 0, y: -280)
+        })
     }
 }

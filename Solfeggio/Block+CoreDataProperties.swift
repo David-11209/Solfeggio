@@ -15,7 +15,7 @@ extension Block {
         return NSFetchRequest<Block>(entityName: "Block")
     }
 
-    @NSManaged public var name: String?
+    @NSManaged public var name: String
     @NSManaged public var themes: Set<Theme>
 
 }

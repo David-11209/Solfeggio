@@ -1,13 +1,13 @@
 //
-//  LessonLevelViewModel.swift
+//  LevelViewModelProtocol.swift
 //  Solfeggio
 //
-//  Created by Давид Васильев on 15.04.2024.
+//  Created by Давид Васильев on 19.05.2024.
 //
 
 import UIKit
 
-protocol LessonLevelViewModelProtocol {
+protocol LevelViewModelProtocol {
     var moveToNext: ((Float, Int) -> Void)? { get set }
     func setData(tasks: Set<Task>, dict: [String: UIImage])
     func getCurrentTaskWithImage() -> (Task, UIImage?)
@@ -18,7 +18,7 @@ protocol LessonLevelViewModelProtocol {
     func nextTask()
 }
 
-class LessonLevelViewModel: LessonLevelViewModelProtocol {
+class LevelViewModel {
 
     private var tasks: [Task]
     private var index = 0

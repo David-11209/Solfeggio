@@ -7,12 +7,12 @@
         <relationship name="task" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Task" inverseName="answers" inverseEntity="Task"/>
     </entity>
     <entity name="Block" representedClassName="Block" syncable="YES">
-        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
         <relationship name="themes" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Theme" inverseName="block" inverseEntity="Theme"/>
     </entity>
     <entity name="Level" representedClassName="Level" syncable="YES">
-        <attribute name="id" optional="YES" attributeType="String"/>
-        <relationship name="tasks" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Task" inverseName="level" inverseEntity="Task"/>
+        <attribute name="id" attributeType="String"/>
+        <relationship name="tasks" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Task" inverseName="level" inverseEntity="Task"/>
         <relationship name="theme" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="levels" inverseEntity="Theme"/>
     </entity>
     <entity name="Task" representedClassName="Task" syncable="YES">

@@ -10,12 +10,12 @@ import UIKit
 class KnowRepChossingTopicsViewController: UIViewController {
 
     private let contentView: KnowledgeRepetitionChossingTopicsView = .init()
-    private let viewModel: KnowRepetitionChossingTopicsViewModel
+    private let viewModel: KnowRepChossingTopicsViewModelProtocol
 
     var didSelectItem: ((_ indexPath: IndexPath) -> Void)?
-    var exitClosure: (() -> Void)?
+    var exitClosure: (([String]) -> Void)?
 
-    init(viewModel: KnowRepetitionChossingTopicsViewModel) {
+    init(viewModel: KnowRepChossingTopicsViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -34,8 +34,8 @@ class KnowRepChossingTopicsViewController: UIViewController {
         contentView.topicsCollectionView.dataSource = viewModel
         contentView.topicsCollectionView.register(
             KnowRepChossingTopicsCollectionViewCell.self, forCellWithReuseIdentifier: KnowRepChossingTopicsCollectionViewCell.reuseIdentifier)
-        contentView.exitClosure = {
-            self.exitClosure?()
+        contentView.exitClosure = { chooseNames in
+            self.exitClosure?(self.viewModel.getChooseBlocks())
         }
     }
 }

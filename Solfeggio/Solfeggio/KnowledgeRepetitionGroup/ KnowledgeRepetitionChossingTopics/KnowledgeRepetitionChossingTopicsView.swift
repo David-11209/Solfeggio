@@ -11,7 +11,7 @@ class KnowledgeRepetitionChossingTopicsView: UIView {
 
     private lazy var exitButton: UIButton = UIButton()
 
-    var exitClosure: (() -> Void)?
+    var exitClosure: (([String]) -> Void)?
 
     lazy var topicsCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -51,7 +51,7 @@ class KnowledgeRepetitionChossingTopicsView: UIView {
     private func setUpExitButton() {
         addSubview(exitButton)
         let action: UIAction = UIAction { [weak self] _ in
-            self?.exitClosure?()
+            self?.exitClosure?([])
         }
         exitButton.addAction(action, for: .touchUpInside)
         exitButton.setImage(.exit, for: .normal)
