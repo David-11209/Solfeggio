@@ -28,6 +28,9 @@
 		2A5042B22BF39A7100A8DA22 /* AudioService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042B12BF39A7100A8DA22 /* AudioService.swift */; };
 		2A5042B42BF4114500A8DA22 /* C.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2A5042B32BF4114500A8DA22 /* C.mp3 */; };
 		2A5042BB2BFA57B000A8DA22 /* LevelViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042BA2BFA57B000A8DA22 /* LevelViewModelProtocol.swift */; };
+		2A5042BE2BFA9ED300A8DA22 /* EndKnowledgeRepetitionLevelScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042BD2BFA9ED300A8DA22 /* EndKnowledgeRepetitionLevelScreenView.swift */; };
+		2A5042C02BFA9EE900A8DA22 /* EndKnowledgeRepetitionLevelScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042BF2BFA9EE900A8DA22 /* EndKnowledgeRepetitionLevelScreenViewController.swift */; };
+		2A5042C22BFA9EF400A8DA22 /* EndKnowledgeRepetitionLevelScreenViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042C12BFA9EF400A8DA22 /* EndKnowledgeRepetitionLevelScreenViewModel.swift */; };
 		2A5B8E4A2BBF2139007D8CDD /* HearingTestScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */; };
 		2A5B8E4C2BBF28D3007D8CDD /* HearingTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */; };
 		2ABFFBC32BA1C2CC00DA45E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFFBC22BA1C2CC00DA45E8 /* AppDelegate.swift */; };
@@ -107,6 +110,9 @@
 		2A5042B12BF39A7100A8DA22 /* AudioService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioService.swift; sourceTree = "<group>"; };
 		2A5042B32BF4114500A8DA22 /* C.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = C.mp3; sourceTree = "<group>"; };
 		2A5042BA2BFA57B000A8DA22 /* LevelViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LevelViewModelProtocol.swift; sourceTree = "<group>"; };
+		2A5042BD2BFA9ED300A8DA22 /* EndKnowledgeRepetitionLevelScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndKnowledgeRepetitionLevelScreenView.swift; sourceTree = "<group>"; };
+		2A5042BF2BFA9EE900A8DA22 /* EndKnowledgeRepetitionLevelScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndKnowledgeRepetitionLevelScreenViewController.swift; sourceTree = "<group>"; };
+		2A5042C12BFA9EF400A8DA22 /* EndKnowledgeRepetitionLevelScreenViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndKnowledgeRepetitionLevelScreenViewModel.swift; sourceTree = "<group>"; };
 		2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestScreenView.swift; sourceTree = "<group>"; };
 		2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestViewController.swift; sourceTree = "<group>"; };
 		2ABFFBBF2BA1C2CC00DA45E8 /* Solfeggio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solfeggio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -285,6 +291,16 @@
 			path = Protocols;
 			sourceTree = "<group>";
 		};
+		2A5042BC2BFA9E7E00A8DA22 /* EndKnowledgeRepetitionLevelScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2A5042BD2BFA9ED300A8DA22 /* EndKnowledgeRepetitionLevelScreenView.swift */,
+				2A5042BF2BFA9EE900A8DA22 /* EndKnowledgeRepetitionLevelScreenViewController.swift */,
+				2A5042C12BFA9EF400A8DA22 /* EndKnowledgeRepetitionLevelScreenViewModel.swift */,
+			);
+			path = EndKnowledgeRepetitionLevelScreen;
+			sourceTree = "<group>";
+		};
 		2A5B8E482BBF17F2007D8CDD /* HearingTestScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -314,6 +330,7 @@
 		2ABFFBC12BA1C2CC00DA45E8 /* Solfeggio */ = {
 			isa = PBXGroup;
 			children = (
+				2A5042BC2BFA9E7E00A8DA22 /* EndKnowledgeRepetitionLevelScreen */,
 				2A5042B92BFA578B00A8DA22 /* Protocols */,
 				2A5042B82BFA46EB00A8DA22 /* HearingTestLevelGroup */,
 				2A5042B72BFA46A600A8DA22 /* KnowledgeRepetitionGroup */,
@@ -595,9 +612,11 @@
 				2AE929A12BC7E873003D32E0 /* MainScreenViewModel.swift in Sources */,
 				2A02908C2BB5DE2F008BB3C7 /* HearingTestLevelScreenView.swift in Sources */,
 				2ABFFBEC2BA3B24800DA45E8 /* ButtonsStackView.swift in Sources */,
+				2A5042BE2BFA9ED300A8DA22 /* EndKnowledgeRepetitionLevelScreenView.swift in Sources */,
 				2A4048A32BE935F20030260E /* LoadingScreenView.swift in Sources */,
 				2A0290872BB5D58A008BB3C7 /* KnowledgeRepetitionLevelViewModel.swift in Sources */,
 				2A5B8E4A2BBF2139007D8CDD /* HearingTestScreenView.swift in Sources */,
+				2A5042C02BFA9EE900A8DA22 /* EndKnowledgeRepetitionLevelScreenViewController.swift in Sources */,
 				2AE929D12BCD1322003D32E0 /* LessonLevelViewModel.swift in Sources */,
 				2AE9299F2BC7E852003D32E0 /* MainScreenViewController.swift in Sources */,
 				2AE929C12BCC1177003D32E0 /* ContainerAssembly.swift in Sources */,
@@ -643,6 +662,7 @@
 				2AE929C72BCC288A003D32E0 /* UIImageExtension.swift in Sources */,
 				2A0290832BB5D524008BB3C7 /* KnowledgeRepetitionLevelView.swift in Sources */,
 				2AE929A42BC7E8A4003D32E0 /* MainScreenCollectionViewCell.swift in Sources */,
+				2A5042C22BFA9EF400A8DA22 /* EndKnowledgeRepetitionLevelScreenViewModel.swift in Sources */,
 				2AE929A62BC7EAC9003D32E0 /* MainScreenSubCollectionViewDataManager.swift in Sources */,
 				2A0290852BB5D542008BB3C7 /* KnowledgeRepetitionLevelViewController.swift in Sources */,
 				2AE92A8C2BE555F1003D32E0 /* Level+CoreDataClass.swift in Sources */,

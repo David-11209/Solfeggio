@@ -125,10 +125,10 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
     private func showEndLevelScreen(result: Bool) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
-            EndLevelScreenViewModelProtocol.self
+            EndKnowledgeRepetitionLevelScreenViewModelProtocol.self
         ) else { return }
         viewModel.setResult(result: result)
-        let viewController = EndLevelScreenViewController(
+        let viewController = EndKnowledgeRepetitionLevelScreenViewController(
             viewModel: viewModel
         )
         viewController.exitClosure = { result in
