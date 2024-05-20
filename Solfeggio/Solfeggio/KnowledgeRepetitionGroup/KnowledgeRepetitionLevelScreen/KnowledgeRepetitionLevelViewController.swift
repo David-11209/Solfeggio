@@ -11,7 +11,7 @@ class KnowledgeRepetitionLevelViewController: UIViewController {
 
     var viewModel: KnowledgeRepetitionLevelVMProtocol
     var contentView: KnowledgeRepetitionLevelView?
-    var exitClosure: ((Bool) -> Void)?
+    var exitClosure: ((Int) -> Void)?
     private var animate: Bool = true
 
     init(viewModel: KnowledgeRepetitionLevelVMProtocol) {
@@ -26,23 +26,23 @@ class KnowledgeRepetitionLevelViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView?.exitClosure = {
-            self.exitClosure?(false)
+            self.exitClosure?(self.viewModel.getNumberCompletedTasks())
+        }
+
+        self.viewModel.exitClosureWithResult = { result in
+            self.exitClosure?(result)
         }
 
         contentView?.didSelectAnswer = { answer in
             self.viewModel.checkCorrectAnswer(answerName: answer)
         }
 
-        self.viewModel.moveToNext = { progress, hpCount in
-            self.setUpTaskView(progress: progress, hpCount: hpCount)
-        }
-
-        self.viewModel.exitClosure = { result in
-            self.exitClosure?(result)
+        self.viewModel.moveToNext = { progress in
+            self.setUpTaskView(progress: progress)
         }
     }
 
-    func setUpTaskView(progress: Float, hpCount: Int) {
+    func setUpTaskView(progress: Float) {
         let tuple = viewModel.getCurrentTaskWithImage()
         let answers = viewModel.getCurrentAnswers()
 
@@ -84,15 +84,17 @@ class KnowledgeRepetitionLevelViewController: UIViewController {
             }
         }
         contentView?.exitClosure = {
-            self.exitClosure?(false)
+            self.exitClosure?(self.viewModel.getNumberCompletedTasks())
+        }
+        self.viewModel.exitClosureWithResult = { result in
+            self.exitClosure?(result)
         }
         animate = false
         view = contentView
         view.backgroundColor = .pBlue
-        self.navigationItem.title = "Ноты и длительности"
     }
 
     override func loadView() {
-        setUpTaskView(progress: 0.0, hpCount: 3)
+        setUpTaskView(progress: 0.0)
     }
 }

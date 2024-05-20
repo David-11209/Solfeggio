@@ -79,8 +79,8 @@ class ContainerAssembly: Assembly {
             EndLevelScreenViewModel()
         }
 
-        container.register(EndKnowledgeRepetitionLevelScreenViewModelProtocol.self) { _ in
-            EndKnowledgeRepetitionLevelScreenViewModel()
+        container.register(EndKRLevelViewModelProtocol.self) { _ in
+            EndKnowledgeRepetitionLevelViewModel()
         }
     }
 }

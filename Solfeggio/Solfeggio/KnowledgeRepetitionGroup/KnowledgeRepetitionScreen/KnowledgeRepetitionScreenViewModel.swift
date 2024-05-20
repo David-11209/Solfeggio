@@ -21,6 +21,7 @@ class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewMode
     var namesBlocks: [String] = []
     var chooseNames: Set<String> = .init()
     var selectedNumberTasks = 10
+    var userDefaultsBlocks: [String: Bool] = UserDefaults.standard.object(forKey: "chooseBlocks") as? [String: Bool] ?? [:]
 
     init(
         coreDataManager: CoreDataManagerProtocol
@@ -33,6 +34,11 @@ class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewMode
                 self.namesBlocks.append(block.name)
             }
         }
+        var resultArray: [String] = []
+        for block in userDefaultsBlocks where block.value {
+            resultArray.append(block.key)
+        }
+        setChooseNames(names: resultArray)
     }
 
     private func requestData(completion: @escaping ([Block]) -> Void) {
@@ -66,19 +72,16 @@ class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewMode
 
     func getTasks() -> [Task] {
         var tasks: [Task] = []
-        for block in dataSource {
-            if chooseNames.contains(block.name) {
-                for theme in block.themes {
-                    for level in  theme.levels {
-                        for task in level.tasks {
-                            tasks.append(task)
-                        }
+        for block in dataSource where chooseNames.contains(block.name) {
+            for theme in block.themes {
+                for level in  theme.levels {
+                    for task in level.tasks {
+                        tasks.append(task)
                     }
                 }
             }
         }
         tasks.shuffle()
-        print("selectedNumberTasks\(selectedNumberTasks)")
         return Array(tasks.prefix(selectedNumberTasks))
     }
 }

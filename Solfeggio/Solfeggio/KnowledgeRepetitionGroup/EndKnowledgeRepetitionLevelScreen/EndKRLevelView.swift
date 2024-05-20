@@ -7,7 +7,7 @@
 
 import UIKit
 
-class EndKnowledgeRepetitionLevelScreenView: UIView {
+class EndKRLevelView: UIView {
     private lazy var imageView: UIImageView = UIImageView()
     private lazy var titleLabel: UILabel = UILabel()
     private lazy var retryButton: UIButton = UIButton()
@@ -15,9 +15,9 @@ class EndKnowledgeRepetitionLevelScreenView: UIView {
 
     var exitClosure: ((String) -> Void)?
 
-    init(frame: CGRect, result: Bool) {
+    init(frame: CGRect, resultTuple: (Int, Int)) {
         super.init(frame: frame)
-        setUp(image: .test, titleText: "10/20")
+        setUp(image: .test, titleText: "\(resultTuple.0)\\\(resultTuple.1)")
         self.backgroundColor = .pBlue
     }
 
@@ -35,6 +35,7 @@ class EndKnowledgeRepetitionLevelScreenView: UIView {
     private func setUpTitleLabel(titleText: String) {
         addSubview(titleLabel)
         titleLabel.text = titleText
+        titleLabel.textAlignment = .center
         titleLabel.font = .boldSystemFont(ofSize: 32)
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(100)

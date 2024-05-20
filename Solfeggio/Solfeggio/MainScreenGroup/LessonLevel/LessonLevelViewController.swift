@@ -76,7 +76,7 @@ class LessonLevelViewController: UIViewController {
             self.viewModel.checkCorrectAnswer(answerName: answer)
         }
 
-        self.viewModel.moveToNext = { progress, hpCount in
+        self.viewModel.moveToNextWithHP = { progress, hpCount in
             self.setUpTaskView(progress: progress, hpCount: hpCount)
         }
 

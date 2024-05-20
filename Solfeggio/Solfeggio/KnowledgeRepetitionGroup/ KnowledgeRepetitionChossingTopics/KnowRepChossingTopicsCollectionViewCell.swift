@@ -34,17 +34,6 @@ class KnowRepChossingTopicsCollectionViewCell: UICollectionViewCell {
         self.layer.borderColor = UIColor.black.cgColor
     }
 
-//    override func prepareForReuse() {
-//        super.prepareForReuse()
-//        customView.removeFromSuperview()
-//    }
-
-//    func configure(title: String, image: UIImage) {
-//        titleLabel.text = title
-//        imageView.image = image
-//        setUpSecondCell()
-//    }
-
     func configure(color: UIColor, title: String, enabled: Bool) {
         backgroundColor = color
         titleLabel.text = title
@@ -90,10 +79,8 @@ class KnowRepChossingTopicsCollectionViewCell: UICollectionViewCell {
             guard let self = self else { return }
             if self.switchButton.isOn {
                 switchClosure?()
-                print("Переключатель включен")
             } else {
                 switchClosure?()
-                print("Переключатель выключен")
             }
         }), for: .valueChanged)
 

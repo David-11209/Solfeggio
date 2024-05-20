@@ -91,9 +91,6 @@ class CustomViewBuilder: CustomViewBuilderProtocol {
             view?.addSubview(imageView)
             setUpImage(40, 60, 60, 40)
         }
-//        else {
-//
-//        }
         setUpShadow(30)
         return view ?? UIView()
     }

@@ -86,14 +86,12 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         guard let viewModel = container.resolve(
             LoadingScreenViewModelProtocol.self
         ) else { return }
-        ///???
         viewModel.setData(tasks: Set(tasks))
         let viewController = LoadingScreenViewController(
             viewModel: viewModel
         )
         viewController.allDataDownload = { dict in
             self.imageDict = dict
-            print( self.imageDict.count)
             self.showKnowledgeRepetitionLevel()
         }
         navigationController.pushViewController(
@@ -109,26 +107,25 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         guard let viewModel = container.resolve(
             KnowledgeRepetitionLevelVMProtocol.self
         ) else { return }
-        print(self.imageDict.count)
-        print(Set(tasks).count)
         viewModel.setData(tasks: Set(tasks), dict: imageDict)
         let viewController = KnowledgeRepetitionLevelViewController(viewModel: viewModel)
         viewController.exitClosure = { result in
-            self.showEndLevelScreen(result: result)
+            self.showEndLevelScreen(result: result, tasksCount: self.tasks.count)
         }
+
         navigationController.pushViewController(
             viewController,
             animated: true
         )
     }
 
-    private func showEndLevelScreen(result: Bool) {
+    private func showEndLevelScreen(result: Int, tasksCount: Int) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
-            EndKnowledgeRepetitionLevelScreenViewModelProtocol.self
+            EndKRLevelViewModelProtocol.self
         ) else { return }
-        viewModel.setResult(result: result)
-        let viewController = EndKnowledgeRepetitionLevelScreenViewController(
+        viewModel.setResult(result: result, tasksCount: tasksCount)
+        let viewController = EndKRLevelViewController(
             viewModel: viewModel
         )
         viewController.exitClosure = { result in

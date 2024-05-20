@@ -45,7 +45,7 @@ class KnowRepetitionChossingTopicsViewModel: NSObject, KnowRepChossingTopicsView
         cell.switchClosure = {
             self.blocksDict[self.blockNames[indexPath.row]]?.toggle()
         }
-        var enabled = userDefaultsBlocks[blockNames[indexPath.row]] ?? false
+        let enabled = userDefaultsBlocks[blockNames[indexPath.row]] ?? false
         cell.configure(color: cellDataArray[indexPath.row], title: blockNames[indexPath.row], enabled: enabled)
 
         return cell
@@ -53,10 +53,8 @@ class KnowRepetitionChossingTopicsViewModel: NSObject, KnowRepChossingTopicsView
 
     func getChooseBlocks() -> [String] {
         var resultArray: [String] = []
-        for block in blocksDict {
-            if block.value {
-                resultArray.append(block.key)
-            }
+        for block in blocksDict where block.value {
+            resultArray.append(block.key)
         }
         UserDefaults.standard.set(blocksDict, forKey: "chooseBlocks")
         return resultArray

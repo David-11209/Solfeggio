@@ -26,18 +26,13 @@ class KnowledgeRepetitionLevelView: UIView {
         self.backgroundColor = .pBlue
         taskView = GradientTaskView(frame: frame, text: text, color1: .pOrange, color2: .pRed)
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .myOrange)
-        var builder = CustomViewBuilder()
+        let builder = CustomViewBuilder()
         customView = builder
             .addImage(image ?? UIImage())
             .addBackgroundColor(.white)
             .build()
         setUpWithTextAndImage()
         progressView.setProgress(progressProcent, animated: progressAnimate)
-//        if image != nil {
-//            setUpWithTextAndImage()
-//        } else {
-//            setUpWithText()
-//        }
     }
 
     required init?(coder: NSCoder) {

@@ -7,15 +7,15 @@
 
 import UIKit
 
-class EndKnowledgeRepetitionLevelScreenViewController: UIViewController {
+class EndKRLevelViewController: UIViewController {
 
-    private let contentView: EndKnowledgeRepetitionLevelScreenView
-    private let viewModel: EndKnowledgeRepetitionLevelScreenViewModelProtocol
+    private let contentView: EndKRLevelView
+    private let viewModel: EndKRLevelViewModelProtocol
     var exitClosure: ((String) -> Void)?
 
-    init(viewModel: EndKnowledgeRepetitionLevelScreenViewModelProtocol) {
+    init(viewModel: EndKRLevelViewModelProtocol) {
         self.viewModel = viewModel
-        self.contentView = EndKnowledgeRepetitionLevelScreenView(frame: CGRect(), result: viewModel.getResult())
+        self.contentView = EndKRLevelView(frame: CGRect(), resultTuple: viewModel.getResult())
         super.init(nibName: nil, bundle: nil)
     }
 

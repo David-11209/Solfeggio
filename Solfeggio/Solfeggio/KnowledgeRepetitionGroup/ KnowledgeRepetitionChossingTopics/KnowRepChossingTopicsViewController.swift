@@ -34,7 +34,7 @@ class KnowRepChossingTopicsViewController: UIViewController {
         contentView.topicsCollectionView.dataSource = viewModel
         contentView.topicsCollectionView.register(
             KnowRepChossingTopicsCollectionViewCell.self, forCellWithReuseIdentifier: KnowRepChossingTopicsCollectionViewCell.reuseIdentifier)
-        contentView.exitClosure = { chooseNames in
+        contentView.exitClosure = {
             self.exitClosure?(self.viewModel.getChooseBlocks())
         }
     }

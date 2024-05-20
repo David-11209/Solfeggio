@@ -42,7 +42,6 @@ class HearingTestLevelScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView?.startStopButtonTapped = {
-            print("play audio")
             self.viewModel.playSound()
         }
         contentView?.exitClosure = {
