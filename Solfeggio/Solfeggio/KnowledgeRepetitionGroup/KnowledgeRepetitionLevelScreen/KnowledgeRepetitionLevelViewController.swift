@@ -9,10 +9,10 @@ import UIKit
 
 class KnowledgeRepetitionLevelViewController: UIViewController {
 
+    private var animate: Bool = true
     var viewModel: KnowledgeRepetitionLevelVMProtocol
     var contentView: KnowledgeRepetitionLevelView?
     var exitClosure: ((Int) -> Void)?
-    private var animate: Bool = true
 
     init(viewModel: KnowledgeRepetitionLevelVMProtocol) {
         self.viewModel = viewModel

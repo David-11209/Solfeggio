@@ -19,8 +19,10 @@ class KnowledgeRepetitionLevelView: UIView {
     private var resultView: UIView = UIView()
     private var resultTitle: UILabel = UILabel()
     private var resultImageView: UIImageView = UIImageView()
+
     var didSelectAnswer: ((_ answer: String) -> Void)?
     var exitClosure: (() -> Void)?
+
     init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String], progressProcent: Float, progressAnimate: Bool) {
         super.init(frame: frame)
         self.backgroundColor = .pBlue

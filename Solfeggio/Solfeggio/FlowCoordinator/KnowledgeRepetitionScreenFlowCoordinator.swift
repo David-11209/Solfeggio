@@ -10,12 +10,12 @@ import UIKit
 
 class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
 
-    var navigationController: UINavigationController
-    let container: Container
-    var dataTransmissonClosure: (([String]) -> Void)?
     private var imageDict: [String: UIImage] = [:]
     private var tasks: [Task] = []
+    let container: Container
+    var navigationController: UINavigationController
     var exitLevelClosure: (() -> Void)?
+    var dataTransmissonClosure: (([String]) -> Void)?
 
     init(
         navigationController: UINavigationController,

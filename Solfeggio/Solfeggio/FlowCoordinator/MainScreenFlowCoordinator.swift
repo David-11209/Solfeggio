@@ -104,7 +104,6 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
     }
 
     private func showLessonLevelScreen(level: Level, imageDict: [String: UIImage]) {
-        print(navigationController.viewControllers.count)
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             LessonLevelViewModelProtocol.self
