@@ -12,12 +12,12 @@ class HearingTestLevelScreenViewController: UIViewController {
     let text = "Выберите ноту которую вы услышали"
 
     private var contentView: HearingTestLevelScreenView?
-    private var viewModel: HearingTestLevelScreenViewModel
+    private var viewModel: HearingTestLevelScreenViewModelProtocol
 
     var didSelectItem: ((_ indexPath: IndexPath) -> Void)?
     var exitClosure: (() -> Void)?
 
-    init(viewModel: HearingTestLevelScreenViewModel) {
+    init(viewModel: HearingTestLevelScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
         self.navigationItem.title = "Ноты и длительности"
@@ -42,7 +42,7 @@ class HearingTestLevelScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentView?.startStopButtonTapped = {
-            print("start")
+            self.viewModel.playSound()
         }
         contentView?.exitClosure = {
             self.exitClosure?()

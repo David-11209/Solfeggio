@@ -19,7 +19,8 @@ class KnowledgeRepetitionScreenView: UIView {
     private lazy var chooseTopicsLabel: UILabel = UILabel()
     private lazy var chooseTopicsImage: UIImageView = UIImageView()
     private lazy var segmentControl: UISegmentedControl = UISegmentedControl()
-    var viewTappedClosure: (() -> Void)?
+    var chooseViewTappedClosure: (() -> Void)?
+    var startTappedClosure: ((Int) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,12 +80,18 @@ class KnowledgeRepetitionScreenView: UIView {
         startView.layer.shadowRadius = 5.0
         startView.layer.borderColor = UIColor.black.cgColor
         startView.backgroundColor = .pDarkBlue
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(startTapped))
+        startView.addGestureRecognizer(tapGesture)
         startView.snp.makeConstraints { make in
             make.top.equalTo(imageView.snp_bottomMargin).offset(60)
             make.centerX.equalToSuperview()
             make.width.equalToSuperview().multipliedBy(0.8)
             make.height.equalTo(100)
         }
+    }
+
+    @objc func startTapped(sender: UITapGestureRecognizer) {
+        startTappedClosure?(segmentControl.selectedSegmentIndex)
     }
 
     private func setUpStartLabel() {
@@ -126,7 +133,7 @@ class KnowledgeRepetitionScreenView: UIView {
         chooseTopicsView.layer.shadowRadius = 5.0
         chooseTopicsView.layer.borderColor = UIColor.black.cgColor
         chooseTopicsView.backgroundColor = .pPink
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(chooseViewTapped))
         chooseTopicsView.addGestureRecognizer(tapGesture)
         chooseTopicsView.snp.makeConstraints { make in
             make.top.equalTo(startView.snp_bottomMargin).offset(38)
@@ -136,8 +143,8 @@ class KnowledgeRepetitionScreenView: UIView {
         }
     }
 
-    @objc func viewTapped(sender: UITapGestureRecognizer) {
-        viewTappedClosure?()
+    @objc func chooseViewTapped(sender: UITapGestureRecognizer) {
+        chooseViewTappedClosure?()
     }
 
     private func setUpChooseTopicsLabel() {

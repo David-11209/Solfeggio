@@ -19,60 +19,56 @@ class ContainerAssembly: Assembly {
         }
         .inObjectScope(.container)
 
-        container.register( KnowledgeRepetitionSViewModelProtocol.self) { _ in
-            KnowledgeRepetitionScreenViewModel()
-        }
-
-        container.register( ProfileScreenViewModelProtocol.self) { _ in
+        container.register(ProfileScreenViewModelProtocol.self) { _ in
             ProfileScreenViewModel()
         }
 
-        container.register( LessonLevelViewModelProtocol.self) { _ in
+        container.register(LessonLevelViewModelProtocol.self) { _ in
             LessonLevelViewModel()
         }
 
-        container.register( HearingTestLevelScreenViewModelProtocol.self) { _ in
+        container.register(HearingTestLevelScreenViewModelProtocol.self) { _ in
             HearingTestLevelScreenViewModel()
         }
 
-        container.register( TopicLevelsScreenViewModelProtocol.self) { _ in
+        container.register(TopicLevelsScreenViewModelProtocol.self) { _ in
             TopicLevelsScreenViewModel()
         }
 
         container.register(KnowRepChossingTopicsViewModelProtocol.self) { _ in
-            KnowRepetitionChossingTopicsViewModel(levelNames: [
-                "Нотная грамота",
-                "Все о тональностях",
-                "Все о ладах",
-                "Все об интервалах",
-                "Основные аккорды",
-                "Секстаккорды",
-                "Квартсекстаккорды"
-            ])
+            KnowRepetitionChossingTopicsViewModel()
         }
 
-        container.register( CoreDataManagerProtocol.self) { _ in
+        container.register(CoreDataManagerProtocol.self) { _ in
             CoreDataManager()
         }
         .inObjectScope(.container)
 
-        container.register( NetworkServiceProtocol.self) { _ in
+        container.register(NetworkServiceProtocol.self) { _ in
             NetworkService()
         }
         .inObjectScope(.container)
 
         guard let coreDataManager = container.resolve(CoreDataManagerProtocol.self)  else { return }
 
-        container.register( ConvertServiceProtocol.self) { _ in
+        container.register(ConvertServiceProtocol.self) { _ in
             ConvertService(coreDataManager: coreDataManager)
         }
-
         .inObjectScope(.container)
+
         guard let networkService = container.resolve(NetworkServiceProtocol.self),
             let convertService = container.resolve(ConvertServiceProtocol.self) else { return }
 
         container.register(MainScreenViewModelProtocol.self) { _ in
             MainScreenViewModel(coreDataManager: coreDataManager, networkService: networkService, convertService: convertService)
+        }
+
+        container.register( KnowledgeRepetitionSViewModelProtocol.self) { _ in
+            KnowledgeRepetitionScreenViewModel(coreDataManager: coreDataManager)
+        }
+
+        container.register(KnowledgeRepetitionLevelVMProtocol.self) { _ in
+            KnowledgeRepetitionLevelViewModel()
         }
 
         container.register(LoadingScreenViewModelProtocol.self) { _ in
@@ -81,6 +77,10 @@ class ContainerAssembly: Assembly {
 
         container.register(EndLevelScreenViewModelProtocol.self) { _ in
             EndLevelScreenViewModel()
+        }
+
+        container.register(EndKRLevelViewModelProtocol.self) { _ in
+            EndKnowledgeRepetitionLevelViewModel()
         }
     }
 }

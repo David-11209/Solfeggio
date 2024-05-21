@@ -10,10 +10,11 @@ import UIKit
 class KnowledgeRepetitionScreenViewController: UIViewController {
 
     private let contentView: KnowledgeRepetitionScreenView = .init()
-    private let viewModel: KnowledgeRepetitionScreenViewModel
-    var viewTappedClosure: (() -> Void)?
+    private let viewModel: KnowledgeRepetitionSViewModelProtocol
+    var chooseViewTappedClosure: (([String]) -> Void)?
+    var startTappedClosure: (() -> Void)?
 
-    init(viewModel: KnowledgeRepetitionScreenViewModel) {
+    init(viewModel: KnowledgeRepetitionSViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -28,8 +29,12 @@ class KnowledgeRepetitionScreenViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.viewTappedClosure = {
-            self.viewTappedClosure?()
+        contentView.chooseViewTappedClosure = {
+            self.chooseViewTappedClosure?(self.viewModel.getNames())
+        }
+        contentView.startTappedClosure = { segment in
+            self.viewModel.setSelectedNumberTasks(number: segment)
+            self.startTappedClosure?()
         }
     }
 }

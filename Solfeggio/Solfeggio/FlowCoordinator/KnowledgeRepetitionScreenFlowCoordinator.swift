@@ -10,8 +10,12 @@ import UIKit
 
 class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
 
-    var navigationController: UINavigationController
+    private var imageDict: [String: UIImage] = [:]
+    private var tasks: [Task] = []
     let container: Container
+    var navigationController: UINavigationController
+    var exitLevelClosure: (() -> Void)?
+    var dataTransmissonClosure: (([String]) -> Void)?
 
     init(
         navigationController: UINavigationController,
@@ -29,9 +33,8 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         }
         let image: UIImage = .tasks
         let viewController = KnowledgeRepetitionScreenViewController(
-            viewModel: viewModel as? KnowledgeRepetitionScreenViewModel ?? KnowledgeRepetitionScreenViewModel()
+            viewModel: viewModel
         )
-
         let item = UITabBarItem(
             title: nil,
             image: image.resizeImage(
@@ -46,23 +49,93 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         navigationController = UINavigationController(
             rootViewController: viewController
         )
-        viewController.viewTappedClosure = {
+        dataTransmissonClosure = { chooseNames in
+            viewModel.setChooseNames(names: chooseNames)
+        }
+        viewController.chooseViewTappedClosure = { names in
             self.navigationController.tabBarController?.tabBar.isHidden = true
-            self.showTopicsScreen()
+            self.showTopicsScreen(names: names)
+        }
+        viewController.startTappedClosure = {
+            self.tasks = viewModel.getTasks()
+            self.navigationController.tabBarController?.tabBar.isHidden = true
+            self.showLoadingLevelScreen()
         }
         navigationController.isNavigationBarHidden = true
     }
 
-    private func showTopicsScreen() {
+    private func showTopicsScreen(names: [String]) {
         guard let viewModel = container.resolve(
             KnowRepChossingTopicsViewModelProtocol.self
         ) else { return }
-        let viewController = KnowRepChossingTopicsViewController(
-            viewModel: viewModel as? KnowRepetitionChossingTopicsViewModel ?? KnowRepetitionChossingTopicsViewModel(levelNames: [])
-        )
-        viewController.exitClosure = {
+        viewModel.setData(names: names)
+        let viewController = KnowRepChossingTopicsViewController(viewModel: viewModel)
+        viewController.exitClosure = { chooseNames in
+            self.dataTransmissonClosure?(chooseNames)
             self.navigationController.tabBarController?.tabBar.isHidden = false
             self.navigationController.popViewController(animated: true)
+        }
+        navigationController.pushViewController(
+            viewController,
+            animated: true
+        )
+    }
+
+    private func showLoadingLevelScreen() {
+        navigationController.tabBarController?.tabBar.isHidden = true
+        guard let viewModel = container.resolve(
+            LoadingScreenViewModelProtocol.self
+        ) else { return }
+        viewModel.setData(tasks: Set(tasks))
+        let viewController = LoadingScreenViewController(
+            viewModel: viewModel
+        )
+        viewController.allDataDownload = { dict in
+            self.imageDict = dict
+            self.showKnowledgeRepetitionLevel()
+        }
+        navigationController.pushViewController(
+            viewController,
+            animated: true
+        )
+        exitLevelClosure = {
+            self.navigationController.popViewController(animated: false)
+        }
+    }
+
+    private func showKnowledgeRepetitionLevel() {
+        guard let viewModel = container.resolve(
+            KnowledgeRepetitionLevelVMProtocol.self
+        ) else { return }
+        viewModel.setData(tasks: Set(tasks), dict: imageDict)
+        let viewController = KnowledgeRepetitionLevelViewController(viewModel: viewModel)
+        viewController.exitClosure = { result in
+            self.showEndLevelScreen(result: result, tasksCount: self.tasks.count)
+        }
+
+        navigationController.pushViewController(
+            viewController,
+            animated: true
+        )
+    }
+
+    private func showEndLevelScreen(result: Int, tasksCount: Int) {
+        navigationController.tabBarController?.tabBar.isHidden = true
+        guard let viewModel = container.resolve(
+            EndKRLevelViewModelProtocol.self
+        ) else { return }
+        viewModel.setResult(result: result, tasksCount: tasksCount)
+        let viewController = EndKRLevelViewController(
+            viewModel: viewModel
+        )
+        viewController.exitClosure = { result in
+            if result == "exit" {
+                self.navigationController.tabBarController?.tabBar.isHidden = false
+                self.navigationController.popToViewController(self.navigationController.viewControllers[0], animated: true)
+            } else {
+                self.navigationController.popToViewController(self.navigationController.viewControllers[1], animated: false)
+                self.showLoadingLevelScreen()
+            }
         }
         navigationController.pushViewController(
             viewController,

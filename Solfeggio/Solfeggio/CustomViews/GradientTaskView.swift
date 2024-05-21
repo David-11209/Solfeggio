@@ -15,6 +15,12 @@ class GradientTaskView: UIView {
         setUpLabel(text: text)
     }
 
+    init(frame: CGRect, text: String, color: UIColor) {
+        super.init(frame: frame)
+        backgroundColor = color
+        setUpLabel(text: text)
+    }
+
     required init?(coder: NSCoder) {
         super.init(coder: coder)
     }

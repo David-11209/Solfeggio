@@ -2,7 +2,6 @@ import UIKit
 
 class LessonLevelViewController: UIViewController {
 
-    let text = "Выберите правильную длительность ноты"
     private var contentView: LessonLevelView?
     private var viewModel: LessonLevelViewModelProtocol
     private var animate: Bool = true
@@ -77,7 +76,7 @@ class LessonLevelViewController: UIViewController {
             self.viewModel.checkCorrectAnswer(answerName: answer)
         }
 
-        self.viewModel.moveToNext = { progress, hpCount in
+        self.viewModel.moveToNextWithHP = { progress, hpCount in
             self.setUpTaskView(progress: progress, hpCount: hpCount)
         }
 

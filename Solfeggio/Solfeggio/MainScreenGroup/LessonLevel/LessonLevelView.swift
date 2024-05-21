@@ -164,7 +164,7 @@ class LessonLevelView: UIView {
         }
     }
 
-    func setupMyView(color: UIColor) {
+    func setupResultView(color: UIColor) {
         addSubview(resultView)
         resultView.backgroundColor = color
         resultView.snp.makeConstraints { make in
@@ -199,16 +199,16 @@ class LessonLevelView: UIView {
 
     func showView(result: Bool) {
         if result {
-            setupMyView(color: .myGreen)
+            setupResultView(color: .myGreen)
             setUpResultImage(image: .ok)
             setUpResultTitle(title: "Правильно")
         } else {
-            setupMyView(color: .pRed)
+            setupResultView(color: .pRed)
             setUpResultImage(image: .cross)
             setUpResultTitle(title: "Неправильно")
         }
         UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: {
             self.resultView.transform = CGAffineTransform(translationX: 0, y: -280)
-    })
+        })
     }
 }

@@ -1,31 +1,20 @@
 //
-//  LessonLevelViewModel.swift
+//  LevelViewModel.swift
 //  Solfeggio
 //
-//  Created by Давид Васильев on 15.04.2024.
+//  Created by Давид Васильев on 20.05.2024.
 //
 
 import UIKit
 
-protocol LessonLevelViewModelProtocol {
-    var moveToNext: ((Float, Int) -> Void)? { get set }
-    func setData(tasks: Set<Task>, dict: [String: UIImage])
-    func getCurrentTaskWithImage() -> (Task, UIImage?)
-    func getCurrentAnswers() -> [Answer]
-    func checkCorrectAnswer(answerName: String)
-    var exitClosure: ((Bool) -> Void)? { get set }
-    var answerReaction: ((Bool) -> Void)? { get set }
-    func nextTask()
-}
-
-class LessonLevelViewModel: LessonLevelViewModelProtocol {
-
-    private var tasks: [Task]
-    private var index = 0
-    private var countHP = 3
+class LevelViewModel: LevelViewModelProtocol {
+    var tasks: [Task]
+    var index = 0
+    private var numberCompletedTasks = 0
+    private var tasksCount = 0
     private var imageDict: [String: UIImage]
-    var moveToNext: ((Float, Int) -> Void)?
-    var exitClosure: ((Bool) -> Void)?
+    var moveToNext: ((Float) -> Void)?
+    var exitClosureWithResult: ((Int) -> Void)?
     var answerReaction: ((Bool) -> Void)?
 
     init() {
@@ -35,6 +24,7 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
 
     func setData(tasks: Set<Task>, dict: [String: UIImage]) {
         self.tasks = Array(tasks)
+        self.tasksCount = tasks.count
         self.imageDict = dict
     }
 
@@ -47,25 +37,27 @@ class LessonLevelViewModel: LessonLevelViewModelProtocol {
         return Array(answers)
     }
 
+    func getNumberCompletedTasks() -> Int {
+        return numberCompletedTasks
+    }
+
     func checkCorrectAnswer(answerName: String) {
         let tuple = getCurrentTaskWithImage()
         guard let rightAnswer = tuple.0.answers.first(where: { $0.name == answerName})?.rightAnswer else { return }
         if rightAnswer {
+            numberCompletedTasks += 1
             answerReaction?(true)
         } else {
             answerReaction?(false)
-            countHP -= 1
         }
     }
 
     func nextTask() {
         if index == tasks.count - 1 {
-            exitClosure?(true)
-        } else if countHP == 0 {
-            exitClosure?(false)
+            exitClosureWithResult?(numberCompletedTasks)
         } else {
             index += 1
-            moveToNext?(Float(index) / Float(tasks.count), countHP)
+            moveToNext?(Float(index) / Float(tasks.count))
         }
     }
 }

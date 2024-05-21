@@ -10,7 +10,6 @@ import UIKit
 class KnowledgeRepetitionChossingTopicsView: UIView {
 
     private lazy var exitButton: UIButton = UIButton()
-
     var exitClosure: (() -> Void)?
 
     lazy var topicsCollectionView: UICollectionView = {
