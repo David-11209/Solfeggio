@@ -9,7 +9,6 @@
 import Foundation
 import CoreData
 
-
 extension SoundTest {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<SoundTest> {
@@ -17,7 +16,7 @@ extension SoundTest {
     }
 
     @NSManaged public var name: String?
-    @NSManaged public var soundTasks: NSOrderedSet?
+    @NSManaged public var soundTasks: Set<SoundTask>
 
 }
 
@@ -56,6 +55,6 @@ extension SoundTest {
 
 }
 
-extension SoundTest : Identifiable {
+extension SoundTest: Identifiable {
 
 }

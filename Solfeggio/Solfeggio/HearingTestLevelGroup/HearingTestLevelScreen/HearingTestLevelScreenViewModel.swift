@@ -7,15 +7,18 @@
 
 import UIKit
 
-protocol HearingTestLevelScreenViewModelProtocol {
+protocol HearingTestLevelScreenViewModelProtocol: LevelViewModelProtocol {
     func playSound()
 }
 
-class HearingTestLevelScreenViewModel: HearingTestLevelScreenViewModelProtocol {
+class HearingTestLevelScreenViewModel: LevelViewModel, HearingTestLevelScreenViewModelProtocol {
+    var audioService: AudioServiceProtocol
 
-    var audioService: AudioService = AudioService()
+    init(audioService: AudioServiceProtocol) {
+        self.audioService = audioService
+    }
 
     func playSound() {
-        audioService.playSound()
+        audioService.playSound(soundName: getCurrentSoundTask().soundName)
     }
 }

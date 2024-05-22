@@ -53,5 +53,24 @@ class ConvertService: ConvertServiceProtocol {
             }
             coreDataManager.saveContext()
         }
+        for soundTestData in jsonData.soundTests {
+            let soundTest = SoundTest(context: viewContext)
+            soundTest.name = soundTestData.name
+
+            for soundTaskData in soundTestData.soundTasks {
+                let soundTask = SoundTask(context: viewContext)
+                soundTask.id = soundTaskData.id
+                soundTask.soundName = soundTaskData.soundName
+                for answerOptionData in soundTaskData.answerOptions {
+                    let answer = Answer(context: viewContext)
+                    answer.name = answerOptionData.name
+                    answer.rightAnswer = answerOptionData.rightAnswer
+                    soundTask.addToAnswers(answer)
+                }
+                soundTest.addToSoundTasks(soundTask)
+            }
+            coreDataManager.saveContext()
+        }
+
     }
 }

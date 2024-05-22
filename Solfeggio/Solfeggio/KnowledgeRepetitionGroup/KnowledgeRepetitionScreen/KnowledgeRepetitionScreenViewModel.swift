@@ -44,7 +44,7 @@ class KnowledgeRepetitionScreenViewModel: NSObject, KnowledgeRepetitionSViewMode
     private func requestData(completion: @escaping ([Block]) -> Void) {
         let backgroundQueue = DispatchQueue.global(qos: .background)
         backgroundQueue.async {
-            let coreData = self.coreDataManager.obtainAllData()
+            let coreData = self.coreDataManager.obtainBlocksData()
             completion(coreData)
         }
     }

@@ -17,7 +17,7 @@ class LessonLevelViewModel: LevelViewModel, LessonLevelViewModelProtocol {
     var moveToNextWithHP: ((Float, Int) -> Void)?
 
     private var countHP = 3
-    override func checkCorrectAnswer(answerName: String) {
+    override func checkCorrectAnswerTask(answerName: String) {
         let tuple = getCurrentTaskWithImage()
         guard let rightAnswer = tuple.0.answers.first(where: { $0.name == answerName})?.rightAnswer else { return }
         if rightAnswer {

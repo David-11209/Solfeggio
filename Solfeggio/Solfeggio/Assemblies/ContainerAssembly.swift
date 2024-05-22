@@ -10,10 +10,6 @@ import Swinject
 class ContainerAssembly: Assembly {
     func assemble(container: Swinject.Container) {
 
-        container.register(HearingTestScreenViewModelProtocol.self) { _ in
-            HearingTestScreenViewModel()
-        }
-
         container.register(TabBarFabricProtocol.self) { _ in
             TabBarFabric(container: container)
         }
@@ -27,8 +23,12 @@ class ContainerAssembly: Assembly {
             LessonLevelViewModel()
         }
 
+        container.register(AudioServiceProtocol.self) { _ in
+            AudioService()
+        }
+
         container.register(HearingTestLevelScreenViewModelProtocol.self) { _ in
-            HearingTestLevelScreenViewModel()
+            HearingTestLevelScreenViewModel(audioService: container.resolve(AudioServiceProtocol.self) ??   AudioService())
         }
 
         container.register(TopicLevelsScreenViewModelProtocol.self) { _ in
@@ -81,6 +81,10 @@ class ContainerAssembly: Assembly {
 
         container.register(EndKRLevelViewModelProtocol.self) { _ in
             EndKnowledgeRepetitionLevelViewModel()
+        }
+
+        container.register(HearingTestScreenViewModelProtocol.self) { _ in
+            HearingTestScreenViewModel(coreDataManager: coreDataManager)
         }
     }
 }

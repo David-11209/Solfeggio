@@ -13,6 +13,7 @@ class LoadingScreenView: UIView {
 
     private lazy var hud = JGProgressHUD()
     private lazy var imageView: UIImageView = UIImageView()
+    var endAnimateClosure: (() -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -47,6 +48,7 @@ class LoadingScreenView: UIView {
                 self.hud.detailTextLabel.text = nil
                 self.hud.textLabel.text = "Готово!"
                 self.hud.dismiss(afterDelay: 3)
+                self.endAnimateClosure?()
             }
         }
     }
