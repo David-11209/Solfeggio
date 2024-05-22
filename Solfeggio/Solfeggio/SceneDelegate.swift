@@ -18,13 +18,36 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         options connectionOptions: UIScene.ConnectionOptions) {
             let assembly = ContainerAssembly()
             assembly.assemble(container: container)
-            let fabric = TabBarFabric(container: container)
-            let tbController = fabric.makeTabBarController()
             guard let windowScene = (scene as? UIWindowScene) else { return }
             self.window = UIWindow(windowScene: windowScene)
-            self.window?.rootViewController = tbController
-            self.window?.makeKeyAndVisible()
+            guard let networkMonitor = container.resolve(
+                NetworkMonitorProtocol.self
+            ) else { return }
+            networkMonitor.startMonitoring()
+            Timer.scheduledTimer(withTimeInterval: 0.1, repeats: false) {_ in
+                if networkMonitor.isConnected {
+                    self.makeTabBarControllerVisible()
+                } else {
+                    guard let viewModel = self.container.resolve(
+                        MissingInternetViewModelProtocol.self
+                    ) else { return }
+                    let viewController = MissingInternetViewController(viewModel: viewModel)
+                    viewController.exitClosure = {
+                        self.makeTabBarControllerVisible()
+                    }
+                    self.window?.rootViewController = viewController
+                    self.window?.makeKeyAndVisible()
+                }
+
+            }
         }
+
+    func makeTabBarControllerVisible() {
+        let fabric = TabBarFabric(container: self.container)
+        let tbController = fabric.makeTabBarController()
+        self.window?.rootViewController = tbController
+        self.window?.makeKeyAndVisible()
+    }
 
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
@@ -55,7 +78,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
 
         // Save changes in the application's managed object context when the application transitions to the background.
-//        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
+        //        (UIApplication.shared.delegate as? AppDelegate)?.saveContext()
     }
 
 }

@@ -61,6 +61,7 @@ class ConvertService: ConvertServiceProtocol {
                 let soundTask = SoundTask(context: viewContext)
                 soundTask.id = soundTaskData.id
                 soundTask.soundName = soundTaskData.soundName
+
                 for answerOptionData in soundTaskData.answerOptions {
                     let answer = Answer(context: viewContext)
                     answer.name = answerOptionData.name

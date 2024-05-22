@@ -8,14 +8,12 @@
 import UIKit
 
 protocol HearingTestScreenViewModelProtocol {
-    func dataPrint()
     func getDataSelectedTopic(selectedTopic: String) -> [SoundTask]
 }
 
 class HearingTestScreenViewModel: NSObject, HearingTestScreenViewModelProtocol {
 
     var closeClosure: ((_ theme: Theme) -> Void)?
-//    var successfulDataAcquisition: (() -> Void)?
     var coreDataManager: CoreDataManagerProtocol
     var dataSource: [SoundTest] = []
 
@@ -26,16 +24,6 @@ class HearingTestScreenViewModel: NSObject, HearingTestScreenViewModelProtocol {
         super.init()
         requestData { data in
             self.dataSource = data
-//            self.successfulDataAcquisition?()
-        }
-    }
-
-    func dataPrint() {
-        for test in dataSource {
-            print(test.name)
-            for task in test.soundTasks {
-                print(task.soundName)
-            }
         }
     }
 
@@ -49,12 +37,8 @@ class HearingTestScreenViewModel: NSObject, HearingTestScreenViewModelProtocol {
 
     func getDataSelectedTopic(selectedTopic: String) -> [SoundTask] {
         var resultArray: [SoundTask] = []
-        for test in dataSource {
-            if selectedTopic == test.name {
-                for task in test.soundTasks {
-                    resultArray.append(task)
-                }
-            }
+        for test in dataSource where selectedTopic == test.name {
+            resultArray.append(contentsOf: test.soundTasks)
         }
         return resultArray
     }

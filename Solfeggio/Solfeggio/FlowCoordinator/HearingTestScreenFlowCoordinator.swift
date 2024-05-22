@@ -62,7 +62,6 @@ class HearingTestScreenFlowCoordinator: CoordinatorProtocol {
         viewController.exitClosure = { result in
             self.showEndLevelScreen(result: result, tasksCount: self.soundTasks.count)
             self.navigationController.tabBarController?.tabBar.isHidden = true
-//            self.navigationController.popViewController(animated: true)
         }
         navigationController.pushViewController(
             viewController,

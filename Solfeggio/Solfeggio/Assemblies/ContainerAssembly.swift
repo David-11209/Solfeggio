@@ -9,6 +9,15 @@ import Swinject
 
 class ContainerAssembly: Assembly {
     func assemble(container: Swinject.Container) {
+        container.register(NetworkMonitorProtocol.self) { _ in
+            NetworkMonitor()
+        }
+        .inObjectScope(.container)
+        guard let networkMonitor = container.resolve(NetworkMonitorProtocol.self)  else { return }
+
+        container.register(MissingInternetViewModelProtocol.self) { _ in
+            MissingInternetViewModel(networkMonitor: networkMonitor)
+        }
 
         container.register(TabBarFabricProtocol.self) { _ in
             TabBarFabric(container: container)
@@ -26,9 +35,9 @@ class ContainerAssembly: Assembly {
         container.register(AudioServiceProtocol.self) { _ in
             AudioService()
         }
-
+        guard let audioService = container.resolve(AudioServiceProtocol.self)  else { return }
         container.register(HearingTestLevelScreenViewModelProtocol.self) { _ in
-            HearingTestLevelScreenViewModel(audioService: container.resolve(AudioServiceProtocol.self) ??   AudioService())
+            HearingTestLevelScreenViewModel(audioService: audioService)
         }
 
         container.register(TopicLevelsScreenViewModelProtocol.self) { _ in

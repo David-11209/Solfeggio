@@ -48,7 +48,6 @@ class HearingTestLevelScreenViewController: UIViewController {
     }
 
     func setUpTaskView(progress: Float) {
-        let task = viewModel.getCurrentSoundTask()
         let answers = viewModel.getCurrentAnswers()
         self.contentView = HearingTestLevelScreenView(frame: CGRect(), text: text, buttonsNames: [
             answers[0].name,
@@ -66,7 +65,6 @@ class HearingTestLevelScreenViewController: UIViewController {
         }
 
         self.viewModel.answerReaction = { result in
-            print(result)
             if result {
                 self.contentView?.showView(result: true)
                 DispatchQueue.global().asyncAfter(deadline: .now() + .milliseconds(1000)) {
