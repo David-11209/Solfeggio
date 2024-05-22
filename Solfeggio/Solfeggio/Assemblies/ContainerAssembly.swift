@@ -9,11 +9,40 @@ import Swinject
 
 class ContainerAssembly: Assembly {
     func assemble(container: Swinject.Container) {
+
         container.register(NetworkMonitorProtocol.self) { _ in
             NetworkMonitor()
         }
         .inObjectScope(.container)
-        guard let networkMonitor = container.resolve(NetworkMonitorProtocol.self)  else { return }
+
+        container.register(AudioServiceProtocol.self) { _ in
+            AudioService()
+        }
+        .inObjectScope(.container)
+
+        container.register(CoreDataManagerProtocol.self) { _ in
+            CoreDataManager()
+        }
+        .inObjectScope(.container)
+
+        container.register(NetworkServiceProtocol.self) { _ in
+            NetworkService()
+        }
+        .inObjectScope(.container)
+
+        guard let coreDataManager = container.resolve(CoreDataManagerProtocol.self),
+              let audioService =  container.resolve(AudioServiceProtocol.self),
+              let networkMonitor = container.resolve(NetworkMonitorProtocol.self),
+              let networkService = container.resolve(NetworkServiceProtocol.self)
+        else { return }
+
+        container.register(ConvertServiceProtocol.self) { _ in
+            ConvertService(coreDataManager: coreDataManager)
+        }
+        .inObjectScope(.container)
+
+        guard let convertService = container.resolve(ConvertServiceProtocol.self) else { return }
+
 
         container.register(MissingInternetViewModelProtocol.self) { _ in
             MissingInternetViewModel(networkMonitor: networkMonitor)
@@ -32,10 +61,6 @@ class ContainerAssembly: Assembly {
             LessonLevelViewModel()
         }
 
-        container.register(AudioServiceProtocol.self) { _ in
-            AudioService()
-        }
-        guard let audioService = container.resolve(AudioServiceProtocol.self)  else { return }
         container.register(HearingTestLevelScreenViewModelProtocol.self) { _ in
             HearingTestLevelScreenViewModel(audioService: audioService)
         }
@@ -47,26 +72,6 @@ class ContainerAssembly: Assembly {
         container.register(KnowRepChossingTopicsViewModelProtocol.self) { _ in
             KnowRepetitionChossingTopicsViewModel()
         }
-
-        container.register(CoreDataManagerProtocol.self) { _ in
-            CoreDataManager()
-        }
-        .inObjectScope(.container)
-
-        container.register(NetworkServiceProtocol.self) { _ in
-            NetworkService()
-        }
-        .inObjectScope(.container)
-
-        guard let coreDataManager = container.resolve(CoreDataManagerProtocol.self)  else { return }
-
-        container.register(ConvertServiceProtocol.self) { _ in
-            ConvertService(coreDataManager: coreDataManager)
-        }
-        .inObjectScope(.container)
-
-        guard let networkService = container.resolve(NetworkServiceProtocol.self),
-            let convertService = container.resolve(ConvertServiceProtocol.self) else { return }
 
         container.register(MainScreenViewModelProtocol.self) { _ in
             MainScreenViewModel(coreDataManager: coreDataManager, networkService: networkService, convertService: convertService)
