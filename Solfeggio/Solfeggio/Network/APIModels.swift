@@ -19,6 +19,12 @@ struct TaskModel: Decodable {
     let answerOptions: [AnswerOptionModel]
 }
 
+struct SoundTaskModel: Decodable {
+    let id: String
+    let soundName: String
+    let answerOptions: [AnswerOptionModel]
+}
+
 struct LevelModel: Decodable {
     let id: String
     let tasks: [TaskModel]
@@ -35,6 +41,12 @@ struct BlockModel: Decodable {
     let themes: [ThemeModel]
 }
 
+struct SoundTestModel: Decodable {
+    let name: String
+    let soundTasks: [SoundTaskModel]
+}
+
 struct JSONData: Decodable {
     let blocks: [BlockModel]
+    let soundTests: [SoundTestModel]
 }

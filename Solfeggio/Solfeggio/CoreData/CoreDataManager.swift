@@ -10,7 +10,8 @@ import CoreData
 
 protocol CoreDataManagerProtocol {
     func saveContext()
-    func obtainAllData() -> [Block]
+    func obtainBlocksData() -> [Block]
+    func obtainSoundTestsData() -> [SoundTest]
     func getViewContext() -> NSManagedObjectContext
 }
 
@@ -49,8 +50,19 @@ class CoreDataManager: CoreDataManagerProtocol {
         }
     }
 
-    func obtainAllData() -> [Block] {
+    func obtainBlocksData() -> [Block] {
         let fetchRequest = Block.fetchRequest()
+        do {
+            let results = try viewContext.fetch(fetchRequest)
+            return results
+        } catch {
+            print("Ошибка при получении данных из CoreData: \(error)")
+        }
+        return []
+    }
+
+    func obtainSoundTestsData() -> [SoundTest] {
+        let fetchRequest = SoundTest.fetchRequest()
         do {
             let results = try viewContext.fetch(fetchRequest)
             return results

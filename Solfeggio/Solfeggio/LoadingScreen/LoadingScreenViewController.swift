@@ -12,6 +12,7 @@ class LoadingScreenViewController: UIViewController {
     private let contentView: LoadingScreenView = .init()
     private var viewModel: LoadingScreenViewModelProtocol
     var allDataDownload: (([String: UIImage]) -> Void)?
+    var endAnimateClosure: (() -> Void)?
 
     init(viewModel: LoadingScreenViewModelProtocol) {
         self.viewModel = viewModel
@@ -30,6 +31,9 @@ class LoadingScreenViewController: UIViewController {
         super.viewDidLoad()
         viewModel.allDataDownload = { dict in
             self.allDataDownload?(dict)
+        }
+        contentView.endAnimateClosure = {
+            self.endAnimateClosure?()
         }
     }
 }

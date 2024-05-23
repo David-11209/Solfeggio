@@ -34,7 +34,7 @@ class KnowledgeRepetitionLevelViewController: UIViewController {
         }
 
         contentView?.didSelectAnswer = { answer in
-            self.viewModel.checkCorrectAnswer(answerName: answer)
+            self.viewModel.checkCorrectAnswerTask(answerName: answer)
         }
 
         self.viewModel.moveToNext = { progress in
@@ -61,7 +61,7 @@ class KnowledgeRepetitionLevelViewController: UIViewController {
         )
 
         contentView?.didSelectAnswer = { answer in
-            self.viewModel.checkCorrectAnswer(answerName: answer)
+            self.viewModel.checkCorrectAnswerTask(answerName: answer)
         }
 
         self.viewModel.answerReaction = { result in

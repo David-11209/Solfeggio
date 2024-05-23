@@ -12,11 +12,16 @@ protocol LevelViewModelProtocol {
     var exitClosureWithResult: ((Int) -> Void)? { get set }
     var answerReaction: ((Bool) -> Void)? { get set }
     var tasks: [Task] { get set }
+    var soundTasks: [SoundTask] { get set }
     var index: Int { get set }
     func setData(tasks: Set<Task>, dict: [String: UIImage])
+    func setData(soundTask: Set<SoundTask>)
     func getCurrentTaskWithImage() -> (Task, UIImage?)
+    func getCurrentSoundTask() -> SoundTask
     func getCurrentAnswers() -> [Answer]
-    func checkCorrectAnswer(answerName: String)
+    func checkCorrectAnswerTask(answerName: String)
+    func checkCorrectAnswerSoundTask(answerName: String)
     func getNumberCompletedTasks() -> Int
+    func nextSoundTask()
     func nextTask()
 }

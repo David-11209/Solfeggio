@@ -10,10 +10,10 @@ import UIKit
 class HearingTestViewController: UIViewController {
 
     private let contentView: HearingTestScreenView = .init()
-    private let viewModel: HearingTestScreenViewModel
-    var closeClosure: (() -> Void)?
+    private let viewModel: HearingTestScreenViewModelProtocol
+    var closeClosure: ((String) -> Void)?
 
-    init(viewModel: HearingTestScreenViewModel) {
+    init(viewModel: HearingTestScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -28,8 +28,8 @@ class HearingTestViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        contentView.viewTappedClosure = {
-            self.closeClosure?()
+        contentView.viewTappedClosure = { viewName in
+            self.closeClosure?(viewName)
         }
     }
 }

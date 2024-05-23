@@ -63,13 +63,13 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
     private func requestData(completion: @escaping ([Block]) -> Void) {
         let backgroundQueue = DispatchQueue.global(qos: .background)
         backgroundQueue.async {
-            var coreData = self.coreDataManager.obtainAllData()
+            var coreData = self.coreDataManager.obtainBlocksData()
             if coreData.isEmpty {
                 self.networkService.getData(completion: { result in
                     switch result {
                     case .success(let data):
                         self.convertService.convertDataToCoreData(jsonData: data)
-                        coreData = self.coreDataManager.obtainAllData()
+                        coreData = self.coreDataManager.obtainBlocksData()
                         completion(coreData)
                     case .failure(let error):
                         print("Error retrieving data: \(error.localizedDescription)")

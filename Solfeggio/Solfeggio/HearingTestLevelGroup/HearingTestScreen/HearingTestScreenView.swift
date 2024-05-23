@@ -33,7 +33,7 @@ class HearingTestScreenView: UIView {
     private lazy var subCellStackView1: UIStackView = UIStackView()
     private lazy var subCellStackView2: UIStackView = UIStackView()
 
-    var viewTappedClosure: (() -> Void)?
+    var viewTappedClosure: ((String) -> Void)?
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -119,7 +119,8 @@ class HearingTestScreenView: UIView {
             .addTitle("Ноты")
             .build()
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        let tapGesture = UITapGestureRecognizerCustom(target: self, action: #selector(viewTapped))
+        tapGesture.title = "Ноты"
         notesView.addGestureRecognizer(tapGesture)
         addSubview(notesView)
         notesView.snp.makeConstraints { make in
@@ -138,7 +139,8 @@ class HearingTestScreenView: UIView {
             .addTitle("Интервалы")
             .build()
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        let tapGesture = UITapGestureRecognizerCustom(target: self, action: #selector(viewTapped))
+        tapGesture.title = "Интервалы"
         intervalsView.addGestureRecognizer(tapGesture)
         addSubview(intervalsView)
         intervalsView.snp.makeConstraints { make in
@@ -157,7 +159,8 @@ class HearingTestScreenView: UIView {
             .addTitle("Лады")
             .build()
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        let tapGesture = UITapGestureRecognizerCustom(target: self, action: #selector(viewTapped))
+        tapGesture.title = "Лады"
         moodsView.addGestureRecognizer(tapGesture)
         addSubview(moodsView)
         moodsView.snp.makeConstraints { make in
@@ -176,7 +179,8 @@ class HearingTestScreenView: UIView {
             .addTitle("Аккорды")
             .build()
 
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(viewTapped))
+        let tapGesture = UITapGestureRecognizerCustom(target: self, action: #selector(viewTapped))
+        tapGesture.title = "Аккорды"
         chordsView.addGestureRecognizer(tapGesture)
         addSubview(chordsView)
         chordsView.snp.makeConstraints { make in
@@ -187,7 +191,8 @@ class HearingTestScreenView: UIView {
         }
     }
 
-    @objc func viewTapped() {
-        viewTappedClosure?()
+    @objc func viewTapped(_ sender: UITapGestureRecognizerCustom) {
+        let viewName = sender.title
+        viewTappedClosure?(viewName)
     }
 }

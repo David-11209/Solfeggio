@@ -17,7 +17,7 @@ class EndKRLevelView: UIView {
 
     init(frame: CGRect, resultTuple: (Int, Int)) {
         super.init(frame: frame)
-        setUp(image: .test, titleText: "\(resultTuple.0)\\\(resultTuple.1)")
+        setUp(image: .test, titleText: "\(resultTuple.0) из \(resultTuple.1)")
         self.backgroundColor = .pBlue
     }
 

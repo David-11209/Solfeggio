@@ -112,7 +112,6 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
         viewController.exitClosure = { result in
             self.showEndLevelScreen(result: result, tasksCount: self.tasks.count)
         }
-
         navigationController.pushViewController(
             viewController,
             animated: true

@@ -8,11 +8,38 @@
 import UIKit
 
 protocol HearingTestScreenViewModelProtocol {
-
+    func getDataSelectedTopic(selectedTopic: String) -> [SoundTask]
 }
 
 class HearingTestScreenViewModel: NSObject, HearingTestScreenViewModelProtocol {
 
-    override init() {
+    var closeClosure: ((_ theme: Theme) -> Void)?
+    var coreDataManager: CoreDataManagerProtocol
+    var dataSource: [SoundTest] = []
+
+    init(
+        coreDataManager: CoreDataManagerProtocol
+    ) {
+        self.coreDataManager = coreDataManager
+        super.init()
+        requestData { data in
+            self.dataSource = data
+        }
+    }
+
+    private func requestData(completion: @escaping ([SoundTest]) -> Void) {
+        let backgroundQueue = DispatchQueue.global(qos: .background)
+        backgroundQueue.async {
+            let coreData = self.coreDataManager.obtainSoundTestsData()
+            completion(coreData)
+        }
+    }
+
+    func getDataSelectedTopic(selectedTopic: String) -> [SoundTask] {
+        var resultArray: [SoundTask] = []
+        for test in dataSource where selectedTopic == test.name {
+            resultArray.append(contentsOf: test.soundTasks)
+        }
+        return resultArray
     }
 }

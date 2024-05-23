@@ -35,7 +35,7 @@ class LessonLevelViewController: UIViewController {
         )
 
         contentView?.didSelectAnswer = { answer in
-            self.viewModel.checkCorrectAnswer(answerName: answer)
+            self.viewModel.checkCorrectAnswerTask(answerName: answer)
         }
 
         self.viewModel.answerReaction = { result in
@@ -73,7 +73,7 @@ class LessonLevelViewController: UIViewController {
         }
 
         contentView?.didSelectAnswer = { answer in
-            self.viewModel.checkCorrectAnswer(answerName: answer)
+            self.viewModel.checkCorrectAnswerTask(answerName: answer)
         }
 
         self.viewModel.moveToNextWithHP = { progress, hpCount in

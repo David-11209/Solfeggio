@@ -1,19 +1,20 @@
 //
-//  LoadingScreenView.swift
+//  MissingInternetView.swift
 //  Solfeggio
 //
-//  Created by Давид Васильев on 06.05.2024.
+//  Created by Давид Васильев on 22.05.2024.
 //
 
-import UIKit
 import JGProgressHUD
 import SnapKit
+import UIKit
 
-class LoadingScreenView: UIView {
+class MissingInternetView: UIView {
 
     private lazy var hud = JGProgressHUD()
     private lazy var imageView: UIImageView = UIImageView()
-    var endAnimateClosure: (() -> Void)?
+    var exitClosure: (() -> Void)?
+    var isConnect = false
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,34 +32,32 @@ class LoadingScreenView: UIView {
     }
 
     private func setUpProgressHUD() {
-        hud.indicatorView = JGProgressHUDPieIndicatorView()
         hud.indicatorView = JGProgressHUDIndeterminateIndicatorView()
-        hud.textLabel.text = "Загрузка"
-        hud.detailTextLabel.text = "0%"
+        hud.textLabel.text = "Попытка подключения к интернету"
         hud.show(in: self)
-        var progress: Float = 0.0
+        var time: Float = 0.0
+        self.hud.textLabel.lineBreakMode = .byWordWrapping
         Timer.scheduledTimer(withTimeInterval: 0.1, repeats: true) { timer in
-            progress += 0.1
-            self.hud.setProgress(progress, animated: true)
-            let value: Float = progress / 1.0
-            self.hud.detailTextLabel.text = "\(Int(value * 100.0))%"
-            if progress > 1.0 {
+            time += 0.1
+            if self.isConnect {
                 timer.invalidate()
-                self.hud.indicatorView = JGProgressHUDSuccessIndicatorView()
-                self.hud.detailTextLabel.text = nil
-                self.hud.textLabel.text = "Готово!"
-                self.hud.dismiss(afterDelay: 3)
-                self.endAnimateClosure?()
+                self.exitClosure?()
+            } else if time > 10 {
+
+                timer.invalidate()
+                self.hud.textLabel.text = "Отсутсвует соединение.\nПереподключение к интернету..."
+
+                self.hud.indicatorView = JGProgressHUDImageIndicatorView(image: .noWifi2.resizeImage(to: CGSize(width: 40, height: 40)) ?? UIImage())
             }
         }
     }
 
     private func setUpImageView() {
         addSubview(imageView)
-        imageView.image = .sleep
+        imageView.image = .noWifi
         imageView.contentMode = .scaleAspectFill
         imageView.snp.makeConstraints { make in
-            make.bottom.equalToSuperview().inset(90)
+            make.top.equalToSuperview().offset(140)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(240)
         }

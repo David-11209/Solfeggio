@@ -16,20 +16,20 @@ class HearingTestLevelScreenView: UIView {
     private var taskView: GradientTaskView?
     private lazy var taskLabel: UILabel = UILabel()
     private var customView: UIView = UIView()
+    private var resultView: UIView = UIView()
+    private var resultTitle: UILabel = UILabel()
+    private var resultImageView: UIImageView = UIImageView()
     var buttonsStackView: ButtonsStackView?
-
+    var didSelectAnswer: ((_ answer: String) -> Void)?
     var startStopButtonTapped: (() -> Void)?
     var exitClosure: (() -> Void)?
 
-    init(frame: CGRect, text: String, image: UIImage? = nil, buttonsNames: [String]) {
+    init(frame: CGRect, text: String, buttonsNames: [String], progressProcent: Float, progressAnimate: Bool) {
         super.init(frame: frame)
         taskView = GradientTaskView(frame: frame, text: text, color1: .pOrange, color2: .pRed)
         buttonsStackView = ButtonsStackView(names: buttonsNames, color: .pOrange)
-        if image != nil {
-            setUpWithTextAndImage()
-        } else {
-            setUpWithText()
-        }
+        progressView.setProgress(progressProcent, animated: progressAnimate)
+        setUpWithText()
     }
 
     required init?(coder: NSCoder) {
@@ -37,14 +37,6 @@ class HearingTestLevelScreenView: UIView {
     }
 
     private func setUpWithText() {
-        setUpExitButton()
-        setUpProgressView()
-        setUpProgressLabel()
-        setUpTaskView()
-        setUpButtonsStackView()
-    }
-
-    private func setUpWithTextAndImage() {
         setUpExitButton()
         setUpProgressView()
         setUpProgressLabel()
@@ -80,7 +72,6 @@ class HearingTestLevelScreenView: UIView {
             make.height.equalTo(20)
             make.width.equalToSuperview().multipliedBy(0.9)
         }
-        progressView.setProgress(0.3, animated: true)
     }
 
     private func setUpProgressLabel() {
@@ -109,6 +100,9 @@ class HearingTestLevelScreenView: UIView {
 
     private func setUpButtonsStackView() {
         addSubview(buttonsStackView ?? UIView())
+        buttonsStackView?.actionClosure = { answer in
+            self.didSelectAnswer?(answer)
+        }
         buttonsStackView?.snp.makeConstraints { make in
             make.top.equalTo(customView.snp_bottomMargin).offset(90)
             make.height.equalTo(160)
@@ -137,5 +131,53 @@ class HearingTestLevelScreenView: UIView {
 
     @objc func viewTapped() {
         startStopButtonTapped?()
+    }
+
+    func setupResultView(color: UIColor) {
+        addSubview(resultView)
+        resultView.backgroundColor = color
+        resultView.snp.makeConstraints { make in
+            make.bottom.equalToSuperview().offset(300)
+            make.height.equalTo(300)
+            make.width.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
+    }
+
+    func setUpResultImage(image: UIImage) {
+        resultView.addSubview(resultImageView)
+        resultImageView.contentMode = .scaleAspectFill
+        resultImageView.image = image
+        resultImageView.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.height.width.equalTo(46)
+            make.leading.equalToSuperview().offset(20)
+        }
+    }
+
+    func setUpResultTitle(title: String) {
+        resultView.addSubview(resultTitle)
+        resultTitle.text = title
+        resultTitle.font = .boldSystemFont(ofSize: 34)
+        resultTitle.textColor = .white
+        resultTitle.snp.makeConstraints { make in
+            make.top.equalToSuperview().offset(30)
+            make.leading.equalToSuperview().offset(80)
+        }
+    }
+
+    func showView(result: Bool) {
+        if result {
+            setupResultView(color: .myGreen)
+            setUpResultImage(image: .ok)
+            setUpResultTitle(title: "Правильно")
+        } else {
+            setupResultView(color: .pRed)
+            setUpResultImage(image: .cross)
+            setUpResultTitle(title: "Неправильно")
+        }
+        UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseOut, animations: {
+            self.resultView.transform = CGAffineTransform(translationX: 0, y: -280)
+        })
     }
 }

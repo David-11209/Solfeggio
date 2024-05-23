@@ -74,7 +74,7 @@ class KnowRepChossingTopicsCollectionViewCell: UICollectionViewCell {
 
     private func setUpSwitchButton() {
         addSubview(switchButton)
-        switchButton.onTintColor = .myWhiteop
+        switchButton.onTintColor = .myWhite2
         switchButton.addAction(UIAction(handler: { [weak self] _ in
             guard let self = self else { return }
             if self.switchButton.isOn {
@@ -83,7 +83,6 @@ class KnowRepChossingTopicsCollectionViewCell: UICollectionViewCell {
                 switchClosure?()
             }
         }), for: .valueChanged)
-
         switchButton.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.trailing.equalToSuperview().inset(20)
