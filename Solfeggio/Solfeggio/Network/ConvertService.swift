@@ -32,6 +32,7 @@ class ConvertService: ConvertServiceProtocol {
                 for levelData in themeData.levels {
                     let level = Level(context: viewContext)
                     level.id = levelData.id
+                    level.completed = false
 
                     for taskData in levelData.tasks {
                         let task = Task(context: viewContext)

@@ -13,6 +13,7 @@
     </entity>
     <entity name="Level" representedClassName="Level" syncable="YES">
         <attribute name="attribute" optional="YES" attributeType="String"/>
+        <attribute name="completed" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String"/>
         <relationship name="tasks" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Task" inverseName="level" inverseEntity="Task"/>
         <relationship name="theme" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="levels" inverseEntity="Theme"/>

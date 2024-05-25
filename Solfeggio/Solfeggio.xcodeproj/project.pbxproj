@@ -44,6 +44,10 @@
 		2A5042EA2BFE6FE000A8DA22 /* MissingInternetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042E92BFE6FE000A8DA22 /* MissingInternetView.swift */; };
 		2A5042EC2BFE6FF400A8DA22 /* MissingInternetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042EB2BFE6FF400A8DA22 /* MissingInternetViewController.swift */; };
 		2A5042EE2BFE700C00A8DA22 /* MissingInternetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042ED2BFE700C00A8DA22 /* MissingInternetViewModel.swift */; };
+		2A5042F12C01314300A8DA22 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042F02C01314300A8DA22 /* SignInViewController.swift */; };
+		2A5042F32C01315C00A8DA22 /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042F22C01315C00A8DA22 /* SignInView.swift */; };
+		2A5042F62C0146A700A8DA22 /* RegistrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042F52C0146A700A8DA22 /* RegistrationView.swift */; };
+		2A5042F82C0146BA00A8DA22 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5042F72C0146BA00A8DA22 /* RegistrationViewController.swift */; };
 		2A5B8E4A2BBF2139007D8CDD /* HearingTestScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */; };
 		2A5B8E4C2BBF28D3007D8CDD /* HearingTestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */; };
 		2ABFFBC32BA1C2CC00DA45E8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ABFFBC22BA1C2CC00DA45E8 /* AppDelegate.swift */; };
@@ -139,6 +143,10 @@
 		2A5042E92BFE6FE000A8DA22 /* MissingInternetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingInternetView.swift; sourceTree = "<group>"; };
 		2A5042EB2BFE6FF400A8DA22 /* MissingInternetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingInternetViewController.swift; sourceTree = "<group>"; };
 		2A5042ED2BFE700C00A8DA22 /* MissingInternetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MissingInternetViewModel.swift; sourceTree = "<group>"; };
+		2A5042F02C01314300A8DA22 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		2A5042F22C01315C00A8DA22 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
+		2A5042F52C0146A700A8DA22 /* RegistrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationView.swift; sourceTree = "<group>"; };
+		2A5042F72C0146BA00A8DA22 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 		2A5B8E492BBF2139007D8CDD /* HearingTestScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestScreenView.swift; sourceTree = "<group>"; };
 		2A5B8E4B2BBF28D3007D8CDD /* HearingTestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HearingTestViewController.swift; sourceTree = "<group>"; };
 		2ABFFBBF2BA1C2CC00DA45E8 /* Solfeggio.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solfeggio.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -342,6 +350,24 @@
 			path = MissingInternetScreen;
 			sourceTree = "<group>";
 		};
+		2A5042EF2C01311000A8DA22 /* SignInScreen */ = {
+			isa = PBXGroup;
+			children = (
+				2A5042F02C01314300A8DA22 /* SignInViewController.swift */,
+				2A5042F22C01315C00A8DA22 /* SignInView.swift */,
+			);
+			path = SignInScreen;
+			sourceTree = "<group>";
+		};
+		2A5042F42C01462C00A8DA22 /* Registration */ = {
+			isa = PBXGroup;
+			children = (
+				2A5042F52C0146A700A8DA22 /* RegistrationView.swift */,
+				2A5042F72C0146BA00A8DA22 /* RegistrationViewController.swift */,
+			);
+			path = Registration;
+			sourceTree = "<group>";
+		};
 		2A5B8E482BBF17F2007D8CDD /* HearingTestScreen */ = {
 			isa = PBXGroup;
 			children = (
@@ -372,6 +398,8 @@
 		2ABFFBC12BA1C2CC00DA45E8 /* Solfeggio */ = {
 			isa = PBXGroup;
 			children = (
+				2A5042F42C01462C00A8DA22 /* Registration */,
+				2A5042EF2C01311000A8DA22 /* SignInScreen */,
 				2A5042E62BFE6F7900A8DA22 /* MissingInternetScreen */,
 				2A5042B92BFA578B00A8DA22 /* Protocols */,
 				2A5042B82BFA46EB00A8DA22 /* HearingTestLevelGroup */,
@@ -700,6 +728,7 @@
 				2A4048AE2BE972320030260E /* EndLevelScreenViewModel.swift in Sources */,
 				2AE929B82BCC0E99003D32E0 /* KnowledgeRepetitionScreenViewController.swift in Sources */,
 				2A0290932BBA984D008BB3C7 /* TopicLevelScreenViewController.swift in Sources */,
+				2A5042F62C0146A700A8DA22 /* RegistrationView.swift in Sources */,
 				2A5042D32BFCC3B100A8DA22 /* SoundTask+CoreDataClass.swift in Sources */,
 				2A5042EC2BFE6FF400A8DA22 /* MissingInternetViewController.swift in Sources */,
 				2ABFFBE72BA2E79500DA45E8 /* GradientTaskView.swift in Sources */,
@@ -713,6 +742,8 @@
 				2AE92A8A2BE555F1003D32E0 /* Answer+CoreDataClass.swift in Sources */,
 				2A0290912BBA9836008BB3C7 /* TopicLevelScreenView.swift in Sources */,
 				2A02908E2BB5DE47008BB3C7 /* HearingTestLevelScreenViewModel.swift in Sources */,
+				2A5042F82C0146BA00A8DA22 /* RegistrationViewController.swift in Sources */,
+				2A5042F12C01314300A8DA22 /* SignInViewController.swift in Sources */,
 				2AE929D52BCD6754003D32E0 /* ProfileScreenFlowCoordinator.swift in Sources */,
 				2AE92A8E2BE555F1003D32E0 /* Block+CoreDataClass.swift in Sources */,
 				2AE929B22BCC0D33003D32E0 /* HearingTestScreenViewModel.swift in Sources */,
@@ -730,6 +761,7 @@
 				2ABFFBEA2BA38DB300DA45E8 /* GradientView.swift in Sources */,
 				2A02909A2BBAB826008BB3C7 /* UICollectionViewCellExtension.swift in Sources */,
 				2ABFFBEE2BA5508E00DA45E8 /* CustomViewBuilder.swift in Sources */,
+				2A5042F32C01315C00A8DA22 /* SignInView.swift in Sources */,
 				2A5042D42BFCC3B100A8DA22 /* SoundTask+CoreDataProperties.swift in Sources */,
 				2AE929CB2BCD10F7003D32E0 /* KnowledgeRepetitionScreenViewModel.swift in Sources */,
 				2A4048A72BE9362D0030260E /* LoadingScreenViewModel.swift in Sources */,

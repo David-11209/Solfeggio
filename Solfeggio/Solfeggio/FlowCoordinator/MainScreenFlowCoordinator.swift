@@ -113,7 +113,7 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             viewModel: viewModel
         )
         viewController.exitClosure = { result in
-            self.showEndLevelScreen(result: result)
+            self.showEndLevelScreen(level: level, result: result)
         }
         navigationController.pushViewController(
             viewController,
@@ -121,12 +121,12 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
         )
     }
 
-    private func showEndLevelScreen(result: Bool) {
+    private func showEndLevelScreen(level: Level, result: Bool) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             EndLevelScreenViewModelProtocol.self
         ) else { return }
-        viewModel.setResult(result: result)
+        viewModel.setResult(level: level, result: result)
         let viewController = EndLevelScreenViewController(
             viewModel: viewModel
         )

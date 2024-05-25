@@ -31,7 +31,7 @@ class ContainerAssembly: Assembly {
         .inObjectScope(.container)
 
         guard let coreDataManager = container.resolve(CoreDataManagerProtocol.self),
-              let audioService =  container.resolve(AudioServiceProtocol.self),
+              let audioService = container.resolve(AudioServiceProtocol.self),
               let networkMonitor = container.resolve(NetworkMonitorProtocol.self),
               let networkService = container.resolve(NetworkServiceProtocol.self)
         else { return }
@@ -42,7 +42,6 @@ class ContainerAssembly: Assembly {
         .inObjectScope(.container)
 
         guard let convertService = container.resolve(ConvertServiceProtocol.self) else { return }
-
 
         container.register(MissingInternetViewModelProtocol.self) { _ in
             MissingInternetViewModel(networkMonitor: networkMonitor)

@@ -14,6 +14,7 @@ protocol NetworkServiceProtocol {
 
 class NetworkService: NetworkServiceProtocol {
 
+    private let url = "http://localhost:5087/Solfeggio"
     func getData(completion: @escaping (Result<JSONData, Error>) -> Void) {
         executeRequestJSONData { result in
             switch result {
@@ -26,7 +27,8 @@ class NetworkService: NetworkServiceProtocol {
     }
 
     private func executeRequestJSONData(completion: @escaping (Result<JSONData, Error>) -> Void) {
-        AF.request("http://localhost:5087/Solfeggio").response { response in
+        executeRequesUserData()
+        AF.request(url).response { response in
             switch response.result {
             case .success(let data):
                 if let data = data {
@@ -44,5 +46,14 @@ class NetworkService: NetworkServiceProtocol {
                 print("Error: \(error.localizedDescription)")
             }
         }
+    }
+
+    func executeRequesUserData() {
+        let parameters: [String: Any] = ["login": "Admin", "password": "1111"]
+
+        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseJSON { response in
+                debugPrint(response)
+            }
     }
 }

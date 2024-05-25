@@ -9,7 +9,7 @@ import UIKit
 
 protocol EndLevelScreenViewModelProtocol {
     func getResult() -> Bool
-    func setResult(result: Bool)
+    func setResult(level: Level, result: Bool)
 }
 
 class EndLevelScreenViewModel: EndLevelScreenViewModelProtocol {
@@ -20,7 +20,10 @@ class EndLevelScreenViewModel: EndLevelScreenViewModelProtocol {
         return result
     }
 
-    func setResult(result: Bool) {
+    func setResult(level: Level, result: Bool) {
         self.result = result
+        if  level.completed == false && result {
+            level.completed = true
+        }
     }
 }
