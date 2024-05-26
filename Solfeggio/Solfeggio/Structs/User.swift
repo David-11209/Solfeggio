@@ -7,9 +7,14 @@
 
 import UIKit
 
-struct User {
+struct User: Decodable {
     let name: String
     let login: String
     let password: String
-    let image: Int
+    let image: String
+    let completedLevels: [CompletedLevel]
+}
+
+struct CompletedLevel: Decodable {
+    let id: String
 }

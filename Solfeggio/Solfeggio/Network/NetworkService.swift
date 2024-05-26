@@ -10,7 +10,8 @@ import UIKit
 
 protocol NetworkServiceProtocol {
     func getData(completion: @escaping (Result<JSONData, Error>) -> Void)
-    func executeAddNewUser(name: String, login: String, password: String, image: Int)
+    func executeAddNewUser(name: String, login: String, password: String, image: String)
+    func executeGetUser(login: String, password: String, completion: @escaping (User?) -> Void)
     var resultClosure: ((Bool) -> Void)? { get set}
 }
 
@@ -22,8 +23,8 @@ class NetworkService: NetworkServiceProtocol {
     func getData(completion: @escaping (Result<JSONData, Error>) -> Void) {
         executeRequestJSONData { result in
             switch result {
-            case .success(let product):
-                completion(.success(product))
+            case .success(let data):
+                completion(.success(data))
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -52,45 +53,34 @@ class NetworkService: NetworkServiceProtocol {
         }
     }
 
-    func executeRequesUserData() {
-        let parameters: [String: Any] = ["login": "Admin", "password": "1111"]
-
-        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .responseJSON { response in
-                debugPrint(response)
-            }
-    }
-
-    func executeAddNewUser(name: String, login: String, password: String, image: Int) {
+    func executeAddNewUser(name: String, login: String, password: String, image: String) {
         let parameters: [String: Any] = ["name": name, "login": login, "password": password, "image": image]
-
-        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        AF.request("\(url)/addUser", method: .post, parameters: parameters, encoding: JSONEncoding.default)
             .response { response in
                 print(response.response)
-                switch response.result {
-                case .success:
+                if let statusCode = response.response?.statusCode, statusCode == 200 {
                     self.resultClosure?(true)
                     print("User added successfully")
-                case .failure(let error):
+                } else {
                     self.resultClosure?(false)
-                    print("Bad request: \(error.localizedDescription)")
+                    print("Server returned an error: \(response.response?.statusCode ?? -1)")
                 }
             }
     }
 
-    func executeGetUser(login: String, password: String) {
+    func executeGetUser(login: String, password: String, completion: @escaping (User?) -> Void) {
         let parameters: [String: Any] = [ "login": login, "password": password]
-        AF.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default)
-            .response { response in
-                print(response.response)
+        AF.request("\(url)/getUser", method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .responseDecodable(of: User.self) { response in
                 switch response.result {
-                case .success:
-                    self.resultClosure?(true)
-                    print("User added successfully")
-                case .failure(let error):
-                    self.resultClosure?(false)
-                    print("Bad request: \(error.localizedDescription)")
+                case .success(let user):
+                    print(user)
+                    completion(user)
+                case .failure:
+                    print("Error: \(response.error)")
+                    completion(nil)
                 }
             }
     }
 }
+

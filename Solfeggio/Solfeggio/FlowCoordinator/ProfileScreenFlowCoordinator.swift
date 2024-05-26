@@ -12,7 +12,7 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
 
     var navigationController: UINavigationController
     let container: Container
-    var authorized: Bool = UserDefaults.standard.object(forKey: "authorized") as? Bool ?? false
+    var authorizedUser: Bool = UserDefaults.standard.object(forKey: "authorized") as? Bool ?? false
 
     init(navigationController: UINavigationController, container: Container) {
         self.navigationController = navigationController
@@ -20,7 +20,7 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
     }
 
     func start() {
-        if authorized {
+        if authorizedUser {
             showProfileScreen()
         } else {
             showSignInScreen()
@@ -29,6 +29,17 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
 
     func showProfileScreen() {
         guard let viewModel = container.resolve(ProfileScreenViewModelProtocol.self) else { return }
+        let viewController = ProfileScreenViewController(viewModel: viewModel)
+        navigationController = UINavigationController(rootViewController: viewController)
+        let image: UIImage = .profile
+        let item = UITabBarItem(title: nil, image: image.resizeImage(to: CGSize(width: 34, height: 34)), selectedImage: nil)
+        viewController.tabBarItem = item
+        navigationController.setViewControllers([viewController], animated: true)
+    }
+
+    func createAndShowProfileScreen(user: User) {
+        guard let viewModel = container.resolve(ProfileScreenViewModelProtocol.self) else { return }
+        viewModel.setUser(user: user)
         let viewController = ProfileScreenViewController(viewModel: viewModel)
         let image: UIImage = .profile
         let item = UITabBarItem(title: nil, image: image.resizeImage(to: CGSize(width: 34, height: 34)), selectedImage: nil)
@@ -57,11 +68,9 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
     func showRegistrationScreen() {
         guard let viewModel = container.resolve(RegistrationViewModelProtocol.self) else { return }
         let viewController = RegistrationViewController(viewModel: viewModel)
-        viewController.registerClosure = {
-            var result = viewModel.getRegistrationInfo()
-        }
         viewController.showProfileScreen = {
-            self.showProfileScreen()
+            UserDefaults.standard.set(true, forKey: "authorized")
+            self.createAndShowProfileScreen(user: viewModel.getUser())
         }
         viewController.exitClosure = {
             self.navigationController.popViewController(animated: true)
@@ -75,11 +84,12 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
     func showAuthorizationScreen() {
         guard let viewModel = container.resolve(AuthorizationViewModelProtocol.self) else { return }
         let viewController = AuthorizationViewController(viewModel: viewModel)
-        viewController.authorizeClosure = {
-            var result = viewModel.getAuthorizationInfo()
-        }
         viewController.exitClosure = {
             self.navigationController.popViewController(animated: true)
+        }
+        viewController.authorizeClosure = {
+            UserDefaults.standard.set(true, forKey: "authorized")
+            self.createAndShowProfileScreen(user: viewModel.getUser())
         }
         navigationController.pushViewController(
             viewController,

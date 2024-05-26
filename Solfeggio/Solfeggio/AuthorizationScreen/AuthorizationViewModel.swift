@@ -8,27 +8,35 @@
 import UIKit
 protocol AuthorizationViewModelProtocol {
     func addAuthorizationInfo(login: String, password: String)
-    func getAuthorizationInfo() -> User
+    func getUser() -> User
+    var resultClosure: ((Bool) -> Void)? { get set}
 }
 
 class AuthorizationViewModel: AuthorizationViewModelProtocol {
-    private var user = User(name: "", login: "", password: "", image: 0)
+    private var user = User(name: "", login: "", password: "", image: "", completedLevels: [])
     var networkService: NetworkServiceProtocol
-
+    var resultClosure: ((Bool) -> Void)?
     init(networkService: NetworkServiceProtocol) {
         self.networkService = networkService
     }
 
     func addAuthorizationInfo(login: String, password: String) {
-        self.user = User(name: "", login: login, password: password, image: 0)
+        self.user = User(name: "", login: login, password: password, image: "", completedLevels: [])
+        getUser(login: login, password: password)
     }
 
-    func getUser() {
-        networkService
+    func getUser(login: String, password: String) {
+        networkService.executeGetUser(login: login, password: password, completion: { user in
+            if let user = user {
+                self.user = user
+                self.resultClosure?(true)
+            } else {
+                self.resultClosure?(false)
+            }
+        })
     }
 
-
-    func getAuthorizationInfo() -> User {
+    func getUser() -> User {
         return user
     }
 }

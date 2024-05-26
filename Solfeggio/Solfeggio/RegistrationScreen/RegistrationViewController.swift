@@ -12,7 +12,6 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
     private let contentView: RegistrationView
     private var viewModel: RegistrationViewModelProtocol
     var exitClosure: (() -> Void)?
-    var registerClosure: (() -> Void)?
     var showProfileScreen: (() -> Void)?
 
     init(viewModel: RegistrationViewModelProtocol) {
@@ -70,7 +69,6 @@ class RegistrationViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             self.viewModel.addRegistrationInfo(name: nameText, login: loginText, password: passwordText, image: image)
-            self.registerClosure?()
         }
     }
 

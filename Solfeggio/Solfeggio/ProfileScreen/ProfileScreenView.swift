@@ -34,9 +34,10 @@ class ProfileScreenView: UIView {
     private lazy var chordsProgressLabel: UILabel = UILabel()
     private lazy var chordsProgressView: UIProgressView = UIProgressView(progressViewStyle: .default)
     private lazy var progressStack: UIStackView = UIStackView()
-    override init(frame: CGRect) {
+
+    init(frame: CGRect, avatar: UIImage, name: String) {
         super.init(frame: frame)
-        setUp()
+        setUp(avatar: avatar, name: name)
         self.backgroundColor = .pBlue
     }
 
@@ -44,12 +45,12 @@ class ProfileScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setUp() {
+    private func setUp(avatar: UIImage, name: String) {
         setUpHeaderView()
         setUpSettingsButton()
         setUpNameScreenLabel()
-        setUpProfileImage()
-        setUpNameUserLabel()
+        setUpProfileImage(avatar: avatar)
+        setUpNameUserLabel(name: name)
         setUpWhiteView()
         setUpStatisticImage()
         setUpStatisticLabel()
@@ -116,9 +117,9 @@ class ProfileScreenView: UIView {
         }
     }
 
-    private func setUpProfileImage() {
+    private func setUpProfileImage(avatar: UIImage) {
         headerView.addSubview(profileImage)
-        profileImage.image = .avatar
+        profileImage.image = avatar
         profileImage.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(118)
             make.centerX.equalToSuperview()
@@ -126,9 +127,9 @@ class ProfileScreenView: UIView {
         }
     }
 
-    private func setUpNameUserLabel() {
+    private func setUpNameUserLabel(name: String) {
         headerView.addSubview(nameUserLabel)
-        nameUserLabel.text = "Иван Иванов"
+        nameUserLabel.text = name
         nameUserLabel.font = UIFont.boldSystemFont(ofSize: 26.0)
         nameUserLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(220)

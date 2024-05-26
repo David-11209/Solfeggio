@@ -36,6 +36,15 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
         contentView.passwordTextField.delegate = self
         contentView.passwordTextField.tag = 2
 
+        viewModel.resultClosure = { result in
+            if result {
+                self.authorizeClosure?()
+            } else {
+                let alert = UIAlertController(title: "Ошибка", message: "Такого пользователя не существует", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+                self.present(alert, animated: true)
+            }
+        }
         contentView.exitClosure = {
             self.exitClosure?()
         }
@@ -52,7 +61,6 @@ class AuthorizationViewController: UIViewController, UITextFieldDelegate {
                 return
             }
             self.viewModel.addAuthorizationInfo(login: loginText, password: passwordText)
-            self.authorizeClosure?()
         }
     }
 
