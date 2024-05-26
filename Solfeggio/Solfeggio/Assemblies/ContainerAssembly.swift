@@ -31,9 +31,9 @@ class ContainerAssembly: Assembly {
         .inObjectScope(.container)
 
         guard let coreDataManager = container.resolve(CoreDataManagerProtocol.self),
-              let audioService = container.resolve(AudioServiceProtocol.self),
-              let networkMonitor = container.resolve(NetworkMonitorProtocol.self),
-              let networkService = container.resolve(NetworkServiceProtocol.self)
+            let audioService = container.resolve(AudioServiceProtocol.self),
+            let networkMonitor = container.resolve(NetworkMonitorProtocol.self),
+            let networkService = container.resolve(NetworkServiceProtocol.self)
         else { return }
 
         container.register(ConvertServiceProtocol.self) { _ in
@@ -94,6 +94,14 @@ class ContainerAssembly: Assembly {
 
         container.register(EndKRLevelViewModelProtocol.self) { _ in
             EndKnowledgeRepetitionLevelViewModel()
+        }
+
+        container.register(RegistrationViewModelProtocol.self) { _ in
+            RegistrationViewModel(networkService: networkService)
+        }
+
+        container.register(AuthorizationViewModelProtocol.self) { _ in
+            AuthorizationViewModel(networkService: networkService)
         }
 
         container.register(HearingTestScreenViewModelProtocol.self) { _ in

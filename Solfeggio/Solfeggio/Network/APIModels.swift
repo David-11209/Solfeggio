@@ -50,3 +50,10 @@ struct JSONData: Decodable {
     let blocks: [BlockModel]
     let soundTests: [SoundTestModel]
 }
+
+struct UserData: Decodable, Encodable {
+    let name: String
+    let login: String
+    let password: String
+    let image: String
+}

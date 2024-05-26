@@ -26,7 +26,6 @@ class KnowledgeRepetitionScreenFlowCoordinator: CoordinatorProtocol {
     }
 
     func start() {
-        
         guard let viewModel = container.resolve(
             KnowledgeRepetitionSViewModelProtocol.self
         ) else {
