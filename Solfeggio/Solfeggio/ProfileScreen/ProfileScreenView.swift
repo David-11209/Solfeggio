@@ -35,9 +35,17 @@ class ProfileScreenView: UIView {
     private lazy var chordsProgressView: UIProgressView = UIProgressView(progressViewStyle: .default)
     private lazy var progressStack: UIStackView = UIStackView()
 
-    init(frame: CGRect, avatar: UIImage, name: String) {
+    var settingsClosure: (() -> Void)?
+    init(frame: CGRect, avatar: UIImage, name: String, notesProgress: Float, intervalsProgress: Float, moodsProgress: Float, chordsProgress: Float) {
         super.init(frame: frame)
-        setUp(avatar: avatar, name: name)
+        setUp(
+            avatar: avatar,
+            name: name,
+            notesProgress: notesProgress,
+            intervalsProgress: intervalsProgress,
+            moodsProgress: moodsProgress,
+            chordsProgress: chordsProgress
+        )
         self.backgroundColor = .pBlue
     }
 
@@ -45,7 +53,7 @@ class ProfileScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
-    private func setUp(avatar: UIImage, name: String) {
+    private func setUp(avatar: UIImage, name: String, notesProgress: Float, intervalsProgress: Float, moodsProgress: Float, chordsProgress: Float) {
         setUpHeaderView()
         setUpSettingsButton()
         setUpNameScreenLabel()
@@ -60,18 +68,22 @@ class ProfileScreenView: UIView {
         setUpSeparatorView()
 
         setUpProgressLabel(progressLabel: notesProgressLabel, text: "Ноты")
-        setUpProgressView(progressView: notesProgressView, color: .pRed, trackColor: .pRedOp)
+        setUpProgressView(progressView: notesProgressView, color: .pRed, trackColor: .pRedOp, progress: notesProgress)
 
         setUpProgressLabel(progressLabel: intervalsProgressLabel, text: "Интервалы")
-        setUpProgressView(progressView: intervalsProgressView, color: .pPurple, trackColor: .pPurpleOp)
+        setUpProgressView(progressView: intervalsProgressView, color: .pPurple, trackColor: .pPurpleOp, progress: intervalsProgress)
 
         setUpProgressLabel(progressLabel: moodsProgressLabel, text: "Лады")
-        setUpProgressView(progressView: moodsProgressView, color: .pOrange, trackColor: .pOrangeOp)
+        setUpProgressView(progressView: moodsProgressView, color: .pOrange, trackColor: .pOrangeOp, progress: moodsProgress)
 
         setUpProgressLabel(progressLabel: chordsProgressLabel, text: "Аккорды")
-        setUpProgressView(progressView: chordsProgressView, color: .pIndigo, trackColor: .pIndigoOp)
+        setUpProgressView(progressView: chordsProgressView, color: .pIndigo, trackColor: .pIndigoOp, progress: chordsProgress)
 
         setUpStackView()
+    }
+
+    func config(levelsProgress: Float) {
+        procentLabel.text = "\(levelsProgress)%"
     }
 
     private func setUpHeaderView() {
@@ -82,7 +94,7 @@ class ProfileScreenView: UIView {
             make.top.equalToSuperview().offset(-10)
             make.width.equalToSuperview()
             make.centerX.equalToSuperview()
-            make.height.equalTo(300)
+            make.height.equalTo(320)
         }
     }
 
@@ -99,8 +111,12 @@ class ProfileScreenView: UIView {
     private func setUpSettingsButton() {
         headerView.addSubview(settingsButton)
         settingsButton.setImage(.settings, for: .normal)
+        let openSettingsAction: UIAction = UIAction { [weak self] _ in
+            self?.settingsClosure?()
+        }
+        settingsButton.addAction(openSettingsAction, for: .touchUpInside)
         settingsButton.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(68)
+            make.top.equalToSuperview().offset(98)
             make.leading.equalToSuperview().inset(20)
             make.height.width.equalTo(40)
         }
@@ -111,7 +127,7 @@ class ProfileScreenView: UIView {
         nameScreenLabel.text = "Профиль"
         nameScreenLabel.font = UIFont.boldSystemFont(ofSize: 30.0)
         nameScreenLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(68)
+            make.top.equalToSuperview().offset(98)
             make.centerX.equalToSuperview()
             make.height.equalTo(40)
         }
@@ -121,7 +137,7 @@ class ProfileScreenView: UIView {
         headerView.addSubview(profileImage)
         profileImage.image = avatar
         profileImage.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(118)
+            make.top.equalToSuperview().offset(148)
             make.centerX.equalToSuperview()
             make.height.width.equalTo(100)
         }
@@ -132,7 +148,7 @@ class ProfileScreenView: UIView {
         nameUserLabel.text = name
         nameUserLabel.font = UIFont.boldSystemFont(ofSize: 26.0)
         nameUserLabel.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(220)
+            make.top.equalToSuperview().offset(230)
             make.centerX.equalToSuperview()
             make.height.equalTo(80)
         }
@@ -195,13 +211,13 @@ class ProfileScreenView: UIView {
         }
     }
 
-    private func setUpProgressView(progressView: UIProgressView, color: UIColor, trackColor: UIColor) {
+    private func setUpProgressView(progressView: UIProgressView, color: UIColor, trackColor: UIColor, progress: Float) {
         progressStack.addArrangedSubview(progressView)
         progressView.layer.cornerRadius = 8
         progressView.layer.masksToBounds = true
         progressView.progressTintColor = color
         progressView.trackTintColor = trackColor
-        progressView.setProgress(0.3, animated: true)
+        progressView.setProgress(progress, animated: true)
         progressView.snp.makeConstraints { make in
             make.height.equalTo(14)
         }
@@ -241,7 +257,6 @@ class ProfileScreenView: UIView {
 
     private func setUpProcentLabel() {
         procentView.addSubview(procentLabel)
-        procentLabel.text = "25%"
         procentLabel.font = UIFont.boldSystemFont(ofSize: 26.0)
         procentLabel.snp.makeConstraints { make in
             make.trailing.equalToSuperview().inset(16)

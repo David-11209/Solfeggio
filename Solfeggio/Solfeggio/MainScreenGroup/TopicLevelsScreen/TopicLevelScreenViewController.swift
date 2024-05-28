@@ -9,18 +9,21 @@ import UIKit
 
 class TopicLevelsScreenViewController: UIViewController {
 
-    private let contentView: TopicLevelsScreenView = .init()
+    private var contentView: TopicLevelsScreenView
     private let viewModel: TopicLevelsScreenViewModelProtocol
 
     var didSelectItem: ((_ level: Level) -> Void)?
+    var didSelectTheory: (() -> Void)?
     var exitClosure: (() -> Void)?
 
     init(viewModel: TopicLevelsScreenViewModelProtocol) {
         self.viewModel = viewModel
+        self.contentView = TopicLevelsScreenView(frame: CGRect())
         super.init(nibName: nil, bundle: nil)
     }
 
     override func loadView() {
+
         view = contentView
     }
 
@@ -32,11 +35,17 @@ class TopicLevelsScreenViewController: UIViewController {
         super.viewDidLoad()
         contentView.levelsCollectionView.delegate = self
         contentView.levelsCollectionView.dataSource = viewModel
+        contentView.configure(progress: viewModel.getProgress())
         contentView.levelsCollectionView.register(
             LevelsCollectionViewCell.self, forCellWithReuseIdentifier: LevelsCollectionViewCell.reuseIdentifier)
         contentView.exitClosure = {
             self.exitClosure?()
         }
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        contentView.configure(progress: viewModel.getProgress())
     }
 }
 
@@ -51,6 +60,11 @@ extension TopicLevelsScreenViewController: UICollectionViewDelegateFlowLayout {
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        didSelectItem?(viewModel.getLevel(index: indexPath.row - 1))
+        if indexPath.row == 0 {
+            didSelectTheory?()
+        } else {
+            didSelectItem?(viewModel.getLevel(index: indexPath.row - 1))
+        }
+
     }
 }

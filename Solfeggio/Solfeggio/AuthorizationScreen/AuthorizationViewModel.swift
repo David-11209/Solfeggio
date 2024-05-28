@@ -8,12 +8,30 @@
 import UIKit
 protocol AuthorizationViewModelProtocol {
     func addAuthorizationInfo(login: String, password: String)
-    func getUser() -> User
+    func getUser() -> UserModel
     var resultClosure: ((Bool) -> Void)? { get set}
 }
 
 class AuthorizationViewModel: AuthorizationViewModelProtocol {
-    private var user = User(name: "", login: "", password: "", image: "", completedLevels: [])
+    private var user = UserModel(
+        name: "",
+        login: "",
+        password: "",
+        image: "",
+        notesStat: "",
+        intervalsStat: "",
+        moodsStat: "",
+        chordsStat: "",
+        numberNotesListened: "",
+        numberIntervalsListened: "",
+        numberMoodsListened: "",
+        numberChordsListened: "",
+        numberNotesSuccessListened: "",
+        numberIntervalsSuccessListened: "",
+        numberMoodsSuccessListened: "",
+        numberChordsSuccessListened: "",
+        completedLevels: []
+    )
     var networkService: NetworkServiceProtocol
     var resultClosure: ((Bool) -> Void)?
     init(networkService: NetworkServiceProtocol) {
@@ -21,7 +39,25 @@ class AuthorizationViewModel: AuthorizationViewModelProtocol {
     }
 
     func addAuthorizationInfo(login: String, password: String) {
-        self.user = User(name: "", login: login, password: password, image: "", completedLevels: [])
+        self.user = UserModel(
+            name: "",
+            login: login,
+            password: password,
+            image: "",
+            notesStat: "",
+            intervalsStat: "",
+            moodsStat: "",
+            chordsStat: "",
+            numberNotesListened: "",
+            numberIntervalsListened: "",
+            numberMoodsListened: "",
+            numberChordsListened: "",
+            numberNotesSuccessListened: "",
+            numberIntervalsSuccessListened: "",
+            numberMoodsSuccessListened: "",
+            numberChordsSuccessListened: "",
+            completedLevels: []
+        )
         getUser(login: login, password: password)
     }
 
@@ -36,7 +72,7 @@ class AuthorizationViewModel: AuthorizationViewModelProtocol {
         })
     }
 
-    func getUser() -> User {
+    func getUser() -> UserModel {
         return user
     }
 }

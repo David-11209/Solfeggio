@@ -14,7 +14,7 @@ class MainScreenCollectionViewCell: UICollectionViewCell {
     private lazy var titleLabel: UILabel = UILabel()
     private lazy var mainImageView: UIImageView = UIImageView()
     private lazy var mainTitle: UILabel = UILabel()
-    var didSelectItem: ((_ theme: Theme) -> Void)?
+    var didSelectItem: (((Theme, Float)) -> Void)?
     var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 30

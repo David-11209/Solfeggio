@@ -30,6 +30,10 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
     func showProfileScreen() {
         guard let viewModel = container.resolve(ProfileScreenViewModelProtocol.self) else { return }
         let viewController = ProfileScreenViewController(viewModel: viewModel)
+        viewController.settingsClosure = {
+            self.navigationController.isNavigationBarHidden = true
+            self.showSettingsScreen()
+        }
         navigationController = UINavigationController(rootViewController: viewController)
         let image: UIImage = .profile
         let item = UITabBarItem(title: nil, image: image.resizeImage(to: CGSize(width: 34, height: 34)), selectedImage: nil)
@@ -37,18 +41,39 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
         navigationController.setViewControllers([viewController], animated: true)
     }
 
-    func createAndShowProfileScreen(user: User) {
+    func createAndShowProfileScreen(user: UserModel) {
         guard let viewModel = container.resolve(ProfileScreenViewModelProtocol.self) else { return }
-        viewModel.setUser(user: user)
+        viewModel.setUser(user: user, newUser: true)
         let viewController = ProfileScreenViewController(viewModel: viewModel)
+        viewController.settingsClosure = {
+            self.navigationController.isNavigationBarHidden = true
+            self.showSettingsScreen()
+        }
         let image: UIImage = .profile
         let item = UITabBarItem(title: nil, image: image.resizeImage(to: CGSize(width: 34, height: 34)), selectedImage: nil)
         item.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 10)
         viewController.tabBarItem = item
+
         navigationController.setViewControllers([viewController], animated: true)
     }
 
+    func showSettingsScreen() {
+        guard let viewModel = container.resolve(SettingsViewModelProtocol.self) else { return }
+        let viewController = SettingsViewController(viewModel: viewModel)
+        viewController.exitClosure = { result in
+            if result == "exitAccont" {
+                self.createAndShowSignInScreen()
+            } else if result == "exitScreen"{
+                self.navigationController.popViewController(animated: true)
+            }
+
+        }
+        navigationController.pushViewController(
+            viewController,
+            animated: true
+        )
+    }
     func showSignInScreen() {
         let viewController = SignInViewController()
         navigationController = UINavigationController(rootViewController: viewController)
@@ -63,6 +88,17 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
                 self.showAuthorizationScreen()
             }
         }
+    }
+
+    func createAndShowSignInScreen() {
+        let viewController = SignInViewController()
+        let image: UIImage = .profile
+        let item = UITabBarItem(title: nil, image: image.resizeImage(to: CGSize(width: 34, height: 34)), selectedImage: nil)
+        item.imageInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        item.titlePositionAdjustment = UIOffset(horizontal: 0, vertical: 10)
+        viewController.tabBarItem = item
+
+        navigationController.setViewControllers([viewController], animated: true)
     }
 
     func showRegistrationScreen() {
@@ -96,8 +132,4 @@ class ProfileScreenFlowCoordinator: CoordinatorProtocol {
             animated: true
         )
     }
-//    func start() {
-//        let viewController = SignInViewController()
-//        navigationController = UINavigationController(rootViewController: viewController)
-//    }
 }

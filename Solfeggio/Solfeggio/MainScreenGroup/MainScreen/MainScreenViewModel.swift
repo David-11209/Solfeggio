@@ -8,18 +8,22 @@
 import UIKit
 
 protocol MainScreenViewModelProtocol: UICollectionViewDataSource {
-    var closeClosure: ((_ theme: Theme) -> Void)? { get set }
+    var closeClosure: (((Theme, Float)) -> Void)? { get set }
     var successfulDataAcquisition: (() -> Void)? { get set }
+    func reloadDataSource()
+    var dataSource: [Block] { get }
+    var reloadClosure: (() -> Void)? { get set }
 }
 
 class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
 
-    var closeClosure: ((_ theme: Theme) -> Void)?
+    var closeClosure: (((Theme, Float)) -> Void)?
     var successfulDataAcquisition: (() -> Void)?
     var coreDataManager: CoreDataManagerProtocol
     var networkService: NetworkServiceProtocol
     var convertService: ConvertServiceProtocol
     var dataSource: [Block] = []
+    var reloadClosure: (() -> Void)?
 
     init(
         coreDataManager: CoreDataManagerProtocol,
@@ -49,8 +53,8 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
             cell.configureSecondCell()
         } else {
             cell.configure(block: dataSource[indexPath.row - 2])
-            cell.didSelectItem = { [weak self] theme in
-                self?.closeClosure?(theme)
+            cell.didSelectItem = { [weak self] tuple in
+                self?.closeClosure?(tuple)
             }
         }
         return cell
@@ -58,6 +62,13 @@ class MainScreenViewModel: NSObject, MainScreenViewModelProtocol {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dataSource.count + 2
+    }
+
+    func reloadDataSource() {
+        requestData { data in
+            self.dataSource = data
+            self.reloadClosure?()
+        }
     }
 
     private func requestData(completion: @escaping ([Block]) -> Void) {

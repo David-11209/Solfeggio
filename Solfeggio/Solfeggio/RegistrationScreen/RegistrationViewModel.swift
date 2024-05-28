@@ -9,12 +9,30 @@ import UIKit
 
 protocol RegistrationViewModelProtocol {
     func addRegistrationInfo(name: String, login: String, password: String, image: Int)
-    func getUser() -> User
+    func getUser() -> UserModel
     var resultClosure: ((Bool) -> Void)? { get set}
 }
 
 class RegistrationViewModel: RegistrationViewModelProtocol {
-    private var user = User(name: "", login: "", password: "", image: "", completedLevels: [])
+    private var user = UserModel(
+        name: "",
+        login: "",
+        password: "",
+        image: "",
+        notesStat: "",
+        intervalsStat: "",
+        moodsStat: "",
+        chordsStat: "",
+        numberNotesListened: "",
+        numberIntervalsListened: "",
+        numberMoodsListened: "",
+        numberChordsListened: "",
+        numberNotesSuccessListened: "",
+        numberIntervalsSuccessListened: "",
+        numberMoodsSuccessListened: "",
+        numberChordsSuccessListened: "",
+        completedLevels: []
+    )
     var networkService: NetworkServiceProtocol
     var resultClosure: ((Bool) -> Void)?
 
@@ -23,7 +41,27 @@ class RegistrationViewModel: RegistrationViewModelProtocol {
     }
 
     func addRegistrationInfo(name: String, login: String, password: String, image: Int) {
-        self.user = User(name: name, login: login, password: password, image: String(image), completedLevels: [])
+        self.user = UserModel(
+            name: name,
+            login: login,
+            password: password,
+            image: String(
+                image
+            ),
+            notesStat: "",
+            intervalsStat: "",
+            moodsStat: "",
+            chordsStat: "",
+            numberNotesListened: "",
+            numberIntervalsListened: "",
+            numberMoodsListened: "",
+            numberChordsListened: "",
+            numberNotesSuccessListened: "",
+            numberIntervalsSuccessListened: "",
+            numberMoodsSuccessListened: "",
+            numberChordsSuccessListened: "",
+            completedLevels: []
+        )
         createNewUser()
     }
 
@@ -34,7 +72,7 @@ class RegistrationViewModel: RegistrationViewModelProtocol {
         }
     }
 
-    func getUser() -> User {
+    func getUser() -> UserModel {
         return user
     }
 }

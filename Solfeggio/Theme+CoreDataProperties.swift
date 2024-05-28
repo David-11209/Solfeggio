@@ -17,6 +17,8 @@ extension Theme {
 
     @NSManaged public var id: String?
     @NSManaged public var name: String?
+    @NSManaged public var theoryText: String
+    @NSManaged public var theoryImage: String
     @NSManaged public var block: Block?
     @NSManaged public var levels: Set<Level>
 

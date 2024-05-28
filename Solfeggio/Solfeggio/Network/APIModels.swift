@@ -33,6 +33,8 @@ struct LevelModel: Decodable {
 struct ThemeModel: Decodable {
     let id: String
     let name: String
+    let theoryText: String
+    let theoryImage: String
     let levels: [LevelModel]
 }
 
@@ -49,11 +51,4 @@ struct SoundTestModel: Decodable {
 struct JSONData: Decodable {
     let blocks: [BlockModel]
     let soundTests: [SoundTestModel]
-}
-
-struct UserData: Decodable, Encodable {
-    let name: String
-    let login: String
-    let password: String
-    let image: String
 }

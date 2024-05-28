@@ -11,6 +11,7 @@ protocol LoadingScreenViewModelProtocol {
     func setData(tasks: Set<Task>)
     func downloadImage(from urlString: String, completion: @escaping (UIImage?) -> Void)
     var allDataDownload: (([String: UIImage]) -> Void)? { get set }
+    func setTheoryData(url: String)
 }
 
 class LoadingScreenViewModel: LoadingScreenViewModelProtocol {
@@ -32,6 +33,13 @@ class LoadingScreenViewModel: LoadingScreenViewModelProtocol {
                 self.allDataDownload?(self.imageDict)
             }
         }
+    }
+
+    func setTheoryData(url: String) {
+        downloadImage(from: url, completion: { image in
+            self.imageDict[url] = image
+            self.allDataDownload?(self.imageDict)
+        })
     }
 
     func downloadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {

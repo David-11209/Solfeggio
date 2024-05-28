@@ -22,20 +22,18 @@ class HearingTestScreenViewModel: NSObject, HearingTestScreenViewModelProtocol {
     ) {
         self.coreDataManager = coreDataManager
         super.init()
-        requestData { data in
-            self.dataSource = data
-        }
+
     }
 
     private func requestData(completion: @escaping ([SoundTest]) -> Void) {
-        let backgroundQueue = DispatchQueue.global(qos: .background)
-        backgroundQueue.async {
-            let coreData = self.coreDataManager.obtainSoundTestsData()
-            completion(coreData)
-        }
+        let coreData = self.coreDataManager.obtainSoundTestsData()
+        completion(coreData)
     }
 
     func getDataSelectedTopic(selectedTopic: String) -> [SoundTask] {
+        requestData { data in
+            self.dataSource = data
+        }
         var resultArray: [SoundTask] = []
         for test in dataSource where selectedTopic == test.name {
             resultArray.append(contentsOf: test.soundTasks)

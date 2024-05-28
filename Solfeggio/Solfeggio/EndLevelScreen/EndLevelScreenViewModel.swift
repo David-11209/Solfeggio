@@ -14,8 +14,13 @@ protocol EndLevelScreenViewModelProtocol {
 
 class EndLevelScreenViewModel: EndLevelScreenViewModelProtocol {
 
+    private var coreDataManager: CoreDataManagerProtocol
+
     private var result: Bool = false
 
+    init(coreDataManager: CoreDataManagerProtocol) {
+        self.coreDataManager = coreDataManager
+    }
     func getResult() -> Bool {
         return result
     }
@@ -25,5 +30,7 @@ class EndLevelScreenViewModel: EndLevelScreenViewModelProtocol {
         if  level.completed == false && result {
             level.completed = true
         }
+        coreDataManager.saveContext()
     }
+
 }

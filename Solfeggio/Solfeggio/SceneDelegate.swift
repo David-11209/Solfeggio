@@ -75,6 +75,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneDidEnterBackground(_ scene: UIScene) {
         guard let coreDataManager = container.resolve(CoreDataManagerProtocol.self) else {return}
         coreDataManager.saveContext()
+        guard let networkService = container.resolve(NetworkServiceProtocol.self) else { return }
+        var levels: [String] = []
+        for level in coreDataManager.obtainLevels() {
+            if level.completed {
+                levels.append(level.id)
+            }
+        }
+        networkService.executeUpdateUserInfo(user: coreDataManager.obtainUser().first ?? User(), levels: levels)
     }
 
 }

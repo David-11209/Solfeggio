@@ -35,6 +35,9 @@ class TopicLevelsScreenView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
 
+    func configure(progress: Float) {
+        progressView.progress = progress
+    }
     private func setUp() {
         setUpExitButton()
         setUpProgressView()
@@ -80,7 +83,6 @@ class TopicLevelsScreenView: UIView {
             make.height.equalTo(20)
             make.width.equalToSuperview().multipliedBy(0.7)
         }
-        progressView.setProgress(0.0, animated: true)
     }
 
     private func setUpProgressLabel() {
