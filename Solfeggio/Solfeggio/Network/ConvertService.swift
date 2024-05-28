@@ -28,10 +28,13 @@ class ConvertService: ConvertServiceProtocol {
             for themeData in blockData.themes {
                 let theme = Theme(context: viewContext)
                 theme.name = themeData.name
+                theme.theoryText = themeData.theoryText
+                theme.theoryImage = themeData.theoryImage
 
                 for levelData in themeData.levels {
                     let level = Level(context: viewContext)
                     level.id = levelData.id
+                    level.completed = false
 
                     for taskData in levelData.tasks {
                         let task = Task(context: viewContext)
@@ -53,6 +56,7 @@ class ConvertService: ConvertServiceProtocol {
             }
             coreDataManager.saveContext()
         }
+
         for soundTestData in jsonData.soundTests {
             let soundTest = SoundTest(context: viewContext)
             soundTest.name = soundTestData.name
@@ -72,6 +76,5 @@ class ConvertService: ConvertServiceProtocol {
             }
             coreDataManager.saveContext()
         }
-
     }
 }

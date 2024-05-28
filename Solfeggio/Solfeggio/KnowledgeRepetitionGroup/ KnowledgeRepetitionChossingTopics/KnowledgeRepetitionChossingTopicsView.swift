@@ -5,6 +5,7 @@
 //  Created by Давид Васильев on 26.04.2024.
 //
 
+import SnapKit
 import UIKit
 
 class KnowledgeRepetitionChossingTopicsView: UIView {

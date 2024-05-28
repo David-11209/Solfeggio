@@ -33,6 +33,8 @@ struct LevelModel: Decodable {
 struct ThemeModel: Decodable {
     let id: String
     let name: String
+    let theoryText: String
+    let theoryImage: String
     let levels: [LevelModel]
 }
 

@@ -12,11 +12,12 @@ class HearingTestScreenFlowCoordinator: CoordinatorProtocol {
 
     var navigationController: UINavigationController
     let container: Container
-    private var soundTasks: [SoundTask] = []
+    private var soundTasks: ([SoundTask], String)
 
     init(navigationController: UINavigationController, container: Container) {
         self.navigationController = navigationController
         self.container = container
+        self.soundTasks = ([], "")
     }
 
     func start() {
@@ -27,7 +28,7 @@ class HearingTestScreenFlowCoordinator: CoordinatorProtocol {
         viewController.tabBarItem = item
         viewController.closeClosure = { topicName in
             self.navigationController.tabBarController?.tabBar.isHidden = true
-            self.soundTasks = viewModel.getDataSelectedTopic(selectedTopic: topicName)
+            self.soundTasks = (viewModel.getDataSelectedTopic(selectedTopic: topicName), topicName)
             self.showLoadingLevelScreen()
         }
         navigationController = UINavigationController(rootViewController: viewController)
@@ -43,7 +44,7 @@ class HearingTestScreenFlowCoordinator: CoordinatorProtocol {
             viewModel: viewModel
         )
         viewController.endAnimateClosure = {
-            self.showLevelScreen(tasks: self.soundTasks)
+            self.showLevelScreen(tasks: self.soundTasks.0)
         }
         navigationController.pushViewController(
             viewController,
@@ -58,9 +59,9 @@ class HearingTestScreenFlowCoordinator: CoordinatorProtocol {
         let viewController = HearingTestLevelScreenViewController(
             viewModel: viewModel
         )
-        viewModel.setData(soundTask: Set(soundTasks))
+        viewModel.setData(soundTask: Set(tasks))
         viewController.exitClosure = { result in
-            self.showEndLevelScreen(result: result, tasksCount: self.soundTasks.count)
+            self.showEndLevelScreen(result: result, tasksCount: tasks.count)
             self.navigationController.tabBarController?.tabBar.isHidden = true
         }
         navigationController.pushViewController(
@@ -74,7 +75,7 @@ class HearingTestScreenFlowCoordinator: CoordinatorProtocol {
         guard let viewModel = container.resolve(
             EndKRLevelViewModelProtocol.self
         ) else { return }
-        viewModel.setResult(result: result, tasksCount: tasksCount)
+        viewModel.setResult(result: result, tasksCount: tasksCount, categoryName: soundTasks.1)
         let viewController = EndKRLevelViewController(
             viewModel: viewModel
         )

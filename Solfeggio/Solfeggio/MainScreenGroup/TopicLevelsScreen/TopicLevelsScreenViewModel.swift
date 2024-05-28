@@ -8,13 +8,16 @@
 import UIKit
 
 protocol TopicLevelsScreenViewModelProtocol: UICollectionViewDataSource {
-    func setData(levels: Set<Level>)
+    func setData(levels: Set<Level>, theme: Theme, progress: Float)
     func getLevel(index: Int) -> Level
+    func getProgress() -> Float
 }
 
 class TopicLevelsScreenViewModel: NSObject, TopicLevelsScreenViewModelProtocol {
 
     private var levels: [Level] = []
+    private var theme: Theme?
+    private var progress: Float = 0.0
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return levels.count + 1
@@ -35,13 +38,24 @@ class TopicLevelsScreenViewModel: NSObject, TopicLevelsScreenViewModelProtocol {
         return cell
     }
 
-    func setData(levels: Set<Level>) {
+    func setData(levels: Set<Level>, theme: Theme, progress: Float) {
         self.levels = Array(levels)
-        print(levels.count)
+        self.progress = progress
+        self.theme = theme
     }
 
     func getLevel(index: Int) -> Level {
         return levels[index]
+    }
+
+    func getProgress() -> Float {
+        var result = 0
+        for level in levels {
+            if level.completed {
+                result += 1
+            }
+        }
+        return Float(result) / Float(levels.count)
     }
 }
 

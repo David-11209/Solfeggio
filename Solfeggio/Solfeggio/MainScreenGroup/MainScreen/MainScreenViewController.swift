@@ -12,7 +12,7 @@ class MainScreenViewController: UIViewController {
     private let contentView: MainScreenView = .init()
     private let viewModel: MainScreenViewModelProtocol
 
-    var closeClosure: ((_ theme: Theme) -> Void)?
+    var closeClosure: (((Theme, Float)) -> Void)?
     init(viewModel: MainScreenViewModelProtocol) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -30,14 +30,37 @@ class MainScreenViewController: UIViewController {
         super.viewDidLoad()
         contentView.topicsCollectionView.delegate = self
         contentView.topicsCollectionView.dataSource = viewModel
-        viewModel.closeClosure = { theme in
-            self.closeClosure?(theme)
+        viewModel.closeClosure = { tuple in
+            self.closeClosure?(tuple)
+        }
+        viewModel.reloadClosure = {
+            DispatchQueue.main.async {
+                for index in 0..<self.contentView.topicsCollectionView.numberOfItems(inSection: 0) {
+                    guard let cell = self.contentView.topicsCollectionView.cellForItem(
+                        at: IndexPath(
+                            row: index,
+                            section: 0
+                        )
+                    ) as? MainScreenCollectionViewCell else {
+                        return
+                    }
+                    cell.collectionView.reloadData()
+                }
+            }
         }
         viewModel.successfulDataAcquisition = { [weak self] in
-            self?.contentView.topicsCollectionView.reloadData()
+            DispatchQueue.main.async {
+                self?.contentView.topicsCollectionView.reloadData()
+            }
         }
         contentView.topicsCollectionView.register(
             MainScreenCollectionViewCell.self, forCellWithReuseIdentifier: MainScreenCollectionViewCell.reuseIdentifier)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        viewModel.reloadDataSource()
+
     }
 }
 

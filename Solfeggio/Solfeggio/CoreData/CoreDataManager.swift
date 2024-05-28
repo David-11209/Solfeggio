@@ -12,7 +12,9 @@ protocol CoreDataManagerProtocol {
     func saveContext()
     func obtainBlocksData() -> [Block]
     func obtainSoundTestsData() -> [SoundTest]
+    func obtainUser() -> [User]
     func getViewContext() -> NSManagedObjectContext
+    func obtainLevels() -> [Level]
 }
 
 class CoreDataManager: CoreDataManagerProtocol {
@@ -63,6 +65,28 @@ class CoreDataManager: CoreDataManagerProtocol {
 
     func obtainSoundTestsData() -> [SoundTest] {
         let fetchRequest = SoundTest.fetchRequest()
+        do {
+            let results = try viewContext.fetch(fetchRequest)
+            return results
+        } catch {
+            print("Ошибка при получении данных из CoreData: \(error)")
+        }
+        return []
+    }
+
+    func obtainUser() -> [User] {
+        let fetchRequest = User.fetchRequest()
+        do {
+            let results = try viewContext.fetch(fetchRequest)
+            return results
+        } catch {
+            print("Ошибка при получении данных из CoreData: \(error)")
+        }
+        return []
+    }
+
+    func obtainLevels() -> [Level] {
+        let fetchRequest = Level.fetchRequest()
         do {
             let results = try viewContext.fetch(fetchRequest)
             return results

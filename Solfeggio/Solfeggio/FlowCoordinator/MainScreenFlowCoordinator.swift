@@ -53,17 +53,17 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             rootViewController: viewController
         )
         navigationController.isNavigationBarHidden = true
-        viewController.closeClosure = { theme in
-            self.showTopicsScreen(theme: theme)
+        viewController.closeClosure = { tuple in
+            self.showTopicsScreen(tuple: tuple)
         }
     }
 
-    private func showTopicsScreen(theme: Theme) {
+    private func showTopicsScreen(tuple: (Theme, Float)) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             TopicLevelsScreenViewModelProtocol.self
         ) else { return }
-        viewModel.setData(levels: theme.levels)
+        viewModel.setData(levels: tuple.0.levels, theme: tuple.0, progress: tuple.1)
         let viewController = TopicLevelsScreenViewController(
             viewModel: viewModel
         )
@@ -76,28 +76,47 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             self.navigationController.popViewController(animated: true)
         }
         viewController.didSelectItem = { level in
-            self.showLoadingLevelScreen(level: level)
+            self.showLoadingLevelScreen(level: level, theoryImageUrl: nil, theoryText: nil)
+        }
+        viewController.didSelectTheory = {
+            self.showLoadingLevelScreen(level: nil, theoryImageUrl: tuple.0.theoryImage, theoryText: tuple.0.theoryText)
         }
     }
 
-    private func showLoadingLevelScreen(level: Level) {
+    private func showLoadingLevelScreen(level: Level?, theoryImageUrl: String?, theoryText: String?) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             LoadingScreenViewModelProtocol.self
         ) else { return }
-        viewModel.setData(tasks: level.tasks)
-        let viewController = LoadingScreenViewController(
-            viewModel: viewModel
-        )
-        viewController.allDataDownload = { dict in
-            self.level = level
-            self.imageDict = dict
-            self.showLessonLevelScreen(level: level, imageDict: dict)
+        if let level = level {
+            viewModel.setData(tasks: level.tasks)
+            let viewController = LoadingScreenViewController(
+                viewModel: viewModel
+            )
+            viewController.allDataDownload = { dict in
+                self.level = level
+                self.imageDict = dict
+                self.showLessonLevelScreen(level: level, imageDict: dict)
+            }
+            navigationController.pushViewController(
+                viewController,
+                animated: true
+            )
         }
-        navigationController.pushViewController(
-            viewController,
-            animated: true
-        )
+        if let theoryImageUrl = theoryImageUrl {
+            viewModel.setTheoryData(url: theoryImageUrl)
+            let viewController = LoadingScreenViewController(
+                viewModel: viewModel
+            )
+            viewController.allDataDownload = { dict in
+                self.imageDict = dict
+                self.showTheoryScreen(text: theoryText ?? "", image: dict.values.first ?? UIImage())
+            }
+            navigationController.pushViewController(
+                viewController,
+                animated: true
+            )
+        }
         exitLevelClosure = {
             self.navigationController.popViewController(animated: false)
         }
@@ -113,7 +132,7 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
             viewModel: viewModel
         )
         viewController.exitClosure = { result in
-            self.showEndLevelScreen(result: result)
+            self.showEndLevelScreen(level: level, result: result)
         }
         navigationController.pushViewController(
             viewController,
@@ -121,12 +140,30 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
         )
     }
 
-    private func showEndLevelScreen(result: Bool) {
+    private func showTheoryScreen(text: String, image: UIImage) {
+        print("текст теории\(text)")
+        print("картинка теории\(image)")
+        navigationController.tabBarController?.tabBar.isHidden = true
+        guard let viewModel = container.resolve(
+            TheoryViewModelProtocol.self
+        ) else { return }
+        viewModel.setData(text: text, image: image)
+        let viewController = TheoryViewController(viewModel: viewModel)
+        navigationController.pushViewController(
+            viewController,
+            animated: true
+        )
+        viewController.exitClosure = {
+            self.navigationController.popToViewController(self.navigationController.viewControllers[1], animated: true)
+        }
+    }
+
+    private func showEndLevelScreen(level: Level, result: Bool) {
         navigationController.tabBarController?.tabBar.isHidden = true
         guard let viewModel = container.resolve(
             EndLevelScreenViewModelProtocol.self
         ) else { return }
-        viewModel.setResult(result: result)
+        viewModel.setResult(level: level, result: result)
         let viewController = EndLevelScreenViewController(
             viewModel: viewModel
         )
@@ -135,7 +172,7 @@ class MainScreenFlowCoordinator: CoordinatorProtocol {
                 self.navigationController.popToViewController(self.navigationController.viewControllers[1], animated: true)
             } else {
                 self.navigationController.popToViewController(self.navigationController.viewControllers[2], animated: false)
-                self.showLoadingLevelScreen(level: self.level)
+                self.showLoadingLevelScreen(level: self.level, theoryImageUrl: nil, theoryText: nil)
             }
         }
         navigationController.pushViewController(

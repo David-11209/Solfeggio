@@ -9,7 +9,7 @@ import UIKit
 
 protocol MainScreenSubCVDataManagerProtocol: UICollectionViewDataSource {
     func setData(data: Set<Theme>)
-    func getData(index: Int) -> Theme
+    func getData(index: Int) -> (Theme, Float)
 }
 
 class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManagerProtocol {
@@ -26,7 +26,7 @@ class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManag
         else {
             return UICollectionViewCell()
         }
-        cell.configure(color: cellDataArray.randomElement() ?? .white, theme: data[indexPath.row], progressProcent: "0%")
+        cell.configure(color: cellDataArray.randomElement() ?? .white, theme: data[indexPath.row], progressProcent: getProgress(index: indexPath.row))
         return cell
     }
 
@@ -34,8 +34,23 @@ class MainScreenSubCollectionViewDataManager: NSObject, MainScreenSubCVDataManag
         self.data = Array(data)
     }
 
-    func getData(index: Int) -> Theme {
-        return data[index]
+    func getData(index: Int) -> (Theme, Float) {
+        return (data[index], getProgress(index: index))
+    }
+
+    func getProgress(index: Int) -> Float {
+        var count = data[index].levels.count
+        if count == 0 {
+            return 0.0
+        } else {
+            var completeLevelsCount: Float = 0.0
+            for level in data[index].levels {
+                if level.completed {
+                    completeLevelsCount += 1
+                }
+            }
+            return completeLevelsCount / Float(count) * 100
+        }
     }
 }
 

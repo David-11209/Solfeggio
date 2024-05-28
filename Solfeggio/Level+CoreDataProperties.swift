@@ -16,6 +16,7 @@ extension Level {
     }
 
     @NSManaged public var id: String
+    @NSManaged public var completed: Bool
     @NSManaged public var theme: Theme?
     @NSManaged public var tasks: Set<Task>
 

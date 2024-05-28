@@ -12,7 +12,7 @@
         <relationship name="themes" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Theme" inverseName="block" inverseEntity="Theme"/>
     </entity>
     <entity name="Level" representedClassName="Level" syncable="YES">
-        <attribute name="attribute" optional="YES" attributeType="String"/>
+        <attribute name="completed" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="id" attributeType="String"/>
         <relationship name="tasks" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Task" inverseName="level" inverseEntity="Task"/>
         <relationship name="theme" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Theme" inverseName="levels" inverseEntity="Theme"/>
@@ -37,7 +37,27 @@
     <entity name="Theme" representedClassName="Theme" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String"/>
         <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="theoryImage" optional="YES" attributeType="String"/>
+        <attribute name="theoryText" optional="YES" attributeType="String"/>
         <relationship name="block" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Block" inverseName="themes" inverseEntity="Block"/>
         <relationship name="levels" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="Level" inverseName="theme" inverseEntity="Level"/>
+    </entity>
+    <entity name="User" representedClassName="User" syncable="YES">
+        <attribute name="chordsStat" optional="YES" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="image" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="intervalsStat" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="login" optional="YES" attributeType="String"/>
+        <attribute name="moodsStat" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" attributeType="String"/>
+        <attribute name="notesStat" attributeType="Float" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="numberChordsListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberChordsSuccessListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberIntervalsListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberIntervalsSuccessListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberMoodsListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberMoodsSuccessListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberNotesListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="numberNotesSuccessListened" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="password" optional="YES" attributeType="String"/>
     </entity>
 </model>
